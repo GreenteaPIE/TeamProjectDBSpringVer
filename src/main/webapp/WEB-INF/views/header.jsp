@@ -123,7 +123,7 @@
 
 			<div class="col-lg-9">
 				<nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="index.jsp" class="text-decoration-none d-block d-lg-none"> <img src="images/logo.png" alt="DB로고" height="50px" class="img-fluid">
+					<a href="index.jsp" class="text-decoration-none d-block d-lg-none"> <img src="resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
 					</a>
 					<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 						<span class="navbar-toggler-icon"></span>

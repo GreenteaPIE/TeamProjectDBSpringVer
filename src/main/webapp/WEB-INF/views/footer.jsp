@@ -45,7 +45,7 @@
 				</p>
 			</div>
 			<div class="col-md-6 px-xl-0 text-center text-md-right">
-				<img class="img-fluid" src="images/payments.png" alt="">
+				<img class="img-fluid" src="resources/img/payments.png" alt="">
 			</div>
 		</div>
 	</div>
@@ -62,11 +62,11 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="script/easing.min.js"></script>
+<script src="resources/js/easing.min.js"></script>
 
 
 <!-- Template Javascript -->
-<script src="js/main.js"></script>
+<script src="resources/js/main.js"></script>
 
 
 </html>
