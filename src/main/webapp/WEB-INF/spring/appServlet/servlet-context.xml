@@ -28,6 +28,7 @@
 
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/js/**" location="/resources/js/" />
 
 
 	<context:component-scan
