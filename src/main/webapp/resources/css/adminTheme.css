@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	width: 100%;
+	margin: 0 auto;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+h1{
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+
+#wrap{
+	width: 100%;
+	
+}
+
+.list{
+	margin-top: 70px;
+	width: 100%;
+	border: border-collapse;
+	text-align: center;
+}
+
+.list tr td{
+	margin: 10px 50px;
+	width: 100px;
+	height: 200px;
+	border: solid 1px;
+	border-radius: 10px;
+}
+.list tr td:hover{
+	background: pink;
+}

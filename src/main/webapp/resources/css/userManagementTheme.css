@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	width: 80%;
+	margin: 0 auto;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+h1{
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+
+#wrap{
+	width: 100%;
+	
+}
+
+.list{
+	margin-top: 70px;
+	width: 95%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.list th,td{
+	border: solid 1px grey;
+	padding: 5px;
+}
+
+th {
+	background: lightgreen;
+	color: black;
+}	
+
+.button .hiddenbutton{
+	display: none;
+}
+
+.button:hover .hiddenbutton{
+	display: block;
+}
+.button:hover td{
+	background: pink;
+}
+.hiddenbutton{
+	border: none;
+}
+

@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'LOTTERIADDAG';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIADDAG.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'PyeongChangPeace-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'S-CoreDream-3Light';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#wrap {
+	width: 971px; /*1024*768로 해상도를 맞추어서 설계*/
+	/* 가운데 정렬을 위한 바깥쪽 여백 설정 */
+	margin: 0 auto;
+}
+
+h1 {
+	color: green;
+	font-family: 'PyeongChangPeace-Bold';
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12px;
+	line-height: 24px;
+}
+
+table td, th {
+	border: #d3d3d3 solid 1px;
+	padding: 5px;
+	font-family: 'S-CoreDream-3Light';
+	font-size:1.2em;
+	
+}
+
+th {
+	background: yellowgreen;
+	font-weight: bold;
+}
+
+img {
+	width: 200px;
+	height: 300px;
+	border-radius: 10px;
+	opacity: 0.8;
+}
+
+img:hover {
+	opacity: 1;
+	border-radius: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: green;
+}
+
+.btn {
+	background-color: rgba()
+}
