@@ -23,10 +23,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="css/owl.carousel.min.css" rel="stylesheet">
+<link href="../css/owl.carousel.min.css" rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="resources/css/style.css" rel="stylesheet">
+<link href="../resources/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
 
 		<div class="row align-items-center py-3 px-xl-5">
 			<div class="col-lg-3 d-none d-lg-block">
-				<a href="index.jsp" class="text-decoration-none"> <img src="resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
+				<a href="index.jsp" class="text-decoration-none"> <img src="../resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
 
 				</a>
 			</div>
@@ -56,12 +56,12 @@
 			<div class="col-lg-3 col-6 text-right">
 
 
-				<c:if test="${not empty loginUser}">
+				<c:if test="${user != null}">
 
-					<a href="DBServlet?command=user_cart&loginUser=${loginUser.userid }" class="btn border"> <i class="fas fa-shopping-cart text-primary"></i> <span class="badge"></span>
+					<a href="DBServlet?command=user_cart&loginUser=${user.userid }" class="btn border"> <i class="fas fa-shopping-cart text-primary"></i> <span class="badge"></span>
 					</a>
 				</c:if>
-				<c:if test="${empty loginUser}">
+				<c:if test="${user == null}">
 
 					<a href="#" class="btn border" onclick="alert('로그인 후에 이용이 가능합니다.'); return false;"> <i class="fas fa-shopping-cart text-primary"></i> <span class="badge"></span>
 					</a>
@@ -123,14 +123,14 @@
 
 			<div class="col-lg-9">
 				<nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="index.jsp" class="text-decoration-none d-block d-lg-none"> <img src="resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
+					<a href="index.jsp" class="text-decoration-none d-block d-lg-none"> <img src="../resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
 					</a>
 					<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 						<div class="navbar-nav mr-auto py-0">
-							<a href="home.jsp" class="nav-item nav-link">Home</a>
+							<a href="/" class="nav-item nav-link">Home</a>
 							<!--<a href="shop.jsp" class="nav-item nav-link active">미입력</a> <a href="detail.jsp" class="nav-item nav-link">미입력</a>-->
 							
 							<div class="nav-item dropdown">
@@ -146,23 +146,23 @@
 
 						</div>
 						<div class="navbar-nav mr-auto py-0" align="right">
-							<c:if test="${!empty loginUser }">
+							<c:if test="${user != null}">
 								
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									${loginUser.grade}등급회원&nbsp;&nbsp;&nbsp;${loginUser.userid}님
+									${user.grade}등급회원&nbsp;&nbsp;&nbsp;${user.userid}님
 								
 							</c:if>
 						</div>
 
 						<div class="navbar-nav ml-auto py-0">
 
-							<c:if test="${empty loginUser }">
+							<c:if test="${user == null }">
 
-								<a href="DBServlet?command=shopuser_loin" class="nav-item nav-link">로그인</a>
+								<a href="/user/login" class="nav-item nav-link">로그인</a>
 
-								<a href="DBServlet?command=user_join_form" class="nav-item nav-link">회원가입</a>
+								<a href="/user/join" class="nav-item nav-link">회원가입</a>
 							</c:if>
-							<c:if test="${loginUser.grade == 1}">
+							<c:if test="${user.grade == 1}">
 
 								<div class="nav-item dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
@@ -174,14 +174,14 @@
 
 							</c:if>
 
-							<c:if test="${!empty loginUser }">
-								<c:if test="${loginUser.grade != 1 }">
-									<a href="DBServlet?command=my_page&userid=${loginUser.userid }" class="nav-item nav-link">MY PAGE</a>
+							<c:if test="${user != null }">
+								<c:if test="${user.grade != 1 }">
+									<a href="DBServlet?command=my_page&userid=${user.userid }" class="nav-item nav-link">MY PAGE</a>
 
 								</c:if>
-								<a href="DBServlet?command=shopuser_logout" class="nav-item nav-link">로그아웃</a>
+								<a href="/user/logout" class="nav-item nav-link">로그아웃</a>
 							</c:if>
-							<input type="hidden" name="command" value="member_logout">
+							
 						</div>
 
 					</div>

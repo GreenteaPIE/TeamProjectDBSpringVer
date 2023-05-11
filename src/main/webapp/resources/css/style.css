@@ -39,6 +39,70 @@
 		"Liberation Mono", "Courier New", monospace;
 }
 
+/* 중복아이디가 존재하지 않는 경우 */
+.id_input_re_1 {
+	color: green;
+	display: none;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2 {
+	color: red;
+	display: none;
+}
+
+/* 메일 인증번호 입력 박스 */
+#mail_check_input_box_false{
+	background-color: #ebebe4;
+}
+
+#mail_check_input_box_true{
+	background-color: white;
+}
+
+/* 인증번호 일치&불일치 */
+.correct {
+	color: green;
+}
+.incorrect {
+	color: red;
+}
+/* 입력 체크 */
+.final_id_ck{
+	display: none;
+}
+.final_pw_ck{
+	display: none;
+}
+.final_pwck_ck{
+	display: none;
+}
+.final_name_ck{
+	display: none;
+}
+.final_mail_ck{
+	display: none;
+}
+.final_addr_ck{
+	display: none;
+}
+
+/* 비밀번호 확인 유효성 검사 */
+.pwck_input_re_1{
+	color: green;
+	display: none;
+}
+.pwck_input_re_2{
+	color: red;
+	display: none;
+}
+
+/* 로그인 실패시 경고글 */
+.login_warn {
+	margin-top: 30px;
+	text-align: center;
+	color: red;
+}
+
 .delhide:hover .delhidden{
 	display: block;
 }

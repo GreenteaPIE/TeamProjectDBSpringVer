@@ -11,7 +11,7 @@
 		<div class="row px-xl-5 pt-5">
 			<div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5 foop">
 
-				<img src="resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
+				<img src="../resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
 
 				<p></p>
 				<p class="mb-2 ">
@@ -45,7 +45,7 @@
 				</p>
 			</div>
 			<div class="col-md-6 px-xl-0 text-center text-md-right">
-				<img class="img-fluid" src="resources/img/payments.png" alt="">
+				<img class="img-fluid" src="../resources/img/payments.png" alt="">
 			</div>
 		</div>
 	</div>
@@ -62,11 +62,11 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="resources/js/easing.min.js"></script>
+<script src="../resources/js/easing.min.js"></script>
 
 
 <!-- Template Javascript -->
-<script src="resources/js/main.js"></script>
+<script src="../resources/js/main.js"></script>
 
 
 </html>
