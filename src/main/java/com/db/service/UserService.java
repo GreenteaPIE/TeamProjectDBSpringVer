@@ -1,5 +1,7 @@
 package com.db.service;
 
+import org.springframework.stereotype.Service;
+
 import com.db.model.UserVO;
 
 public interface UserService {

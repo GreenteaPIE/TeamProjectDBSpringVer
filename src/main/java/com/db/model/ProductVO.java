@@ -8,9 +8,9 @@ import lombok.Data;
 public class ProductVO {
 	private int num;
 	private int pGender;
-	private String bName;
+	private String bname;
 	private int kind;
-	private String pName;
+	private String pname;
 	private String imgUrl;
 	private String pSize;
 	private int balance;

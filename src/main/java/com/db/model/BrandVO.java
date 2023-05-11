@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class BrandVO {
-	private String bName, imgUrl;
+	private String bname;
+	private String imgurl;
 
 }

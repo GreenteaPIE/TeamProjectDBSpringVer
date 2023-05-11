@@ -84,39 +84,14 @@
 				</a>
 				<nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
 					<div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+						<c:forEach var="blist" items="${blist }">
 						<div class="nav-item dropdown">
-							<a href="#" class="nav-link" data-toggle="dropdown">BALENCIAGA <i class="fa fa-angle-down float-right mt-1"></i></a>
+							<a href="#" class="nav-link" data-toggle="dropdown">${blist.bname } <i class="fa fa-angle-down float-right mt-1"></i></a>
 							<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="DBServlet?command=BRAND_TOP_LIST&bname=balenciaga" class="dropdown-item">TOP</a><a href="DBServlet?command=BRAND_Bottom_LIST&bname=balenciaga" class="dropdown-item">BOTTOM</a> <a href="DBServlet?command=BRAND_Bcollection_LIST&bname=balenciaga" class="dropdown-item">boutique collection</a>
+								<a href="DBServlet?command=BRAND_TOP_LIST&bname=${blist.bname }" class="dropdown-item">TOP</a><a href="DBServlet?command=BRAND_Bottom_LIST&bname=balenciaga" class="dropdown-item">BOTTOM</a> <a href="DBServlet?command=BRAND_Bcollection_LIST&bname=balenciaga" class="dropdown-item">boutique collection</a>
 							</div>
 						</div>
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link" data-toggle="dropdown">HERMES <i class="fa fa-angle-down float-right mt-1"></i></a>
-							<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="DBServlet?command=BRAND_TOP_LIST&bname=hermes" class="dropdown-item">TOP</a> <a href="DBServlet?command=BRAND_Bottom_LIST&bname=hermes" class="dropdown-item">BOTTOM</a> <a href="DBServlet?command=BRAND_Bcollection_LIST&bname=hermes" class="dropdown-item">boutique collection</a>
-							</div>
-						</div>
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link" data-toggle="dropdown">LOUIS VUITTON <i class="fa fa-angle-down float-right mt-1"></i></a>
-							<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="DBServlet?command=BRAND_TOP_LIST&bname=louisvuitton" class="dropdown-item">TOP</a> <a href="DBServlet?command=BRAND_Bottom_LIST&bname=louisvuitton" class="dropdown-item">BOTTOM</a> <a href="DBServlet?command=BRAND_Bcollection_LIST&bname=louisvuitton" class="dropdown-item">boutique collection</a>
-							</div>
-						</div>
-
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link" data-toggle="dropdown">PRADA <i class="fa fa-angle-down float-right mt-1"></i></a>
-							<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="DBServlet?command=BRAND_TOP_LIST&bname=prada" class="dropdown-item">TOP</a> <a href="DBServlet?command=BRAND_Bottom_LIST&bname=prada" class="dropdown-item">BOTTOM</a> <a href="DBServlet?command=BRAND_Bcollection_LIST&bname=prada" class="dropdown-item">boutique collection</a>
-							</div>
-						</div>
-
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link" data-toggle="dropdown" >SAINT LAURENT <i class="fa fa-angle-down float-right mt-1"></i></a>
-							<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="DBServlet?command=BRAND_TOP_LIST&bname=Saint Laurent" class="dropdown-item">TOP</a> <a href="DBServlet?command=BRAND_Bottom_LIST&bname=Saint Laurent" class="dropdown-item">BOTTOM</a> <a href="DBServlet?command=BRAND_Bcollection_LIST&bname=Saint Laurent" class="dropdown-item">boutique collection</a>
-							</div>
-						</div>
-
+						</c:forEach>
 					</div>
 				</nav>
 			</div>
