@@ -10,7 +10,9 @@
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
-			<h1 class="font-weight-semi-bold text-uppercase mb-3">${bname }</h1>
+			
+				<h1 class="font-weight-semi-bold text-uppercase mb-3">상품 "${pname }"의 검색 결과</h1>
+		
 			<div class="d-inline-flex">
 				<p class="m-0">
 					<a href="/">Home</a>
@@ -28,15 +30,13 @@
 					<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
 						<div class="card product-item border-0 mb-4">
 							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<a href="DBServlet?command=brand_Product_Detail&pName=${bplist.pname}&bname=${bplist.bname}"><img class="img-fluid w-100" style="height: 280px" src="../resources/img/${bplist.imgUrl}" alt=""> </a>
+								<a href="DBServlet?command=search_brand_Product_Detail&num=${bplist.num}&bname=${bplist.bname}&pname=${bplist.pname}"><img class="img-fluid w-100" style="height: 280px" src="../resources/img/${bplist.imgUrl}" alt=""> </a>
 							</div>
 							<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
 								<h6 class="text-truncate mb-3">${bplist.pname}</h6>
 								<div class="d-flex justify-content-center">
 									<%-- 통화 단위 지정 --%>
-									<h6>
-										<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="₩###,###" />
-									</h6>
+									<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="###,###원" />
 								</div>
 							</div>
 						</div>

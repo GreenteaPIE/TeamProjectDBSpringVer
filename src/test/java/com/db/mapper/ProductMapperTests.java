@@ -22,7 +22,7 @@ public class ProductMapperTests {
 	public void brandList() throws Exception{
 		productmapper.brandList();
 	}
-	*/
+	
 	@Test
 	public void brandProductList() throws Exception{
 		String bname = "hermes";
@@ -30,6 +30,30 @@ public class ProductMapperTests {
 		
 	}
 	
+	
+	@Test
+	public void brandCateGoriesList() throws Exception{
+		
+		String bname="prada";
+	
+		productmapper.brandCateGoriesTopList(bname);
+	}
+	
 
+	
+	@Test
+	public void searchProductList() throws Exception{
+		String pname = "pan";
+		
+		productmapper.searchProduct(pname);
+	}
+	*/
+	@Test
+	public void brandCateGoriesList() throws Exception{
+		
+		String bname="prada";
+	
+		productmapper.brandCateGoriesBoutiList(bname);
+	}
 }
 

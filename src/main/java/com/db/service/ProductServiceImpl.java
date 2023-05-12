@@ -27,4 +27,28 @@ public class ProductServiceImpl implements ProductService{
 		return productmapper.brandProductList(bname);
 	}
 
+	@Override
+	public ArrayList<ProductVO> brandCateGoriesTopList(String bname) throws Exception {
+		
+		return productmapper.brandCateGoriesTopList(bname);
+	}
+
+	@Override
+	public ArrayList<ProductVO> brandCateGoriesBottomList(String bname) throws Exception {
+		
+		return productmapper.brandCateGoriesBottomList(bname);
+	}
+
+	@Override
+	public ArrayList<ProductVO> brandCateGoriesBoutiList(String bname) throws Exception {
+		
+		return productmapper.brandCateGoriesBoutiList(bname);
+	}
+
+	@Override
+	public ArrayList<ProductVO> searchProduct(String pname) throws Exception {
+		
+		return productmapper.searchProduct(pname);
+	}
+
 }

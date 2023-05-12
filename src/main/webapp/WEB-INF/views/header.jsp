@@ -40,12 +40,11 @@
 				</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left">
-				<form name="sp" method="post" action="DBServlet">
-					<input type="hidden" name="command" value="search_product">
+				<form method="get" action="/product/searchProduct">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="제품명을 입력 해주세요." name="pname">
 						<div class="input-group-append">
-							<button type="submit" class="input-group-text bg-transparent text-primary">
+							<button type="submit" class="input-group-text bg-transparent text-primary sp_btn">
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
@@ -88,7 +87,7 @@
 						<div class="nav-item dropdown">
 							<a href="#" class="nav-link" data-toggle="dropdown">${blist.bname } <i class="fa fa-angle-down float-right mt-1"></i></a>
 							<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-								<a href="DBServlet?command=BRAND_TOP_LIST&bname=${blist.bname }" class="dropdown-item">TOP</a><a href="DBServlet?command=BRAND_Bottom_LIST&bname=balenciaga" class="dropdown-item">BOTTOM</a> <a href="DBServlet?command=BRAND_Bcollection_LIST&bname=balenciaga" class="dropdown-item">boutique collection</a>
+								<a href='/product/brandTopList?bname=<c:out value="${blist.bname }"/>' class="dropdown-item">TOP</a><a href='/product/brandBottomList?bname=<c:out value="${blist.bname }"/>' class="dropdown-item">BOTTOM</a> <a href='/product/brandBoutiList?bname=<c:out value="${blist.bname }"/>' class="dropdown-item">boutique collection</a>
 							</div>
 						</div>
 						</c:forEach>
