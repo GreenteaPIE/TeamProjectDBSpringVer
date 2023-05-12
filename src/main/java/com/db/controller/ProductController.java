@@ -35,7 +35,7 @@ public class ProductController {
 	    
 		try {
 			ArrayList<ProductVO> bplist = productService.brandProductList(bname);
-			request.setAttribute("bplist", bplist);
+			request.setAttribute("bplist", bplist);    // 브랜드명으로 상품을 불러옴
 		} catch (Exception e) {
 	
 			e.printStackTrace();
