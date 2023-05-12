@@ -47,13 +47,25 @@ public class ProductMapperTests {
 		
 		productmapper.searchProduct(pname);
 	}
-	*/
+	
 	@Test
 	public void brandCateGoriesList() throws Exception{
 		
 		String bname="prada";
 	
 		productmapper.brandCateGoriesBoutiList(bname);
+	}
+	
+	@Test
+	public void productDetail() throws Exception{
+		int num = 5;
+		productmapper.productDetail(num);
+	}
+	*/
+	@Test
+	public void productSizeList() throws Exception{
+		String pname = "Herbier 3D T-shirt";
+		productmapper.productSizeList(pname);
 	}
 }
 

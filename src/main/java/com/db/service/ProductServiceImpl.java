@@ -1,6 +1,7 @@
 package com.db.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,18 @@ public class ProductServiceImpl implements ProductService{
 	public ArrayList<ProductVO> searchProduct(String pname) throws Exception {
 		
 		return productmapper.searchProduct(pname);
+	}
+
+	@Override
+	public ProductVO productDetail(int num) {
+		
+		return productmapper.productDetail(num);
+	}
+
+	@Override
+	public List<ProductVO> productSizeList(String pname) throws Exception {
+		
+		return productmapper.productSizeList(pname);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.db.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,11 @@ public interface ProductService {
 
 	// 상품 검색
 	public ArrayList<ProductVO> searchProduct(String pname) throws Exception;
+	
+	// 상품 상세
+	public ProductVO productDetail(int num) throws Exception;
+	
+	// 상품 사이즈 리스트
+	public List<ProductVO> productSizeList(String pname) throws Exception;
 
 }

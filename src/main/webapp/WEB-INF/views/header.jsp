@@ -35,7 +35,7 @@
 
 		<div class="row align-items-center py-3 px-xl-5">
 			<div class="col-lg-3 d-none d-lg-block">
-				<a href="index.jsp" class="text-decoration-none"> <img src="../resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
+				<a href="/" class="text-decoration-none"> <img src="../resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
 
 				</a>
 			</div>
@@ -115,7 +115,7 @@
 							</div>
 							<a href="DBServlet?command=auction_view" class="nav-item nav-link">Auction</a>
 							<a href="DBServlet?command=Hot_Deal" class="nav-item nav-link">HotDeal</a>
-							<a href="contact.jsp" class="nav-item nav-link">Contact</a>
+							<a href="/contact" class="nav-item nav-link">Contact</a>
 							
 
 						</div>

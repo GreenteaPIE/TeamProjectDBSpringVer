@@ -1,6 +1,7 @@
 package com.db.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -42,7 +44,7 @@ public class ProductController {
 		
 	}
 	@GetMapping("/brandTopList")
-	public void brandTopListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
+	public String brandTopListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
 		
 		request.setAttribute("bname", bname);
 		
@@ -53,10 +55,11 @@ public class ProductController {
 	
 			e.printStackTrace();
 		}
+		return "/product/brandProductList";
 		
 	}
 	@GetMapping("/brandBottomList")
-	public void brandBottomListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
+	public String brandBottomListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
 		
 		request.setAttribute("bname", bname);
 		
@@ -67,10 +70,10 @@ public class ProductController {
 	
 			e.printStackTrace();
 		}
-		
+		return "/product/brandProductList";
 	}
 	@GetMapping("/brandBoutiList")
-	public void brandBoutiListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
+	public String brandBoutiListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
 		
 		request.setAttribute("bname", bname);
 		
@@ -82,6 +85,7 @@ public class ProductController {
 	
 			e.printStackTrace();
 		}
+		return "/product/brandProductList";
 		
 	}
 	
@@ -99,6 +103,18 @@ public class ProductController {
 	}
 	return null;
 }
+	
+	@GetMapping("/productDetail")
+	public String productDetailGET(int num, HttpServletRequest request) throws Exception {
+		ProductVO pdlist = productService.productDetail(num);
+		String pname = request.getParameter("pname");          
+		List<ProductVO> slist =  productService.productSizeList(pname);
+		
+	    request.setAttribute("ps", slist);              //상품 이름으로 존재하는 사이즈를 가져옴
+		request.setAttribute("pdlist", pdlist);         //상품번호로 상품정보를 가져옴
+		return "/product/productDetail";
+		
+	}
 
 
 }

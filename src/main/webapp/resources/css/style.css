@@ -39,6 +39,7 @@
 		"Liberation Mono", "Courier New", monospace;
 }
 
+
 /* 중복아이디가 존재하지 않는 경우 */
 .id_input_re_1 {
 	color: green;
@@ -7387,6 +7388,10 @@ supports (position: sticky) { .sticky-top { position:sticky;
 
 .h-75 {
 	height: 75% !important;
+}
+
+.pimg{
+	height: 400px;
 }
 
 .h-100 {

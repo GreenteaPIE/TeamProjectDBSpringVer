@@ -60,7 +60,7 @@
 		WHERE RN = 1
 
 	</select>
-
+	
 	<!-- 브랜드 상품 카테고리Bouti 리스트 -->
 	<select id="brandCateGoriesBoutiList"
 		resultType="com.db.model.ProductVO">
@@ -93,4 +93,19 @@
 		WHERE RN = 1
 
 	</select>
+	
+	<!-- 상품 상세보기 -->
+	<select id="productDetail" resultType="com.db.model.ProductVO">
+	
+	select * from product where num = #{num}
+	
+	</select>
+	
+	<!-- 상품 사이즈 리스트 -->
+	<select id="productSizeList" resultType="com.db.model.ProductVO">
+	
+	select psize from product where pname = #{pname} 
+	
+	</select>
+	
 </mapper>
