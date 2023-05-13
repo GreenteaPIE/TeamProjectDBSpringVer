@@ -172,6 +172,10 @@
 											<a href="#" class="dropdown-item">내가 쓴 글</a>
 											<a href="#" class="dropdown-item">나의 주문내역</a>
 											<a href="#" class="dropdown-item">보유 쿠폰</a>
+											<hr>
+											<div style="text-align: center;">
+												<b style="font-size: 12px; color: gray;">가입일 <fmt:formatDate value="${user.enter}" pattern="yyyy-MM-dd" /></b>
+											</div>
 										</div>
 									</div>
 								</c:if>
