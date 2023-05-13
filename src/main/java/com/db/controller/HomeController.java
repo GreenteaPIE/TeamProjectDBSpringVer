@@ -59,6 +59,7 @@ public class HomeController {
 		return "home";
 	}
 
+	//Contact 페이지
 	@GetMapping("/contact")
 	public void contactGET() {
 		logger.info("contact 진입");

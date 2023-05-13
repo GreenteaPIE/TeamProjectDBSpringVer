@@ -42,7 +42,8 @@ public class ProductController {
 		}
 
 	}
-
+    
+	//브랜드 상의 상품 리스트
 	@GetMapping("/brandTopList")
 	public String brandTopListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
 
@@ -58,7 +59,8 @@ public class ProductController {
 		return "/product/brandProductList";
 
 	}
-
+	
+	//브랜드 하의 상품 리스트
 	@GetMapping("/brandBottomList")
 	public String brandBottomListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
 
@@ -74,6 +76,7 @@ public class ProductController {
 		return "/product/brandProductList";
 	}
 
+	//브랜드 잡화 상품 리스트
 	@GetMapping("/brandBoutiList")
 	public String brandBoutiListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
 
@@ -91,6 +94,7 @@ public class ProductController {
 
 	}
 
+	//상품 검색
 	@GetMapping("/searchProduct")
 	public String searchProductGET(String pname, HttpServletRequest request) {
 		request.setAttribute("pname", pname);
@@ -106,6 +110,7 @@ public class ProductController {
 		return null;
 	}
 
+	//상품 상세 보기
 	@GetMapping("/productDetail")
 	public String productDetailGET(int num, HttpServletRequest request) throws Exception {
 		ProductVO pdlist = productService.productDetail(num);
