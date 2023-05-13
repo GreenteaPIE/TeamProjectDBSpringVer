@@ -34,7 +34,7 @@
 			<div class="col-lg-6 col-6 text-left">
 				<form method="get" action="/product/searchProduct">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="제품명을 입력 해주세요." name="pname">
+						<input type="text" class="form-control" placeholder="상품명을 입력 해주세요." name="pname">
 						<div class="input-group-append">
 							<button type="submit" class="input-group-text bg-transparent text-primary sp_btn">
 								<i class="fa fa-search"></i>

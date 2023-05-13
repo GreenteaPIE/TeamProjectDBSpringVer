@@ -34,10 +34,11 @@
 								</a>
 							</div>
 							<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="text-truncate mb-3">${bplist.pname}</h6>
+								<h6 class="mb-3">${bplist.pname}</h6>
 								<div class="d-flex justify-content-center">
-									<%-- 통화 단위 지정 --%>
-									<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="###,###원" />
+									<h6>
+										<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="₩###,###" />
+									</h6>
 								</div>
 							</div>
 						</div>
