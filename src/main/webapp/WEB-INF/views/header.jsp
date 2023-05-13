@@ -114,7 +114,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									
-									${user.userid}님
+									${user.name} 님
 								
 							</c:if>
 						</div>
@@ -140,7 +140,30 @@
 									<div class="nav-item dropdown">
 										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">MY PAGE</a>
 										<div class="dropdown-menu rounded-0 m-0">
-											<h6 style="text-align: center;">${user.grade }등급회원</h6>
+											<c:if test="${user.grade == 0 }">
+												<h6 style="text-align: center;">
+													<span style="color: #775e39;">Bronze</span>
+													등급
+												</h6>
+											</c:if>
+											<c:if test="${user.grade == 2 }">
+												<h6 style="text-align: center;">
+													<span style="color: #c0c0c0;">Silver</span>
+													등급
+												</h6>
+											</c:if>
+											<c:if test="${user.grade == 3 }">
+												<h6 style="text-align: center;">
+													<span style="color: #ffd700;">Gold</span>
+													등급
+												</h6>
+											</c:if>
+											<c:if test="${user.grade == 4 }">
+												<h6 style="text-align: center;">
+													<span style="color: #87ddb1;">Diamond</span>
+													등급
+												</h6>
+											</c:if>
 											<div style="text-align: center;">
 												<b style="font-size: 13px; color: gray;">${user.point} Point</b>
 											</div>
@@ -148,7 +171,7 @@
 											<a href="/user/mypagechk" class="dropdown-item">내 정보 수정</a>
 											<a href="#" class="dropdown-item">내가 쓴 글</a>
 											<a href="#" class="dropdown-item">나의 주문내역</a>
-											<a href="#" class="dropdown-item">보유쿠폰</a>
+											<a href="#" class="dropdown-item">보유 쿠폰</a>
 										</div>
 									</div>
 								</c:if>
