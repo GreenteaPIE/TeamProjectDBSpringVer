@@ -43,7 +43,7 @@ public class UserMapperTests {
 		usermapper.idCheck(id2);
 		
 	}
-	*/
+	
 	@Test
 	public void userLogin() throws Exception{
 		
@@ -63,5 +63,9 @@ public class UserMapperTests {
 		usermapper.userLogin(user);
 		System.out.println("결과 값 : " + usermapper.userLogin(user));
 	}
+	*/
+	
+	
+	
 
 }

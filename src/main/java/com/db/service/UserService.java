@@ -15,4 +15,13 @@ public interface UserService {
 	// 로그인
 	public UserVO userLogin(UserVO user) throws Exception;
 
+	// 내 정보 수정 본인 확인
+	public UserVO myPageCheck(UserVO user) throws Exception;
+
+	// 내 정보 수정
+	public int userUpdate(UserVO user) throws Exception;
+
+	// 회원 탈퇴
+	public int userExit(UserVO user) throws Exception;
+
 }

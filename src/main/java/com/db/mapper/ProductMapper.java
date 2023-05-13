@@ -22,13 +22,13 @@ public interface ProductMapper {
 
 	// 브랜드 카테고리 잡화 리스트
 	public ArrayList<ProductVO> brandCateGoriesBoutiList(String bname);
-	
+
 	// 상품 검색
 	public ArrayList<ProductVO> searchProduct(String pname);
-	
+
 	// 상품 상세
 	public ProductVO productDetail(int num);
-	
+
 	// 상품 사이즈 리스트
 	public List<ProductVO> productSizeList(String pname);
 

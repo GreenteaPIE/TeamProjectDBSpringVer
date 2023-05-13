@@ -27,43 +27,41 @@ import com.db.service.ProductService;
 @Controller
 @RequestMapping("/*")
 public class HomeController {
-	
+
 	@Autowired
 	ProductService productService;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	
+
 	@GetMapping("/")
 	public String home(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
+
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
+
 		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+
+		model.addAttribute("serverTime", formattedDate);
+
 		try {
 			ArrayList<BrandVO> bvo = productService.brandList();
 			session.setAttribute("blist", bvo);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return "home";
 	}
 
 	@GetMapping("/contact")
-	public void contactGET(){
+	public void contactGET() {
 		logger.info("contact 진입");
 	}
-	
 
-	
 }

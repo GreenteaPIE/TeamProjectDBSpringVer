@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>
 <meta charset="UTF-8">
-<title>userJoin</title>
+<title>mypage</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
 	
 </script>
@@ -13,33 +13,38 @@
 	<div class="frame user-frm">
 		<article class="card-body" style="max-width: 700px; margin: auto;">
 			<!-- 회원가입 form태그 시작 -->
-			<form id="join_form" method="post">
-				<span class="final_name_ck">이름을 입력해주세요.</span>
+			<form id="userUpdate_form" method="post">
 				<div class="form-group input-group fg-x700">
 					<div class="input-group-prepend" style="height: 38px">
 						<span class="input-group-text">
 							<i class="fa fa-user"></i>
 						</span>
 					</div>
-					<input name="name" class="form-control user_input" placeholder="이름 입력" type="text" required />
+					<input name="name" class="form-control user_input" placeholder="이름 입력" type="text" value="${user.name }" readonly="readonly">
 					<div class="btn-group" date-toggle="buttons">
-						<label class="btn  active" style="background-color: #D9D9D9;"> <input type="radio" name="gender" autocomplete="off" value="1" checked>남자
-						</label> <label class="btn " style="color: #737272; background-color: #D9D9D9;"> <input type="radio" name="gender" autocomplete="off" value="2" checked>여자
-						</label>
+						<c:if test="${user.gender == 1 }">
+							<label class="btn  active" style="background-color: #D9D9D9;"> <input type="radio" name="gender" autocomplete="off" value="1" checked>남자
+							</label>
+							<label class="btn " style="color: #737272; background-color: #D9D9D9;"> <input type="radio" name="gender" autocomplete="off" value="2">여자
+							</label>
+						</c:if>
+						<c:if test="${user.gender == 2 }">
+							<label class="btn  active" style="background-color: #D9D9D9;"> <input type="radio" name="gender" autocomplete="off" value="1">남자
+							</label>
+							<label class="btn " style="color: #737272; background-color: #D9D9D9;"> <input type="radio" name="gender" autocomplete="off" value="2" checked>여자
+							</label>
+						</c:if>
 					</div>
 				</div>
 				<!-- form-group// -->
-				<span class="final_id_ck">아이디를 입력해주세요.</span>
 				<div class="form-group input-group fg-x700">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
 							<i class="fa fa-user"></i>
 						</span>
 					</div>
-					<input id="userid" name="userid" class="form-control id_input" placeholder="ID 입력" type="text" required />
+					<input id="userid" name="userid" class="form-control id_input" placeholder="ID 입력" type="text" value="${user.userid }" readonly="readonly">
 				</div>
-				<span class="id_input_re_1">사용 가능한 아이디 입니다.</span>
-				<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
 				<!-- form-group// -->
 				<span class="final_mail_ck">메일을 입력해주세요.</span>
 				<div class="form-group input-group fg-x700">
@@ -48,7 +53,7 @@
 							<i class="fa fa-envelope"></i>
 						</span>
 					</div>
-					<input id="email" name="email" class="form-control mail_input" placeholder="Email 입력" type="email" required />
+					<input id="email" name="email" class="form-control mail_input" placeholder="Email 입력" value="${user.email }" type="email" required />
 				</div>
 				<span class="mail_input_box_warn"></span>
 				<div class="mail_check_wrap">
@@ -65,7 +70,7 @@
 							<i class="fa fa-phone"></i>
 						</span>
 					</div>
-					<input id="phone" name="phone" class="form-control" placeholder="휴대폰번호 입력('-' 제외)" type="text" required />
+					<input id="phone" name="phone" class="form-control" placeholder="휴대폰번호 입력('-' 제외)" value="${user.phone }" type="text" required />
 				</div>
 				<!-- form-group// -->
 				<span class="final_addr_ck">상세 주소를 입력해주세요.</span>
@@ -75,11 +80,11 @@
 							<i class="fa fa-building"></i>
 						</span>
 					</div>
-					<input type="text" id="address1" class="form-control address_input_1" name="address1" placeholder="우편번호" readonly="readonly" /> <br />
+					<input type="text" id="address1" class="form-control address_input_1" name="address1" placeholder="우편번호" value="${user.address1 }" readonly="readonly" /> <br />
 					<div class="form-group input-group fg-x700">
-						<input type="text" id="address2" class="form-control address_input_2" name="address2" placeholder="주소" readonly="readonly" />
+						<input type="text" id="address2" class="form-control address_input_2" name="address2" placeholder="주소" value="${user.address2 }" readonly="readonly" />
 					</div>
-					<br /> <input type="text" id="address3" class="form-control address_input_3" name="address3" placeholder="상세주소" /> <br /> <input type="button" onclick="execution_daum_address()" class="rbutton xsmall white btn btn-primary" value="우편번호 찾기"> <br>
+					<br /> <input type="text" id="address3" class="form-control address_input_3" name="address3" placeholder="상세주소" value="${user.address3 }" /> <br /> <input type="button" onclick="execution_daum_address()" class="rbutton xsmall white btn btn-primary" value="우편번호 찾기"> <br>
 				</div>
 				<!-- form-group end.// -->
 				<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
@@ -96,12 +101,11 @@
 				<span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
 				<!-- form-group// -->
 				<div class="fg-x700 form-group">
-					<input type="button" class="btn btn-primary btn-block join_button" value="가입하기">
+					<input type="button" class="btn btn-primary btn-block update_button" value="정보 수정">
 				</div>
 				<!-- form-group// -->
-				<p class="text-center">
-					카카오 / 네이버를 통한 로그인도 가능합니다.
-					<a href="user?cmd=loginForm">로그인</a>
+				<p class="text-right">
+					<input class="btn" type="button" value="회원 탈퇴" id="user_exit_btn">
 				</p>
 			</form>
 		</article>
@@ -115,8 +119,6 @@
 		var code = "";
 
 		/* 유효성 검사 통과유무 변수 */
-		var idCheck = false; // 아이디
-		var idckCheck = false; // 아이디 중복 검사
 		var pwCheck = false; // 비번
 		var pwckCheck = false; // 비번 확인
 		var pwckcorCheck = false; // 비번 확인 일치 확인
@@ -128,30 +130,20 @@
 		// 회원가입 버튼(회원가입 기능 작동)
 		$(document).ready(
 				function() {
-					$(".join_button")
+					$(".update_button")
 							.click(
 									function() {
-										//$("#join_form").attr("action", "/member/join");
-										//$("#join_form").submit();
+										
 
 										/* 입력값 변수 */
-										var id = $('.id_input').val(); // id 입력란
+
 										var pw = $('.pw_input').val(); // 비밀번호 입력란
 										var pwck = $('.pwck_input').val(); // 비밀번호 확인 입력란
 										var name = $('.user_input').val(); // 이름 입력란
 										var mail = $('.mail_input').val(); // 이메일 입력란
 										var addr = $('.address_input_3').val(); // 주소 입력란
 
-										/* 아이디 유효성검사 */
-										if (id == "") {
-											$('.final_id_ck').css('display',
-													'block');
-											idCheck = false;
-										} else {
-											$('.final_id_ck').css('display',
-													'none');
-											idCheck = true;
-										}
+										
 
 										/* 비밀번호 확인 유효성 검사 */
 										if (pwck == "") {
@@ -198,69 +190,37 @@
 										}
 
 										/* 최종 유효성 검사 */
-										if (idCheck && idckCheck && pwckCheck
+										if (pwckCheck
 												&& pwckcorCheck && nameCheck
 												&& mailCheck && mailnumCheck
 												&& addressCheck) {
-											$("#join_form").attr("action",
-													"/user/join");
-											$("#join_form").submit();
+											$("#userUpdate_form").attr("action",
+													"/user/userupdate");
+											$("#userUpdate_form").submit();
 										}
 										return false;
 									});
 				});
 
-		//아이디 중복검사
-		$('.id_input').on(
-				"propertychange change keyup paste input",
-				function() {
-					//alert("ddd");
-					//console.log("keyup 테스트");   
 
-					var userid = $('.id_input').val(); // .id_input에 입력되는 값
-					var data = {
-						userid : userid
-					} // '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
-
-					$.ajax({
-						type : "post",
-						url : "/user/userIdChk",
-						data : data,
-						success : function(result) {
-							// console.log("성공 여부" + result);
-							// console.log("성공 여부" + result);
-							if (result != 'fail') {
-								$('.id_input_re_1').css("display",
-										"inline-block");
-								$('.id_input_re_2').css("display", "none");
-								idckCheck = true;
-							} else {
-								$('.id_input_re_2').css("display",
-										"inline-block");
-								$('.id_input_re_1').css("display", "none");
-								idckCheck = false;
-							}
-						}// success 종료      
-					}); // ajax 종료   
-				});// function 종료
 
 		/* 인증번호 이메일 전송 */
 		$(".mail_check_button").click(function() {
-			var email = $(".mail_input").val(); // 입력한 이메일
-			var checkBox = $(".mail_check_input"); // 인증번호 입력란
-			var boxWrap = $(".mail_check_input_box"); // 인증번호 입력란 박스
-			var warnMsg = $(".mail_input_box_warn"); // 이메일 입력 경고글
-
+			var email = $(".mail_input").val(); 		// 입력한 이메일
+			var checkBox = $(".mail_check_input"); 		// 인증번호 입력란
+			var boxWrap = $(".mail_check_input_box"); 	// 인증번호 입력란 박스
+			var warnMsg = $(".mail_input_box_warn");	// 이메일 입력 경고글
+			
 			/* 이메일 형식 유효성 검사 */
-			if (mailFormCheck(email)) {
+			if(mailFormCheck(email)){
 				warnMsg.html("메일이 전송 되었습니다. 메일을 확인해주세요.");
 				warnMsg.css("display", "inline-block");
-			} else {
+			}else{
 				warnMsg.html("올바르지 못한 메일 형식입니다.");
 				warnMsg.css("display", "inline-block");
 				return false;
 			}
-
+			
 			$.ajax({
 				type : "GET",
 				url : "mailCheck?email=" + email,
@@ -293,7 +253,7 @@
 		$(".mail_check_input").on("input", function() {
 			var inputCode = $(".mail_check_input").val(); // 입력코드
 			var checkResult = $("#mail_check_input_box_warn"); // 입력결과
-
+			
 			if (inputCode == code) { // 인증번호가 일치할 경우
 				checkResult.html("인증번호가 일치합니다.");
 				checkResult.attr("class", "correct");
@@ -387,12 +347,25 @@
 						pwckcorCheck = false;
 					}
 				});
-
+		
 		/* 입력 이메일 형식 유효성 검사 */
-		function mailFormCheck(email) {
+		function mailFormCheck(email){
 			var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 			return form.test(email);
 		}
+		
+		$(document).ready(function() {
+			  $('#user_exit_btn').on('click', function() {
+			    if(confirm("DB에서 탈퇴 시 모든 정보는 되돌릴 수 없습니다.\n탈퇴 하시겠습니까?")) {
+			      var form = $('form');
+			      form.attr('action', '/user/userexit');
+			      form.attr('method', 'post');
+			      form.submit();
+			    }
+			  });
+			});
+
+
 	</script>
 </body>
 <%@ include file="../footer.jsp"%>

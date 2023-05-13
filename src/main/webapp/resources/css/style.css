@@ -53,7 +53,7 @@
 
 /* 메일 인증번호 입력 박스 */
 #mail_check_input_box_false{
-	background-color: #ebebe4;
+	background-color: #f2f2f2;
 }
 
 #mail_check_input_box_true{
@@ -1928,7 +1928,7 @@ pre code {
 }
 
 .form-control:disabled, .form-control[readonly] {
-	background-color: #d9d9d9;
+	background-color: #f2f2f2;
 	opacity: 1;
 }
 

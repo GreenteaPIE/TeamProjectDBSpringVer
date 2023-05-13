@@ -2,26 +2,56 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.db.mapper.UserMapper">
-  
-  <!-- 회원가입 -->
-  	<insert id="userJoin">
-  		insert into shopuser values(#{userid}, #{pass},
-  		#{name}, #{email}, #{address1},
-  		#{address2}, #{address3}, #{phone}, #{gender}, 0, 5000, sysdate)
-  	</insert>
-  	
-  	<!-- 아이디 중복검사 -->
-  	<select id="idCheck" resultType="int">
-  	select count(*) from shopuser where userid = #{userid}
-  	</select>
-  	
-  	<!-- 로그인 --> 
-  	<select id="userLogin" resultType="com.db.model.UserVO">
-  	
-  	select * from shopuser where userid = #{userid}
-  	
-  	</select>
-  	
-  	
-  	</mapper>
+<mapper namespace="com.db.mapper.UserMapper">
+
+	<!-- 회원가입 -->
+	<insert id="userJoin">
+		insert into shopuser values(#{userid}, #{pass},
+		#{name}, #{email}, #{address1},
+		#{address2}, #{address3}, #{phone},
+		#{gender}, 0, 5000, sysdate)
+	</insert>
+
+	<!-- 아이디 중복검사 -->
+	<select id="idCheck" resultType="int">
+		select count(*) from shopuser
+		where userid = #{userid}
+	</select>
+
+	<!-- 로그인 -->
+	<select id="userLogin" resultType="com.db.model.UserVO">
+
+		select * from shopuser where
+		userid = #{userid}
+
+	</select>
+
+	<!-- 내 정보 수정 본인 확인 -->
+	<select id="myPageCheck" resultType="com.db.model.UserVO">
+
+		select * from shopuser where
+		userid = #{userid}
+
+	</select>
+
+	<!-- 내 정보 수정 -->
+	<update id="userUpdate">
+
+		update shopuser set pass = #{pass}, name = #{name},
+		email = #{email},
+		address1 = #{address1}, address2 = #{address2},
+		address3 = #{address3}, phone = #{phone}, gender = #{gender}
+		where userid = #{userid}
+
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="userExit">
+	
+		delete from shopuser where userid = #{userid}
+	
+	</delete>
+
+
+
+</mapper>
