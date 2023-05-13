@@ -47,6 +47,6 @@
 		
 	</script>
 	<hr>
-	<%@ include file="../footer.jsp"%>
 </body>
+	<%@ include file="../footer.jsp"%>
 </html>

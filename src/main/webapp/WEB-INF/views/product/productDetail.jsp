@@ -5,9 +5,10 @@
 <html>
 <head>
 <script src="../resources/js/detail.js"></script>
+<jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<hr>
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
@@ -85,6 +86,7 @@
 		</div>
 	</div>
 	<!-- Shop Detail End -->
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<hr>
 </body>
+<jsp:include page="../footer.jsp"></jsp:include>
 </html>

@@ -106,10 +106,9 @@
 			</form>
 		</article>
 	</div>
+	<hr>
 	<!-- card.// -->
 	<!--container end.//-->
-	<br>
-	<br>
 	<script>
 		// 이메일전송 인증번호 저장을 위한 코드
 		var code = "";

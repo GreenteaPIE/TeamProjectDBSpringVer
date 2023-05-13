@@ -9,7 +9,7 @@
 		insert into shopuser values(#{userid}, #{pass},
 		#{name}, #{email}, #{address1},
 		#{address2}, #{address3}, #{phone},
-		#{gender}, 0, 5000, sysdate)
+		#{gender}, 0, 0, sysdate)
 	</insert>
 
 	<!-- 아이디 중복검사 -->

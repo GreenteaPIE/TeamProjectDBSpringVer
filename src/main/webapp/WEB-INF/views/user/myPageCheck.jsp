@@ -35,18 +35,16 @@
 		</div>
 	</form>
 	<script>
-	
 		/* 로그인 버튼 클릭 */
-		$(".info_chk_btn").click(function(){
+		$(".info_chk_btn").click(function() {
 			//alert("로그인 버튼 작동");
-			
+
 			// 로그인 메서드 서버 요청
 			$("#infochk_form").attr("action", "/user/mypagechk");
 			$("#infochk_form").submit();
 		});
-		
 	</script>
 	<hr>
-	<%@ include file="../footer.jsp"%>
 </body>
+<%@ include file="../footer.jsp"%>
 </html>
