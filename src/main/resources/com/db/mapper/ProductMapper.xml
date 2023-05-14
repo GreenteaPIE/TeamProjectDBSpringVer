@@ -34,11 +34,14 @@
 		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
 		balance, price, purchasedNum, explain, writedate, readcount
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance, price,
+		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance,
+		price,
 		purchasedNum, explain, writedate, readcount,
-		ROW_NUMBER() OVER (PARTITION BY pName ORDER BY num) RN
+		ROW_NUMBER() OVER
+		(PARTITION BY pName ORDER BY num) RN
 		FROM PRODUCT
-		WHERE bname LIKE #{bname} AND kind = 1
+		WHERE bname LIKE
+		#{bname} AND kind = 1
 		)
 		WHERE RN = 1
 
@@ -51,16 +54,19 @@
 		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
 		balance, price, purchasedNum, explain, writedate, readcount
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance, price,
+		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance,
+		price,
 		purchasedNum, explain, writedate, readcount,
-		ROW_NUMBER() OVER (PARTITION BY pName ORDER BY num) RN
+		ROW_NUMBER() OVER
+		(PARTITION BY pName ORDER BY num) RN
 		FROM PRODUCT
-		WHERE bname LIKE #{bname} AND kind = 2
+		WHERE bname LIKE
+		#{bname} AND kind = 2
 		)
 		WHERE RN = 1
 
 	</select>
-	
+
 	<!-- 브랜드 상품 카테고리Bouti 리스트 -->
 	<select id="brandCateGoriesBoutiList"
 		resultType="com.db.model.ProductVO">
@@ -68,11 +74,14 @@
 		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
 		balance, price, purchasedNum, explain, writedate, readcount
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance, price,
+		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance,
+		price,
 		purchasedNum, explain, writedate, readcount,
-		ROW_NUMBER() OVER (PARTITION BY pName ORDER BY num) RN
+		ROW_NUMBER() OVER
+		(PARTITION BY pName ORDER BY num) RN
 		FROM PRODUCT
-		WHERE bname LIKE #{bname} AND kind = 3
+		WHERE bname LIKE
+		#{bname} AND kind = 3
 		)
 		WHERE RN = 1
 
@@ -81,31 +90,64 @@
 	<!-- 상품 검색 리스트 -->
 	<select id="searchProduct" resultType="com.db.model.ProductVO">
 
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance, price,
-		purchasedNum, explain, writedate, readcount
+		SELECT num, pGender,
+		bName, kind, pName, imgUrl, pSize, balance, price,
+		purchasedNum,
+		explain, writedate, readcount
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance, price,
-		purchasedNum, explain, writedate, readcount,
+		SELECT num, pGender, bName, kind,
+		pName, imgUrl, pSize, balance, price,
+		purchasedNum, explain, writedate,
+		readcount,
 		ROW_NUMBER() OVER (PARTITION BY pName ORDER BY num) RN
-		FROM PRODUCT
+		FROM
+		PRODUCT
 		WHERE pname LIKE '%' ||#{pname}|| '%'
 		)
 		WHERE RN = 1
 
 	</select>
-	
+
 	<!-- 상품 상세보기 -->
 	<select id="productDetail" resultType="com.db.model.ProductVO">
-	
-	select * from product where num = #{num}
-	
+
+		select * from product
+		where num = #{num}
+
 	</select>
-	
+
 	<!-- 상품 사이즈 리스트 -->
 	<select id="productSizeList" resultType="com.db.model.ProductVO">
-	
-	select psize from product where pname = #{pname} 
-	
+
+		select psize from
+		product where pname = #{pname}
+
+	</select>
+
+	<!-- 장바구니 상품 추가 -->
+	<select id="addCart" resultType="com.db.model.CartVO">
+
+		insert into cart(cartnum,
+		userid, num, psize, quantity, price)
+		values (cart_seq.nextval,
+		#{userid}, #{num}, #{psize}, #{quantity},
+		#{price})
+
 	</select>
 	
+	<!-- 모든 상품정보 불러오기 -->
+	<select id="getAllProduct" resultType="com.db.model.ProductVO">
+	
+	    select * from product
+	
+	</select>
+
+	<!-- 장바구니 리스트 불러오기 -->
+	<select id="getCartList" resultType="com.db.model.CartVO">
+		SELECT *
+		FROM cart
+		WHERE userId=#{userid} AND result='1'
+		ORDER BY orderDate DESC
+	</select>
+
 </mapper>

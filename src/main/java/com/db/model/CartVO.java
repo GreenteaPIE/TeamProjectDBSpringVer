@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class CartVO {
-	private int cartNum;
-	private String userId;
+	private int cartnum;
+	private String userid;
 	private int num;
-	private String pSize;
+	private String psize;
 	private int quantity;
-	private int balance;
+	private int price;
 	private Timestamp orderdate;
 }

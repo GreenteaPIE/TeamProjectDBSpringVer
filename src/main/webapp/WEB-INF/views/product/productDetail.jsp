@@ -40,22 +40,16 @@
 				<div class="d-flex mb-3">
 					<p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
 				</div>
-				<form action="DBServlet" name="addcart" method="post" onsubmit="return validateForm()">
-					<input type="hidden" name="command" value="add_cart">
-					<c:choose>
-						<c:when test="${pdlist.psize == null }">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input" id="null" name="psize" value="null" checked="checked"> <label class="custom-control-label" for="null">Free</label>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="ps" items="${ps }">
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="${ps.psize }" name="psize" value="${ps.psize }"> <label class="custom-control-label" for="${ps.psize }">${ps.psize }</label>
-								</div>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+				<form action="/product/addCart" name="addcart" method="post" onsubmit="return validateForm()">
+					<input type="hidden" name="num" value="${pdlist.num }">
+					<input type="hidden" name="userid" value="${user.userid }">
+					<input type="hidden" name="price" value="${Integer.parseInt(pdlist.price)}">
+					<c:forEach var="ps" items="${ps }">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="${ps.psize }" name="psize" value="${ps.psize }">
+							<label class="custom-control-label" for="${ps.psize }">${ps.psize }</label>
+						</div>
+					</c:forEach>
 					<div class="d-flex align-items-center mb-4 pt-2">
 						<div class="input-group quantity mr-3" style="width: 130px;">
 							<div class="input-group-btn">
@@ -63,7 +57,7 @@
 									<i class="fa fa-minus"></i>
 								</button>
 							</div>
-							<input type="text" name="purchasedNum" class="form-control bg-secondary text-center" value="1">
+							<input type="text" name="quantity" class="form-control bg-secondary text-center" value="1">
 							<div class="input-group-btn">
 								<button class="btn btn-primary btn-plus" onclick="plus()">
 									<i class="fa fa-plus"></i>

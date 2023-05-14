@@ -45,7 +45,7 @@
 			</div>
 			<div class="col-lg-3 col-6 text-right">
 				<c:if test="${user != null}">
-					<a href="DBServlet?command=user_cart&loginUser=${user.userid }" class="btn border">
+					<a href="/product/myCart?userid=${user.userid }" class="btn border">
 						<i class="fas fa-shopping-cart text-primary"></i>
 						<span class="badge"></span>
 					</a>
@@ -127,10 +127,11 @@
 								<div class="nav-item dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
 									<div class="dropdown-menu rounded-0 m-0">
-										<a href="DBServlet?command=product_management" class="dropdown-item">상품 관리</a>
 										<a href="DBServlet?command=user_management" class="dropdown-item">회원 관리</a>
 										<a href="DBServlet?command=board_management" class="dropdown-item">게시판 관리</a>
-										<a href="DBServlet?command=auction" class="dropdown-item">옥 션</a>
+										<a href="DBServlet?command=auction" class="dropdown-item">옥션 관리</a>
+										<a href="DBServlet?command=auction" class="dropdown-item">핫딜 관리</a>
+										<a href="DBServlet?command=product_management" class="dropdown-item">상품 관리</a>
 										<a href="DBServlet?command=sales_management" class="dropdown-item">매출 관리</a>
 									</div>
 								</div>

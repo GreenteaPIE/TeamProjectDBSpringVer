@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.db.model.BrandVO;
+import com.db.model.CartVO;
 import com.db.model.ProductVO;
+import com.db.model.UserVO;
 
 public interface ProductService {
 
@@ -33,5 +35,14 @@ public interface ProductService {
 
 	// 상품 사이즈 리스트
 	public List<ProductVO> productSizeList(String pname) throws Exception;
+	
+	// 장바구니 상품 추가
+	public CartVO addCart(CartVO cart) throws Exception;
+	
+	// 장바구니 리스트 불러오기
+	public ArrayList<CartVO> getCartList(String userid) throws Exception;
+	
+	//모든 상품 정보 불러오기
+	public ArrayList<ProductVO> getAllProduct() throws Exception;
 
 }

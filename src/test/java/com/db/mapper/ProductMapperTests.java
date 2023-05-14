@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.db.model.BrandVO;
+import com.db.model.CartVO;
+import com.db.model.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -61,11 +63,37 @@ public class ProductMapperTests {
 		int num = 5;
 		productmapper.productDetail(num);
 	}
-	*/
+	
 	@Test
 	public void productSizeList() throws Exception{
 		String pname = "Herbier 3D T-shirt";
 		productmapper.productSizeList(pname);
 	}
+	
+	
+	
+	@Test
+	public void getCartList() throws Exception{
+		String userid = "user";
+		productmapper.getCartList(userid);
+	}
+	
+	@Test
+	public void addCart() throws Exception{
+		CartVO cart = new CartVO();
+		
+		cart.setUserid("user");
+		cart.setNum(2);
+		cart.setPsize("s");
+		cart.setQuantity(3);
+		cart.setPrice(40000);
+		productmapper.addCart(cart);
+		System.out.println(cart);
+	}
+*/
+	@Test
+	public void getProductByNum() throws Exception{
+	
+		productmapper.getAllProduct();
+	}
 }
-

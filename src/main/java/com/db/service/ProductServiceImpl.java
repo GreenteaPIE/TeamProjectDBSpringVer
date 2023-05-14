@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.db.mapper.ProductMapper;
 import com.db.model.BrandVO;
+import com.db.model.CartVO;
 import com.db.model.ProductVO;
+import com.db.model.UserVO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -62,6 +64,25 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO> productSizeList(String pname) throws Exception {
 
 		return productmapper.productSizeList(pname);
+	}
+
+	@Override
+	public CartVO addCart(CartVO cart) throws Exception {
+		
+		return productmapper.addCart(cart);
+		
+	}
+
+	@Override
+	public ArrayList<CartVO> getCartList(String userid) throws Exception {
+		
+		return productmapper.getCartList(userid);
+	}
+
+	@Override
+	public ArrayList<ProductVO> getAllProduct() throws Exception {
+		
+		return productmapper.getAllProduct();
 	}
 
 }
