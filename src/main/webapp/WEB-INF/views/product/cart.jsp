@@ -64,17 +64,17 @@ td .delhidden {
 									<c:forEach var="cart" items="${clist}">
 										<!-- 장바구니 cartVO -->
 										<tr class="delhide">
-											<c:forEach var="ProductList" items="${plist }">
+											<c:forEach var="product" items="${plist }">
 												<!-- 상품리스트 -->
 												<!--<td><input type="button" style="width: 35px; height: 35px; align-items: center; align-self: center;" class="btn btn-primary px-3 delhidden" value="D" onclick=""></td>
 													  -->
-												<c:if test="${cart.num == ProductList.num}">
+												<c:if test="${cart.num == product.num}">
 													<!--상품리스트품번과 장바구니 번호가 일치할 때  -->
 													<td class="align-middle">
 														<div class="d-flex align-items-center">
-															<img src="../resources/img/${ProductList.imgUrl}" alt="productImg" style="width: 55px; margin-right: 5px;">
+															<img src="../resources/img/${product.imgUrl}" alt="productImg" style="width: 55px; margin-right: 5px;">
 															<div class="text-left">
-																<a href='/product/productDetail?num=${ProductList.num}&pname=${ProductList.pname}'>${ProductList.pname}</a>
+																<a href='/product/productDetail?num=${product.num}&pname=${product.pname}'>${product.pname}</a>
 															</div>
 														</div>
 													</td>

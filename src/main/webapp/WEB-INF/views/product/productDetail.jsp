@@ -38,7 +38,7 @@
 				</h3>
 				<p class="mb-4">${pdlist.explain }</p>
 				<div class="d-flex mb-3">
-					<p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
+					<p class="text-dark font-weight-medium mb-0 mr-3">Sizes</p>
 				</div>
 				<form action="/product/addCart" name="addcart" method="post" onsubmit="return validateForm()">
 					<input type="hidden" name="num" value="${pdlist.num }">

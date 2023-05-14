@@ -111,16 +111,14 @@
 							</div>
 							<a href="DBServlet?command=auction_view" class="nav-item nav-link">Auction</a>
 							<a href="DBServlet?command=Hot_Deal" class="nav-item nav-link">HotDeal</a>
+							<a href="#" class="nav-item nav-link">Event</a>
 							<a href="/contact" class="nav-item nav-link">Contact</a>
 						</div>
 						<div class="navbar-nav mr-auto py-0" align="right">
 							<c:if test="${user != null}">
-								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									
-									${user.name} 님
 								
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <b>${user.name} 님</b>
 							</c:if>
 						</div>
 						<div class="navbar-nav ml-auto py-0">
