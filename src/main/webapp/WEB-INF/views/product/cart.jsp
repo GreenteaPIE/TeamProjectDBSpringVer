@@ -70,7 +70,14 @@ td .delhidden {
 													  -->
 												<c:if test="${cart.num == ProductList.num}">
 													<!--상품리스트품번과 장바구니 번호가 일치할 때  -->
-													<td class="align-middle"><img src="../resources/img/${ProductList.imgUrl }" alt="productImg" style="width: 35px;"> <a href='/product/productDetail?num=${ProductList.num }&pname=${ProductList.pname}'>${ProductList.pname }</a></td>
+													<td class="align-middle">
+														<div class="d-flex align-items-center">
+															<img src="../resources/img/${ProductList.imgUrl}" alt="productImg" style="width: 55px; margin-right: 5px;">
+															<div class="text-left">
+																<a href='/product/productDetail?num=${ProductList.num}&pname=${ProductList.pname}'>${ProductList.pname}</a>
+															</div>
+														</div>
+													</td>
 													<td class="align-middle"><c:choose>
 															<c:when test='${cart.psize  =="S" }'>S</c:when>
 															<c:when test='${cart.psize  =="M" }'>M</c:when>

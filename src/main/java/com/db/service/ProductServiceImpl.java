@@ -85,4 +85,10 @@ public class ProductServiceImpl implements ProductService {
 		return productmapper.getAllProduct();
 	}
 
+	@Override
+	public int countCart(String userid) throws Exception {
+		
+		return productmapper.countCart(userid);
+	}
+
 }

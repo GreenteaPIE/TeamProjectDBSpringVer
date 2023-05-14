@@ -21,6 +21,9 @@
 <link href="../css/owl.carousel.min.css" rel="stylesheet">
 <!-- Customized Bootstrap Stylesheet -->
 <link href="../resources/css/style.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+	
+</script>
 </head>
 <body>
 	<!-- Topbar Start -->
@@ -45,10 +48,12 @@
 			</div>
 			<div class="col-lg-3 col-6 text-right">
 				<c:if test="${user != null}">
-					<a href="/product/myCart?userid=${user.userid }" class="btn border">
-						<i class="fas fa-shopping-cart text-primary"></i>
-						<span class="badge"></span>
-					</a>
+					<div id="cart-badge">
+						<a href="/product/myCart?userid=${user.userid}" class="btn border">
+							<i class="fas fa-shopping-cart text-primary"></i>
+							<span class="badge"></span>
+						</a>
+					</div>
 				</c:if>
 				<c:if test="${user == null}">
 					<a href="#" class="btn border" onclick="alert('로그인 후에 이용이 가능합니다.'); return false;">
@@ -189,5 +194,18 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				url : '/product/countCartAjax',
+				data : {
+					userid : '${user.userid}'
+				},
+				success : function(data) {
+					$('#cart-badge .badge').text(data);
+				}
+			});
+		});
+	</script>
 </body>
 </html>

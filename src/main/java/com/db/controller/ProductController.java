@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.db.model.CartVO;
@@ -129,7 +131,7 @@ public class ProductController {
 	// 장바구니 페이지 이동
 	@GetMapping("/cart")
 	public void cartGET(HttpServletRequest request) throws Exception {
-		
+
 		logger.info("장바구니 페이지 진입");
 	}
 
@@ -150,20 +152,27 @@ public class ProductController {
 		return "/product/cart";
 
 	}
-	
-	//나의 장바구니
-	@GetMapping("myCart")
+
+	// 나의 장바구니
+	@GetMapping("/myCart")
 	public String myCartGET(String userid, HttpServletRequest request, HttpSession session) throws Exception {
-		
+
 		ArrayList<CartVO> clist = productService.getCartList(userid); // userid로 장바구니 리스트 불러오기
 
 		request.setAttribute("clist", clist);
 
 		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
 		request.setAttribute("plist", plist);
-		
+
 		return "/product/cart";
-		
+
+	}
+
+	// 장바구니 뱃지 상품 개수
+	@GetMapping("/countCartAjax")
+	@ResponseBody
+	public String countCartAjax(String userid) throws Exception {
+		return String.valueOf(productService.countCart(userid));
 	}
 
 }

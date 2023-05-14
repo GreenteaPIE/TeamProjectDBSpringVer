@@ -134,20 +134,26 @@
 		#{price})
 
 	</select>
-	
+
 	<!-- 모든 상품정보 불러오기 -->
 	<select id="getAllProduct" resultType="com.db.model.ProductVO">
-	
-	    select * from product
-	
+
+		select * from product
+
 	</select>
 
 	<!-- 장바구니 리스트 불러오기 -->
 	<select id="getCartList" resultType="com.db.model.CartVO">
 		SELECT *
 		FROM cart
-		WHERE userId=#{userid} AND result='1'
+		WHERE
+		userId=#{userid} AND result='1'
 		ORDER BY orderDate DESC
+	</select>
+
+	<!-- 장바구니 상품 갯수 불러오기 -->
+	<select id="countCart" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM cart WHERE userid = #{userid}
 	</select>
 
 </mapper>

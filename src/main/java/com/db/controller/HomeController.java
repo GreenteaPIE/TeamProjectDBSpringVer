@@ -47,7 +47,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
+        
 		try {
 			ArrayList<BrandVO> bvo = productService.brandList();
 			session.setAttribute("blist", bvo);

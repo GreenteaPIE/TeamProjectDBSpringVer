@@ -142,6 +142,7 @@ public class UserController {
 			if (true == pwEncoder.matches(rawPw, encodePw)) {
 				vo.setPass("");
 				session.setAttribute("user", vo);
+				
 				return "redirect:/";
 			} else { // 비밀번호가 일치 하지 않을때(로그인 실패)
 				rttr.addFlashAttribute("result", 0);

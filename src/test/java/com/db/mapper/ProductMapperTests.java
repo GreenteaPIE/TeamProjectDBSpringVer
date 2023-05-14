@@ -90,10 +90,16 @@ public class ProductMapperTests {
 		productmapper.addCart(cart);
 		System.out.println(cart);
 	}
-*/
+
 	@Test
 	public void getProductByNum() throws Exception{
 	
 		productmapper.getAllProduct();
+	}
+	*/
+	@Test
+	public void countCart() throws Exception{
+		String userid = "user";
+		productmapper.countCart(userid);
 	}
 }
