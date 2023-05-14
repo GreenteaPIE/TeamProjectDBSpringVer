@@ -53,7 +53,7 @@ td .delhidden {
 						</thead>
 						<tbody class="align-middle">
 							<c:choose>
-								<c:when test="${cartList.size()==0}">
+								<c:when test="${clist.size()==0}">
 									<tr>
 										<td class="align-middle" colspan="7">
 											<h3>장바구니가 비었습니다.</h3>
