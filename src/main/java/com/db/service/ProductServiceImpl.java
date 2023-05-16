@@ -68,27 +68,61 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public CartVO addCart(CartVO cart) throws Exception {
-		
+
 		return productmapper.addCart(cart);
-		
+
 	}
 
 	@Override
 	public ArrayList<CartVO> getCartList(String userid) throws Exception {
-		
+
 		return productmapper.getCartList(userid);
 	}
 
 	@Override
 	public ArrayList<ProductVO> getAllProduct() throws Exception {
-		
+
 		return productmapper.getAllProduct();
 	}
 
 	@Override
 	public int countCart(String userid) throws Exception {
-		
+
 		return productmapper.countCart(userid);
 	}
+
+	@Override
+	public ArrayList<ProductVO> getAllProductNoDup() throws Exception {
+
+		return productmapper.getAllProductNoDup();
+	}
+
+	@Override
+	public CartVO findByCartNum(int cartnum) throws Exception {
+		
+		return productmapper.findByCartNum(cartnum);
+	}
+
+	@Override
+	public int decreaseQuantity(int cartnum) throws Exception {
+		
+		return productmapper.decreaseQuantity(cartnum);
+	}
+
+	@Override
+	public int increaseQuantity(int cartnum) throws Exception {
+		
+		return productmapper.increaseQuantity(cartnum);
+	}
+
+	@Override
+	public int cartDelete(int cartnum) throws Exception {
+		
+		return productmapper.cartDelete(cartnum);
+	}
+
+	
+
+	
 
 }

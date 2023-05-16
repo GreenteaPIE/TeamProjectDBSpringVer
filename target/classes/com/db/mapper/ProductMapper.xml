@@ -17,12 +17,16 @@
 
 		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
 		balance,
-		price, purchasedNum, explain, writedate, readcount FROM
+		price, purchasedNum, explain, writedate, readcount,
+		discountrate FROM
 		(SELECT num,
-		pGender, bName, kind, pName, imgUrl, pSize, balance,
+		pGender, bName, kind, pName, imgUrl,
+		pSize, balance,
 		price,
-		purchasedNum, explain, writedate, readcount, ROW_NUMBER() OVER
-		(PARTITION BY pName ORDER BY num) RN FROM PRODUCT WHERE bname LIKE
+		purchasedNum, explain, writedate, readcount,
+		discountrate, ROW_NUMBER() OVER
+		(PARTITION BY pName ORDER BY num) RN
+		FROM PRODUCT WHERE bname LIKE
 		#{bname} )WHERE RN = 1
 
 	</select>
@@ -32,11 +36,14 @@
 		resultType="com.db.model.ProductVO">
 
 		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
-		balance, price, purchasedNum, explain, writedate, readcount
+		balance, price, purchasedNum, explain, writedate, readcount,
+		discountrate
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance,
+		SELECT num, pGender, bName, kind, pName, imgUrl,
+		pSize, balance,
 		price,
 		purchasedNum, explain, writedate, readcount,
+		discountrate,
 		ROW_NUMBER() OVER
 		(PARTITION BY pName ORDER BY num) RN
 		FROM PRODUCT
@@ -52,11 +59,14 @@
 		resultType="com.db.model.ProductVO">
 
 		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
-		balance, price, purchasedNum, explain, writedate, readcount
+		balance, price, purchasedNum, explain, writedate, readcount,
+		discountrate
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance,
+		SELECT num, pGender, bName, kind, pName, imgUrl,
+		pSize, balance,
 		price,
 		purchasedNum, explain, writedate, readcount,
+		discountrate,
 		ROW_NUMBER() OVER
 		(PARTITION BY pName ORDER BY num) RN
 		FROM PRODUCT
@@ -72,11 +82,14 @@
 		resultType="com.db.model.ProductVO">
 
 		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
-		balance, price, purchasedNum, explain, writedate, readcount
+		balance, price, purchasedNum, explain, writedate, readcount,
+		discountrate
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize, balance,
+		SELECT num, pGender, bName, kind, pName, imgUrl,
+		pSize, balance,
 		price,
 		purchasedNum, explain, writedate, readcount,
+		discountrate,
 		ROW_NUMBER() OVER
 		(PARTITION BY pName ORDER BY num) RN
 		FROM PRODUCT
@@ -93,16 +106,20 @@
 		SELECT num, pGender,
 		bName, kind, pName, imgUrl, pSize, balance, price,
 		purchasedNum,
-		explain, writedate, readcount
+		explain, writedate, readcount, discountrate
 		FROM (
-		SELECT num, pGender, bName, kind,
+		SELECT num, pGender,
+		bName, kind,
 		pName, imgUrl, pSize, balance, price,
-		purchasedNum, explain, writedate,
+		purchasedNum,
+		explain, writedate, discountrate,
 		readcount,
-		ROW_NUMBER() OVER (PARTITION BY pName ORDER BY num) RN
+		ROW_NUMBER() OVER
+		(PARTITION BY pName ORDER BY num) RN
 		FROM
 		PRODUCT
-		WHERE pname LIKE '%' ||#{pname}|| '%'
+		WHERE pname LIKE '%'
+		||#{pname}|| '%'
 		)
 		WHERE RN = 1
 
@@ -153,7 +170,62 @@
 
 	<!-- 장바구니 상품 갯수 불러오기 -->
 	<select id="countCart" resultType="int" parameterType="String">
-		SELECT COUNT(*) FROM cart WHERE userid = #{userid}
+		SELECT
+		COUNT(*) FROM cart WHERE userid = #{userid}
 	</select>
+
+	<!-- 모든 상품을 중복 없이 불러오기 -->
+	<select id="getAllProductNoDup"
+		resultType="com.db.model.ProductVO">
+
+		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
+		balance, price, purchasedNum, explain, writedate, readcount,
+		discountrate
+		FROM (
+		SELECT num, pGender, bName, kind, pName, imgUrl,
+		pSize,
+		balance, price, purchasedNum, explain, writedate, readcount,
+		discountrate,
+		ROW_NUMBER() OVER (PARTITION BY pName ORDER BY num) RN
+		FROM PRODUCT
+		)
+		WHERE RN = 1
+
+
+	</select>
+
+	<!-- 장바구니num으로 정보 불러오기 -->
+	<select id="findByCartNum" resultType="com.db.model.CartVO">
+		select * from cart where cartnum =#{cartnum}
+	</select>
+	
+	<!-- 장바구니 수량감소 -->
+	<update id="decreaseQuantity" >
+	
+	update cart SET quantity = quantity - 1
+	where cartnum = #{carnum}
+	
+	</update>
+
+	<!-- 장바구니 수량증가 -->
+	<update id="increaseQuantity" >
+	
+	update cart SET quantity = quantity + 1
+	where cartnum = #{carnum}
+	
+	</update>
+	
+	<!-- 장바구니 상품삭제 -->
+	<delete id="cartDelete">
+	
+	delete from cart where cartnum=#{cartnum}
+	
+	</delete>
+
+
+
+
+
+
 
 </mapper>

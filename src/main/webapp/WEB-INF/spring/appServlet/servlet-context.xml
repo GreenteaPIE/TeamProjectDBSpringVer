@@ -33,7 +33,11 @@
 
 	<context:component-scan
 		base-package="com.db.controller" />
+		
+		
+		
 
 
 
 </beans:beans>
+

@@ -38,7 +38,7 @@ public class HomeController {
 	 */
 
 	@GetMapping("/")
-	public String home(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
+	public String home(Locale locale, Model model, HttpServletRequest request, HttpSession session){
 		logger.info("Welcome home! The client locale is {}.", locale);
 
 		Date date = new Date();

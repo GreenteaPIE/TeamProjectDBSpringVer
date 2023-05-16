@@ -18,10 +18,4 @@ function plus() {
 			// form 제출 방지
 			event.preventDefault();
 		}
-		function validateForm() {
-			var psize = document.forms["addcart"]["psize"].value;
-			if (psize === "") {
-				alert("사이즈를 선택해주세요");
-				return false;
-			}
-		}
+		

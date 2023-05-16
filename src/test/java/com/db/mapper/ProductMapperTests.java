@@ -96,10 +96,34 @@ public class ProductMapperTests {
 	
 		productmapper.getAllProduct();
 	}
-	*/
+	
 	@Test
 	public void countCart() throws Exception{
 		String userid = "user";
 		productmapper.countCart(userid);
+	}
+	
+	@Test
+	public void noduplist() throws Exception{
+		productmapper.getAllProductNoDup();
+	}
+	
+	@Test
+	public void cartbynum() throws Exception{
+		
+		int cartnum = 1;
+		productmapper.findByCartNum(cartnum);
+	}
+	
+	@Test
+	public void decrease() throws Exception{
+		int cartnum = 1;
+		productmapper.increaseQuantity(cartnum);
+	}
+	*/
+	@Test
+	public void deletecart() throws Exception{
+		int cartnum = 1;
+		productmapper.cartDelete(cartnum);
 	}
 }

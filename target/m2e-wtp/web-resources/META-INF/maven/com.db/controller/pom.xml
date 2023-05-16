@@ -17,6 +17,7 @@
 	<dependencies>
 		<!-- Spring -->
 		
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 <dependency>
     <groupId>org.springframework.security</groupId>

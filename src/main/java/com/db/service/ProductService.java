@@ -35,17 +35,32 @@ public interface ProductService {
 
 	// 상품 사이즈 리스트
 	public List<ProductVO> productSizeList(String pname) throws Exception;
-	
+
 	// 장바구니 상품 추가
 	public CartVO addCart(CartVO cart) throws Exception;
-	
+
 	// 장바구니 리스트 불러오기
 	public ArrayList<CartVO> getCartList(String userid) throws Exception;
-	
-	//모든 상품 정보 불러오기
+
+	// 모든 상품 정보 불러오기
 	public ArrayList<ProductVO> getAllProduct() throws Exception;
-	
-	//장바구니 상품 갯수 불러오기
+
+	// 장바구니 상품 갯수 불러오기
 	public int countCart(String userid) throws Exception;
+
+	// 모든 상품을 중복 없이 불러오기
+	public ArrayList<ProductVO> getAllProductNoDup() throws Exception;
+
+	// 장바구니안의 장바구니num으로 정보 불러오기
+	public CartVO findByCartNum(int cartnum) throws Exception;
+
+	// 장바구니 수량 감소
+	public int decreaseQuantity(int cartnum)throws Exception;
+
+	// 장바구니 수량 증가
+	public int increaseQuantity(int cartnum)throws Exception;
+	
+	// 장바구니 상품 삭제
+	public int cartDelete(int cartnum)throws Exception;
 
 }

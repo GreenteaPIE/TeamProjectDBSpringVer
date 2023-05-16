@@ -19,5 +19,6 @@ public class ProductVO {
 	private String explain;
 	private Timestamp writedate;
 	private int readcount;
+	private int discountrate;
 
 }

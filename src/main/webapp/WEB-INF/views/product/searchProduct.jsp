@@ -37,10 +37,23 @@
 								<h6 class="mb-3">${bplist.pname}</h6>
 								<div class="d-flex justify-content-center">
 									<h6>
-										<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="₩###,###" />
+										<c:if test="${bplist.discountrate==0}">
+											<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="₩###,###" />
+										</c:if>
+										<c:if test="${bplist.discountrate!=0}">
+									   ${bplist.discountrate}% 할인
+                                            <del style="text-decoration: line-through; color: gray;">
+												<!-- 할인전 가격 -->
+												<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="₩###,###" />
+											</del>
+											<br>
+											<!-- 할인후 가격 -->
+											<c:set var="discountedPrice" value="${Integer.parseInt(bplist.price) * (100 - bplist.discountrate) / 100}" />
+											<fmt:formatNumber value="${Math.round(discountedPrice/100)*100}" pattern="₩###,###" />
+										</c:if>
 									</h6>
 								</div>
-							</div>
+							</div> 
 						</div>
 					</div>
 				</c:forEach>

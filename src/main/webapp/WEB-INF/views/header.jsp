@@ -109,8 +109,8 @@
 									<a href="DBServlet?command=qna_board_list" class="dropdown-item">Q&A게시판</a>
 								</div>
 							</div>
-							<a href="DBServlet?command=auction_view" class="nav-item nav-link">Auction</a>
-							<a href="DBServlet?command=Hot_Deal" class="nav-item nav-link">HotDeal</a>
+							<a href="#" class="nav-item nav-link">Auction</a>
+							<a href="/product/hotDealList" class="nav-item nav-link">Sale</a>
 							<a href="#" class="nav-item nav-link">Event</a>
 							<a href="/contact" class="nav-item nav-link">Contact</a>
 						</div>
@@ -173,7 +173,7 @@
 											</div>
 											<hr>
 											<a href="/user/mypagechk" class="dropdown-item">내 정보 수정</a>
-											<a href="#" class="dropdown-item">내가 쓴 글</a>
+											<a href="#" class="dropdown-item">나의 작성 글</a>
 											<a href="#" class="dropdown-item">나의 주문내역</a>
 											<a href="#" class="dropdown-item">보유 쿠폰</a>
 											<hr>

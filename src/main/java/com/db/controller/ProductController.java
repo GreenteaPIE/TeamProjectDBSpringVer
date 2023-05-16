@@ -9,9 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -128,37 +133,23 @@ public class ProductController {
 
 	}
 
-	// 장바구니 페이지 이동
-	@GetMapping("/cart")
-	public void cartGET(HttpServletRequest request) throws Exception {
-
-		logger.info("장바구니 페이지 진입");
-	}
-
-	// 장바구니에 상품 추가 후 장바구니 리스트 가져오기
+	// 장바구니에 상품 추가
 	@PostMapping("/addCart")
-	public String addCartPOST(String userid, CartVO cart, HttpServletRequest request, HttpSession session)
-			throws Exception {
+	@ResponseBody
+	public ResponseEntity<?> addCartPOST(String userid, CartVO cart, HttpServletRequest request, HttpSession session)
+	        throws Exception {
 
-		productService.addCart(cart); // 장바구니 추가 쿼리 실행
+	    productService.addCart(cart); // 장바구니 추가 쿼리 실행
 
-		ArrayList<CartVO> clist = productService.getCartList(userid); // userid로 장바구니 리스트 불러오기
-
-		request.setAttribute("clist", clist);
-
-		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
-		request.setAttribute("plist", plist);
-
-		return "/product/cart";
-
+	    return ResponseEntity.ok("Success");
 	}
+
 
 	// 나의 장바구니
 	@GetMapping("/myCart")
 	public String myCartGET(String userid, HttpServletRequest request, HttpSession session) throws Exception {
 
 		ArrayList<CartVO> clist = productService.getCartList(userid); // userid로 장바구니 리스트 불러오기
-
 		request.setAttribute("clist", clist);
 
 		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
@@ -175,4 +166,42 @@ public class ProductController {
 		return String.valueOf(productService.countCart(userid));
 	}
 
+	// 핫딜 상품 리스트
+	@GetMapping("/hotDealList")
+	public String hotDealListGET(HttpServletRequest request, RedirectAttributes rttr) {
+
+		try {
+			ArrayList<ProductVO> plist = productService.getAllProductNoDup(); // 모든 상품 중복없이 가져오기
+			request.setAttribute("hdlist", plist);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return "/product/hotDealList";
+
+	}
+
+	//장바구니 수량 감소
+	@PostMapping("/quantityMinus")
+	public ResponseEntity<String> decreaseQuantity(@RequestParam("cartnum") int cartnum) throws Exception {
+	    productService.decreaseQuantity(cartnum);
+	    return ResponseEntity.ok("Success");
+	  }
+
+	// 장바구니 수량 증가
+	@PostMapping("/quantityPlus")
+	@ResponseBody
+	public ResponseEntity<String> increaseQuantity(@RequestParam("cartnum") int cartnum) throws Exception {
+	    productService.increaseQuantity(cartnum);
+	    return ResponseEntity.ok("Success");
+	}
+	
+	// 장바구니 상품 삭제
+	@PostMapping("/deleteCart")
+	@ResponseBody
+	public ResponseEntity<String> cartDelete(@RequestParam("cartnum") int cartnum) throws Exception {
+		productService.cartDelete(cartnum);
+		return ResponseEntity.ok("Success");	
+	}
+	
 }
