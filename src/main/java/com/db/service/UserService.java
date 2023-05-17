@@ -1,7 +1,11 @@
 package com.db.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
+import com.db.model.CartVO;
+import com.db.model.CouponVO;
 import com.db.model.UserVO;
 
 public interface UserService {
@@ -23,5 +27,14 @@ public interface UserService {
 
 	// 회원 탈퇴
 	public int userExit(UserVO user) throws Exception;
+
+	// 쿠폰 받기
+	public int addCoupon(CouponVO coupon) throws Exception;
+	
+	// 쿠폰 보유 확인
+	public CouponVO checkCoupon(CouponVO coupon);
+	
+	// 보유 쿠폰 확인
+	public ArrayList<CouponVO> getMyCoupon(String userid);
 
 }

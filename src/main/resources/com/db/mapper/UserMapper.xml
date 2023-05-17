@@ -41,17 +41,46 @@
 		email = #{email},
 		address1 = #{address1}, address2 = #{address2},
 		address3 = #{address3}, phone = #{phone}, gender = #{gender}
-		where userid = #{userid}
+		where
+		userid = #{userid}
 
 	</update>
-	
+
 	<!-- 회원 탈퇴 -->
 	<delete id="userExit">
-	
+
 		delete from shopuser where userid = #{userid}
-	
+
 	</delete>
 
+	<!-- 쿠폰 추가 -->
+	<insert id="addCoupon">
+
+		insert into coupon(num,
+		userid, couponname,
+		discountprice, imgurl)
+		values (coupon_seq.nextval,
+		#{userid},
+		#{couponname},
+		#{discountprice}, #{imgurl})
+
+	</insert>
+
+	<!-- 쿠폰 보유 확인 -->
+	<select id="checkCoupon" resultType="com.db.model.CouponVO">
+
+		select*from coupon
+		where userid=#{userid} and couponname=#{couponname}
+
+	</select>
+
+	<!-- 보유 쿠폰 보기 -->
+	<select id="getMyCoupon" resultType="com.db.model.CouponVO">
+
+		select*from coupon
+		where userid=#{userid}
+
+	</select>
 
 
 </mapper>

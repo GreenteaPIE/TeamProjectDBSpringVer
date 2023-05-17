@@ -99,30 +99,32 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public CartVO findByCartNum(int cartnum) throws Exception {
-		
+
 		return productmapper.findByCartNum(cartnum);
 	}
 
 	@Override
 	public int decreaseQuantity(int cartnum) throws Exception {
-		
+
 		return productmapper.decreaseQuantity(cartnum);
 	}
 
 	@Override
 	public int increaseQuantity(int cartnum) throws Exception {
-		
+
 		return productmapper.increaseQuantity(cartnum);
 	}
 
 	@Override
 	public int cartDelete(int cartnum) throws Exception {
-		
+
 		return productmapper.cartDelete(cartnum);
 	}
 
-	
-
-	
+	@Override
+	public CartVO addOrders(String userid) throws Exception {
+		
+		return productmapper.addOrders(userid);
+	}
 
 }

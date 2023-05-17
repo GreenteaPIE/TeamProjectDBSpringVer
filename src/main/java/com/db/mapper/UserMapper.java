@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.db.model.BrandVO;
+import com.db.model.CartVO;
+import com.db.model.CouponVO;
 import com.db.model.UserVO;
 
 public interface UserMapper {
@@ -25,5 +27,14 @@ public interface UserMapper {
 
 	// 회원 탈퇴
 	public int userExit(UserVO user);
+
+	// 쿠폰 받기
+	public int addCoupon(CouponVO coupon);
+
+	// 쿠폰 보유 확인
+	public CouponVO checkCoupon(CouponVO coupon);
+	
+	// 보유 쿠폰 확인
+	public ArrayList<CouponVO> getMyCoupon(String userid);
 
 }

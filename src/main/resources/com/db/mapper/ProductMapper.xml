@@ -196,31 +196,41 @@
 
 	<!-- 장바구니num으로 정보 불러오기 -->
 	<select id="findByCartNum" resultType="com.db.model.CartVO">
-		select * from cart where cartnum =#{cartnum}
+		select * from cart where
+		cartnum =#{cartnum}
 	</select>
-	
+
 	<!-- 장바구니 수량감소 -->
-	<update id="decreaseQuantity" >
-	
-	update cart SET quantity = quantity - 1
-	where cartnum = #{carnum}
-	
+	<update id="decreaseQuantity">
+
+		update cart SET quantity = quantity - 1
+		where cartnum
+		= #{carnum}
+
 	</update>
 
 	<!-- 장바구니 수량증가 -->
-	<update id="increaseQuantity" >
-	
-	update cart SET quantity = quantity + 1
-	where cartnum = #{carnum}
-	
+	<update id="increaseQuantity">
+
+		update cart SET quantity = quantity + 1
+		where cartnum
+		= #{carnum}
+
 	</update>
-	
+
 	<!-- 장바구니 상품삭제 -->
 	<delete id="cartDelete">
-	
-	delete from cart where cartnum=#{cartnum}
-	
+
+		delete from cart where cartnum=#{cartnum}
+
 	</delete>
+
+	<!-- 결제정보 추가(orders table) -->
+	<select id="addOrders" resultType="com.db.model.OrderVO">
+		insert into orders(ordernumber, userid) values(orders_seq.nextval,
+		#{userid})
+	</select>
+
 
 
 

@@ -1,5 +1,6 @@
 package com.db.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,16 +11,21 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.db.model.CartVO;
+import com.db.model.CouponVO;
 import com.db.model.UserVO;
 import com.db.service.UserService;
 
@@ -142,7 +148,7 @@ public class UserController {
 			if (true == pwEncoder.matches(rawPw, encodePw)) {
 				vo.setPass("");
 				session.setAttribute("user", vo);
-				
+
 				return "redirect:/";
 			} else { // 비밀번호가 일치 하지 않을때(로그인 실패)
 				rttr.addFlashAttribute("result", 0);
@@ -228,7 +234,7 @@ public class UserController {
 
 	}
 
-	/* 회원 탈퇴 */
+	// 회원 탈퇴
 	@PostMapping("/userexit")
 	public String userExitPOST(UserVO user, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 
@@ -240,4 +246,70 @@ public class UserController {
 
 		return "redirect:/";
 	}
+
+	// 환영 쿠폰
+	@PostMapping("/addWcoupon")
+	@ResponseBody
+	public String addWcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
+		     
+		int result = userService.addCoupon(coupon);
+		return result + "";
+
+	}
+
+	// 브론즈 쿠폰
+	@PostMapping("/addBcoupon")
+	@ResponseBody
+	public String addBcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
+		     
+		int result = userService.addCoupon(coupon);
+		return result + "";
+
+	}
+
+	// 실버 쿠폰
+	@PostMapping("/addScoupon")
+	@ResponseBody
+	public String addScouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
+		     
+		int result = userService.addCoupon(coupon);
+		return result + "";
+
+	}
+
+	// 골드 쿠폰
+	@PostMapping("/addGcoupon")
+	@ResponseBody
+	public String addGcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
+		     
+		int result = userService.addCoupon(coupon);
+		return result + "";
+
+	}
+
+	// 다이아 쿠폰
+	@PostMapping("/addDcoupon")
+	@ResponseBody
+	public String addDcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
+		     
+		int result = userService.addCoupon(coupon);
+		return result + "";
+
+	}
+	
+	// 보유 쿠폰 가져오기
+	@GetMapping("/myCoupon")
+	public String myCouponGET(String userid, HttpServletRequest request) {
+		
+		ArrayList<CouponVO> couplist = userService.getMyCoupon(userid);
+		request.setAttribute("couplist", couplist);
+		return "/user/myCoupon";
+		
+	}
+
 }

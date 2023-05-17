@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.db.model.CouponVO;
 import com.db.model.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -63,9 +64,31 @@ public class UserMapperTests {
 		usermapper.userLogin(user);
 		System.out.println("결과 값 : " + usermapper.userLogin(user));
 	}
-	*/
-	
-	
 	
 
+	
+	
+	}*
+	@Test
+	public void checkcoup() throws Exception{
+		String userid="user";
+		String couponname="test";
+		CouponVO coupon = new CouponVO();
+		coupon.setUserid(userid);
+		coupon.setCouponname(couponname);
+		
+		CouponVO result = usermapper.checkCoupon(coupon);
+		System.out.println("결과 : " + result);
+	}
+	 */
+	
+	@Test
+	public void mycoup() throws Exception{
+		String userid="user";
+
+		usermapper.getMyCoupon(userid);
+	}
+	
+	
+	
 }

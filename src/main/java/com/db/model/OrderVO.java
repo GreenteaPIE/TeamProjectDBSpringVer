@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class OrderVO { // orders table + order_detail table
 
-	private int orderNumber; // seq
-	private int orderDetailNumber; // seq
+	private int ordernumber; // seq
+	private int orderdetailnumber; // seq
 	private int num; // product number
 	private int quantity;
 	private String userid;

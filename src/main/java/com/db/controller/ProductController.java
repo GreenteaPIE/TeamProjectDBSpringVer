@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.db.model.CartVO;
+import com.db.model.OrderVO;
 import com.db.model.ProductVO;
 import com.db.model.UserVO;
 import com.db.service.ProductService;
@@ -137,13 +138,12 @@ public class ProductController {
 	@PostMapping("/addCart")
 	@ResponseBody
 	public ResponseEntity<?> addCartPOST(String userid, CartVO cart, HttpServletRequest request, HttpSession session)
-	        throws Exception {
+			throws Exception {
 
-	    productService.addCart(cart); // 장바구니 추가 쿼리 실행
+		productService.addCart(cart); // 장바구니 추가 쿼리 실행
 
-	    return ResponseEntity.ok("Success");
+		return ResponseEntity.ok("Success");
 	}
-
 
 	// 나의 장바구니
 	@GetMapping("/myCart")
@@ -166,8 +166,8 @@ public class ProductController {
 		return String.valueOf(productService.countCart(userid));
 	}
 
-	// 핫딜 상품 리스트
-	@GetMapping("/hotDealList")
+	// 세일 상품 리스트
+	@GetMapping("/saleList")
 	public String hotDealListGET(HttpServletRequest request, RedirectAttributes rttr) {
 
 		try {
@@ -177,31 +177,52 @@ public class ProductController {
 
 			e.printStackTrace();
 		}
-		return "/product/hotDealList";
+		return "/product/saleList";
 
 	}
 
-	//장바구니 수량 감소
+	// 장바구니 수량 감소
 	@PostMapping("/quantityMinus")
 	public ResponseEntity<String> decreaseQuantity(@RequestParam("cartnum") int cartnum) throws Exception {
-	    productService.decreaseQuantity(cartnum);
-	    return ResponseEntity.ok("Success");
-	  }
+		productService.decreaseQuantity(cartnum);
+		return ResponseEntity.ok("Success");
+	}
 
 	// 장바구니 수량 증가
 	@PostMapping("/quantityPlus")
 	@ResponseBody
 	public ResponseEntity<String> increaseQuantity(@RequestParam("cartnum") int cartnum) throws Exception {
-	    productService.increaseQuantity(cartnum);
-	    return ResponseEntity.ok("Success");
+		productService.increaseQuantity(cartnum);
+		return ResponseEntity.ok("Success");
 	}
-	
+
 	// 장바구니 상품 삭제
 	@PostMapping("/deleteCart")
 	@ResponseBody
 	public ResponseEntity<String> cartDelete(@RequestParam("cartnum") int cartnum) throws Exception {
 		productService.cartDelete(cartnum);
-		return ResponseEntity.ok("Success");	
+		return ResponseEntity.ok("Success");
 	}
+
+	// 체크아웃 페이지
+	@GetMapping("/checkOut")
+	public String checkOutGET(String userid, HttpServletRequest request, HttpSession session) throws Exception {
+
+		ArrayList<CartVO> clist = productService.getCartList(userid); // userid로 장바구니 리스트 불러오기
+		request.setAttribute("clist", clist);
+
+		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
+		request.setAttribute("plist", plist);
+		return "/product/checkOut";
+	}
+
+	// 결제완료
+	@PostMapping("/purchased")
+	public String purchasedPOST(String userid, OrderVO order, HttpServletRequest request) throws Exception{
 	
+	productService.addOrders(userid);
+	return null;
+	
+	}
+
 }

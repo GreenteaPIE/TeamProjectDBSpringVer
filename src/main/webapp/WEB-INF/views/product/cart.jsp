@@ -21,6 +21,7 @@ td .delhidden {
 </style>
 <jsp:include page="../header.jsp"></jsp:include>
 <body>
+<hr>
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
@@ -34,9 +35,6 @@ td .delhidden {
 	</div>
 	<!-- Page Header End -->
 	<!-- Cart Start -->
-	<!--<form>
-		<input type="hidden" name="command" value="Check_out">
-		<input type="hidden" value="delete_cart" name="command">-->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5">
 			<div class="col-lg-8 table-responsive mb-5">
@@ -91,10 +89,9 @@ td .delhidden {
 												<td class="align-middle">
 													<div class="input-group quantity mx-auto" style="width: 120px;">
 														<div class="input-group-btn">
-																<button class="btn btn-primary btn-minus" onclick="decreaseQuantity(${cart.cartnum})">
-																	<i class="fa fa-minus"></i>
-																</button>
-															
+															<button class="btn btn-primary btn-minus" onclick="decreaseQuantity(${cart.cartnum})">
+																<i class="fa fa-minus"></i>
+															</button>
 														</div>
 														<input type="text" style="height: 38.5px;" name="quantity" class="form-control form-control-sm bg-secondary text-center" value="${cart.quantity}" id="quantity-${cart.cartnum}" readonly>
 														<div class="input-group-btn">
@@ -144,14 +141,22 @@ td .delhidden {
 								<fmt:formatNumber type="currency" value="${subprice}" currencySymbol="₩" />
 							</h5>
 						</div>
-						<input type="submit" class="btn btn-block btn-primary my-3 py-3" value="Proceed To Checkout">
+						<c:if test="${clist.size()!=0}">
+						<a href="/product/checkOut?userid=${user.userid}">
+							<input type="button" class="btn btn-block btn-primary my-3 py-3" value="Proceed To Checkout">
+						</a>
+						</c:if>
+						<c:if test="${clist.size()==0}">
+						<a href="#" onclick="alert('주문할 상품이 없습니다.'); return false;">
+							<input type="button" class="btn btn-block btn-primary my-3 py-3" value="Proceed To Checkout">
+						</a>
+						</c:if>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--</form>
-	 Cart End -->
+	<!--Cart End -->
 	<script>
   function increaseQuantity(cartnum) {
     $.ajax({
@@ -202,6 +207,7 @@ td .delhidden {
 	    }
 	  }
 </script>
+<hr>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
 </html>

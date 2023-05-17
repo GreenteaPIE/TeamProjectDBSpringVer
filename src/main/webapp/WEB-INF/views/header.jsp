@@ -92,7 +92,7 @@
 			</div>
 			<div class="col-lg-9">
 				<nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-					<a href="index.jsp" class="text-decoration-none d-block d-lg-none">
+					<a href="/" class="text-decoration-none d-block d-lg-none">
 						<img src="../resources/img/logo.png" alt="DB로고" height="50px" class="img-fluid">
 					</a>
 					<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -110,8 +110,8 @@
 								</div>
 							</div>
 							<a href="#" class="nav-item nav-link">Auction</a>
-							<a href="/product/hotDealList" class="nav-item nav-link">Sale</a>
-							<a href="#" class="nav-item nav-link">Event</a>
+							<a href="/product/saleList" class="nav-item nav-link">Sale</a>
+							<a href="/event" class="nav-item nav-link">Event</a>
 							<a href="/contact" class="nav-item nav-link">Contact</a>
 						</div>
 						<div class="navbar-nav mr-auto py-0" align="right">
@@ -133,7 +133,6 @@
 										<a href="DBServlet?command=user_management" class="dropdown-item">회원 관리</a>
 										<a href="DBServlet?command=board_management" class="dropdown-item">게시판 관리</a>
 										<a href="DBServlet?command=auction" class="dropdown-item">옥션 관리</a>
-										<a href="DBServlet?command=auction" class="dropdown-item">핫딜 관리</a>
 										<a href="DBServlet?command=product_management" class="dropdown-item">상품 관리</a>
 										<a href="DBServlet?command=sales_management" class="dropdown-item">매출 관리</a>
 									</div>
@@ -175,7 +174,7 @@
 											<a href="/user/mypagechk" class="dropdown-item">내 정보 수정</a>
 											<a href="#" class="dropdown-item">나의 작성 글</a>
 											<a href="#" class="dropdown-item">나의 주문내역</a>
-											<a href="#" class="dropdown-item">보유 쿠폰</a>
+											<a href="/user/myCoupon?userid=${user.userid }" class="dropdown-item">보유 쿠폰</a>
 											<hr>
 											<div style="text-align: center;">
 												<b style="font-size: 12px; color: gray;">가입일 <fmt:formatDate value="${user.enter}" pattern="yyyy-MM-dd" /></b>

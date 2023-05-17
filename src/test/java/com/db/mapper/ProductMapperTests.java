@@ -120,10 +120,17 @@ public class ProductMapperTests {
 		int cartnum = 1;
 		productmapper.increaseQuantity(cartnum);
 	}
-	*/
+	
 	@Test
 	public void deletecart() throws Exception{
 		int cartnum = 1;
 		productmapper.cartDelete(cartnum);
+	}
+	*/
+	
+	@Test
+	public void addorders() throws Exception{
+		String userid = "user";
+		productmapper.addOrders(userid);
 	}
 }

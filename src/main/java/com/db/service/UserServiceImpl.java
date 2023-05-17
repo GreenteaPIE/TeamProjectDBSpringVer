@@ -1,9 +1,13 @@
 package com.db.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.db.mapper.UserMapper;
+import com.db.model.CartVO;
+import com.db.model.CouponVO;
 import com.db.model.UserVO;
 
 @Service
@@ -47,6 +51,34 @@ public class UserServiceImpl implements UserService {
 	public int userExit(UserVO user) throws Exception {
 
 		return usermapper.userExit(user);
+	}
+
+	@Override
+	public int addCoupon(CouponVO coupon){
+		
+		CouponVO checkCoupon = usermapper.checkCoupon(coupon);//쿠폰 보유 확인
+		
+		if(checkCoupon != null) {
+			return 2;
+		}
+		
+		try {
+		return usermapper.addCoupon(coupon);
+		}catch (Exception e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public CouponVO checkCoupon(CouponVO coupon) {
+		
+		return usermapper.checkCoupon(coupon);
+	}
+
+	@Override
+	public ArrayList<CouponVO> getMyCoupon(String userid) {
+	
+		return usermapper.getMyCoupon(userid);
 	}
 
 }

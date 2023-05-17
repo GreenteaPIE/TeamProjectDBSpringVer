@@ -38,7 +38,7 @@ public class HomeController {
 	 */
 
 	@GetMapping("/")
-	public String home(Locale locale, Model model, HttpServletRequest request, HttpSession session){
+	public String home(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
 		Date date = new Date();
@@ -47,7 +47,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-        
+
 		try {
 			ArrayList<BrandVO> bvo = productService.brandList();
 			session.setAttribute("blist", bvo);
@@ -59,10 +59,16 @@ public class HomeController {
 		return "home";
 	}
 
-	//Contact 페이지
+	// Contact 페이지
 	@GetMapping("/contact")
 	public void contactGET() {
-		logger.info("contact 진입");
+		logger.info("contact 페이지 진입");
+	}
+
+	// Event 페이지
+	@GetMapping("/event")
+	public void eventGET() {
+		logger.info("event 페이지 진입");
 	}
 
 }

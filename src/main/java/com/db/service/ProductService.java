@@ -55,12 +55,15 @@ public interface ProductService {
 	public CartVO findByCartNum(int cartnum) throws Exception;
 
 	// 장바구니 수량 감소
-	public int decreaseQuantity(int cartnum)throws Exception;
+	public int decreaseQuantity(int cartnum) throws Exception;
 
 	// 장바구니 수량 증가
-	public int increaseQuantity(int cartnum)throws Exception;
-	
+	public int increaseQuantity(int cartnum) throws Exception;
+
 	// 장바구니 상품 삭제
-	public int cartDelete(int cartnum)throws Exception;
+	public int cartDelete(int cartnum) throws Exception;
+	
+	// 결제 정보 추가(orders table)
+	public CartVO addOrders(String userid) throws Exception;
 
 }

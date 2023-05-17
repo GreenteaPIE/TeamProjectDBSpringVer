@@ -54,12 +54,13 @@
 				<div class="d-flex mb-3">
 					<p class="text-dark font-weight-medium mb-0 mr-3">Sizes</p>
 				</div>
-<form name="addcart" method="post" onsubmit="return validateForm();">					<input type="hidden" name="num" value="${pdlist.num }"> <input type="hidden" name="userid" value="${user.userid }"> 
+				<form name="addcart" method="post" onsubmit="return validateForm();">
+					<input type="hidden" name="num" value="${pdlist.num }"> <input type="hidden" name="userid" value="${user.userid }">
 					<c:if test="${pdlist.discountrate==0}">
-					<input type="hidden" name="price" value="${Integer.parseInt(pdlist.price)}">
+						<input type="hidden" name="price" value="${Integer.parseInt(pdlist.price)}">
 					</c:if>
 					<c:if test="${pdlist.discountrate!=0}">
-					<input type="hidden" name="price" value="${Math.round(discountedPrice/100)*100}">
+						<input type="hidden" name="price" value="${Math.round(discountedPrice/100)*100}">
 					</c:if>
 					<c:forEach var="ps" items="${ps }">
 						<div class="custom-control custom-radio custom-control-inline">
@@ -98,34 +99,33 @@
 	<!-- Shop Detail End -->
 	<hr>
 	<script>
-function validateForm() {
-    var psize = $('input[name="psize"]:checked').val();
-    if (!psize) {
-        alert("사이즈를 선택해주세요");
-        return false;
-    }
-    
-    // form data
-    var formData = $("form[name='addcart']").serialize();
+		function validateForm() {
+			var psize = $('input[name="psize"]:checked').val();
+			if (!psize) {
+				alert("사이즈를 선택해주세요");
+				return false;
+			}
 
-    // AJAX request
-    $.ajax({
-        type: "POST",
-        url: "/product/addCart",
-        data: formData,
-        success: function (response) {
-            alert("장바구니에 추가되었습니다.");
-            location.reload(); // 페이지 새로 고침
-        },
-        error: function (xhr, status, error) {
-            alert("장바구니에 추가하는 데 실패했습니다.");
-            location.reload(); // 페이지 새로 고침
-        }
-    });
-    return false;
-}
-</script>
+			// form data
+			var formData = $("form[name='addcart']").serialize();
 
+			// AJAX request
+			$.ajax({
+				type : "POST",
+				url : "/product/addCart",
+				data : formData,
+				success : function(response) {
+					alert("장바구니에 추가되었습니다.");
+					location.reload(); // 페이지 새로 고침
+				},
+				error : function(xhr, status, error) {
+					alert("장바구니에 추가하는 데 실패했습니다.");
+					location.reload(); // 페이지 새로 고침
+				}
+			});
+			return false;
+		}
+	</script>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
 </html>
