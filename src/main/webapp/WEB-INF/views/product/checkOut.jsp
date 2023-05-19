@@ -25,8 +25,22 @@
 	</div>
 	<!-- Page Header End -->
 	<!-- Checkout Start -->
-	<form action="/product/purchased" method="post" name="frm" id="frm" >
-	<input type="hidden" name="userid" value="${user.userid }">
+	<form action="/product/purchased" method="post" name="frm" id="frm">
+		<!-- 가지고 넘어가야 할 값들 
+		cart = psize, num, quantity, price, cartnum -> 0 으로 변경
+		product = imgurl, pname
+		coupon = cnum -> 0으로 변경
+		user = userid
+		totalprice
+		 -->
+		
+		<input type="hidden" name="userid" value="${user.userid }">
+		
+		<input type="hidden" name="totalprice" value="3000">
+		<!-- pname 과 imgurl 은 num(product)를 가져가서 productvo에서 불러오기 -->
+		<input type="hidden" name="cnum" value="3">
+		<!-- cnum 쿠폰등록 번호 를 가져가서 result ->0 로 변경하기 -->
+		
 		<div class="container-fluid pt-5">
 			<div class="row px-xl-5">
 				<div class="col-lg-8">
@@ -77,33 +91,34 @@
 						</div>
 						<div class="card-body">
 							<c:set var="subprice" value="0" />
-							<h5 class="font-weight-medium mb-3">Products Info</h5>
-							<table class="text-center mb-0" style= "margin-bottom: 15px;">
-								<tr>
-									<th style="color: black;">Products</th>
-									<th style="color: black;">Quantity</th>
-									<th style="color: black;">Price</th>
-								</tr>
-								<c:forEach var="cart" items="${clist}">
-									<c:forEach var="plist" items="${plist }">
-										<c:if test="${cart.num == plist.num}">
-											<tr>
-												<td>${plist.pname}</td>
-												<td>${cart.quantity}</td>
-												<td><fmt:setLocale value="ko_KR" /> <fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" /></td>
-											</tr>
-											<div class="d-flex justify-content-between">
-												<input id="pname" type="hidden" value="${plist.pname}">
-											</div>
-											<c:set var="subprice" value="${subprice + cart.price * cart.quantity}" />
-										</c:if>
-									</c:forEach>
+							<h5 class="font-weight-medium mb-3">Products</h5>
+							<c:forEach var="cart" items="${clist}">
+								<c:forEach var="plist" items="${plist}">
+									<c:if test="${cart.num == plist.num}">
+										<div class="d-flex justify-content-between">
+											<p>${plist.pname}</p>
+											<p>
+												<fmt:setLocale value="ko_KR" />
+												<fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" />
+											</p>
+										</div>
+										<input type="hidden" name="pname" value="${plist.pname}">
+										<input type="hidden" name="imgurl" value="${plist.imgUrl}">
+										<input type="hidden" name="psize" value="${cart.psize }">
+										<input type="hidden" name="quantity" value="${cart.quantity }">
+										<input type="hidden" name="num" value="${cart.num }">
+										<input type="hidden" name="cartnum" value="${cart.cartnum }">
+										<!-- cartnum 을 가져가서 result -> 0으로 변경하기 -->
+										<input type="hidden" name="price" value="${cart.price }">
+										<!-- 할인된 가격은 cart에 저장되어있기 때문에 주문상세에서 불러오려면 cart에 저장된 price를 들고가야함 -->
+										<c:set var="subprice" value="${subprice + cart.price * cart.quantity}" />
+									</c:if>
 								</c:forEach>
-							</table>
-							<hr class="mt-0">
+							</c:forEach>
+							<br>
 							<div class="d-flex justify-content-between mb-3 pt-1">
 								<h6 class="font-weight-medium">Subtotal</h6>
-								<h6 class="font-weight-medium" id="subPrice">
+								<h6 class="font-weight-medium" id="subtotalPrice">
 									<fmt:setLocale value="ko_KR" />
 									<fmt:formatNumber type="currency" value="${subprice}" currencySymbol="₩" />
 								</h6>
@@ -114,16 +129,36 @@
 									<strong style="font-size: 20px">Free</strong>
 								</h6>
 							</div>
-							<div class="card-footer border-secondary bg-transparent">
-								<div class="d-flex justify-content-between mt-2">
-									<h5 class="font-weight-bold">Total</h5>
-									<h5 class="font-weight-bold" id="subPrice">
-										<fmt:setLocale value="ko_KR" />
-										<fmt:formatNumber type="currency" value="${subprice}" currencySymbol="₩" />
-										<input id="total" type="hidden" name="total" value="${subprice}">
-									</h5>
+						</div>
+						<div class="card-footer border-secondary bg-transparent">
+							<div class="d-flex justify-content-between mb-2">
+								<h5 class="font-weight-bold">Total</h5>
+								<h5 class="font-weight-bold" id="totalDisplayPrice">
+									<fmt:setLocale value="ko_KR" />
+									<fmt:formatNumber type="currency" value="${subprice}" currencySymbol="₩" />
+									<input id="total" type="hidden" name="totalprice" value="${subprice}">
+								</h5>
+							</div>
+							<div>
+								<div class="d-flex justify-content-between mb-2">
+									<h6 class="font-weight-medium">Discount Price</h6>
+									<h6 class="font-weight-medium" id="DiscountPrice">₩0</h6>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="input-group mb-5">
+						<div class="form-control form-control-custom">
+							<select name="coupon" class="select-no-outline">
+								<c:forEach var="coup" items="${couplist}">
+									<c:if test="${coup.couponresult != 0 }">
+										<option value="${coup.discountprice}" data-num="${coup.cnum}">${coup.couponname}</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="input-group-append">
+							<button class="btn btn-primary">Select Coupon</button>
 						</div>
 					</div>
 					<div class="card border-secondary mb-5">
@@ -155,7 +190,7 @@
 			</div>
 		</div>
 	</form>
-	<!-- Checkout End -->
+	<!--Checkout End -->
 	<script>
 const shiptoCheckbox = document.getElementById('shipto');
 const paymentRadios = document.getElementsByName('payment');
@@ -175,40 +210,79 @@ placeOrderBtn.addEventListener('click', function(event) {
 });
 
 function iamport() {
-	
-	var total = $("#total").val();
-	var pname = $("#pname").val();
-  // 가맹점 식별코드
-  IMP.init('imp36864364');
-  
-  // 결제 요청 함수 호출
-  IMP.request_pay({
-    pg: 'html5_inicis',
-    pay_method: 'card',
-    merchant_uid: 'merchant_' + new Date().getTime(),
-    name: pname, // 결제창에서 보여질 이름
-    amount: total, // 실제 결제되는 가격
-    buyer_email: 'iamport@siot.do',
-    buyer_name: '구매자이름',
-    buyer_tel: '010-1234-5678',
-    buyer_addr: '서울 강남구 대치동',
-    buyer_postcode: '123-456'
-  }, function(rsp) {
-    if (rsp.success) {
-      // 결제 성공 처리
-      var msg = '결제가 완료되었습니다.';
-   
-      alert(msg);
-      document.getElementById('frm').submit(); // 폼 제출
-    } else {
-      // 결제 실패 처리
-      var msg = '결제에 실패하였습니다.';
-      msg += '에러내용 : ' + rsp.error_msg;
-      alert(msg);
-      document.getElementById('frm').submit(); // 폼 제출
-    }
-  });
+    var total = parseFloat($("#total").val()); // parseFloat로 숫자로 변환
+    var pname = $("#pname").val();
+    // 가맹점 식별코드
+    IMP.init('imp36864364');
+    
+    // 결제 요청 함수 호출
+    IMP.request_pay({
+        pg: 'html5_inicis',
+        pay_method: 'card',
+        merchant_uid: 'merchant_' + new Date().getTime(),
+        name: pname, // 결제창에서 보여질 이름
+        amount: total, // 실제 결제되는 가격
+        buyer_email: 'iamport@siot.do',
+        buyer_name: '구매자이름',
+        buyer_tel: '010-1234-5678',
+        buyer_addr: '서울 강남구 대치동',
+        buyer_postcode: '123-456'
+    }, function(rsp) {
+        if (rsp.success) {
+            // 결제 성공 처리
+            var msg = '결제가 완료되었습니다.';
+        
+            alert(msg);
+            document.getElementById('frm').submit(); // 폼 제출
+        } else {
+            // 결제 실패 처리
+            var msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+            alert(msg);
+            document.getElementById('frm').submit(); // 폼 제출
+        }
+    });
 }
+
+function numberWithCommas(x) {
+	  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	$(document).ready(function () {
+	  $("button.btn.btn-primary").on("click", function (e) {
+	    e.preventDefault();
+
+	    var discountPrice = parseFloat($("select[name='coupon']").val());
+	    var coupNum = $("select[name='coupon'] option:selected").data("cnum");
+	    var subPrice = parseFloat(
+	      $("#subtotalPrice").text().replace(/[^0-9.]/g, "")
+	    );
+	    var totalPrice = parseFloat(
+	      $("#totalDisplayPrice").text().replace(/[^0-9.]/g, "")
+	    );
+
+	    if (subPrice - discountPrice < 0) {
+	      alert("상품 가격 보다 높은 할인쿠폰을 사용 하실 수 없습니다");
+	      $("select[name='coupon']").prop("selectedIndex", 0);
+	    } else {
+	      var newTotalPrice = subPrice - discountPrice;
+
+	      // Update the discount price
+	      $("#DiscountPrice").html(
+	        "₩" + numberWithCommas(discountPrice.toFixed(0))
+	      );
+
+	      $("#subtotalPrice").html("₩" + numberWithCommas(subPrice.toFixed(0)));
+	      $("#totalDisplayPrice").html(
+	        "₩" + numberWithCommas(newTotalPrice.toFixed(0))
+	      );
+	      $("#total").val(newTotalPrice);
+
+	      // Assign the coupNum value to the input field with the 'cnum' name
+	      $("input[name='cnum']").val(coupNum);
+	    }
+	  });
+	});
 </script>
 	<hr>
 </body>

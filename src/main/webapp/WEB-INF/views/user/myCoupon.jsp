@@ -23,14 +23,14 @@
 		<div class="col-lg-9 col-md-12">
 			<div class="row pb-3">
 				<c:forEach var="couplist" items="${couplist }">
-				<c:if test="${couplist.couponresult == 0 }">
-					<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-						<div class="card product-item border-0 mb-4">
-							<div class="card-header position-relative overflow-hidden bg-transparent border p-0">
+					<c:if test="${couplist.couponresult != 0 }">
+						<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+							<div class="card product-item border-0 mb-4">
+								<div class="card-header position-relative overflow-hidden bg-transparent border p-0">
 									<img class="img-fluid w-100" style="height: 140px;" src="../resources/img/${couplist.imgurl}" alt="">
+								</div>
 							</div>
 						</div>
-					</div>
 					</c:if>
 				</c:forEach>
 			</div>

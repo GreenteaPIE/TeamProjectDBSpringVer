@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.db.model.CartVO;
+import com.db.model.CouponVO;
 import com.db.model.OrderVO;
 import com.db.model.ProductVO;
 import com.db.model.UserVO;
 import com.db.service.ProductService;
+import com.db.service.UserService;
 
 @Controller
 @RequestMapping(value = "/product")
@@ -37,6 +39,9 @@ public class ProductController {
 
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	UserService userService;
 
 	// 브랜드 상품 리스트 페이지 이동
 	@GetMapping("brandProductList")
@@ -213,16 +218,27 @@ public class ProductController {
 
 		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
 		request.setAttribute("plist", plist);
+		
+		ArrayList<CouponVO> couplist = userService.getMyCoupon(userid); // 쿠폰 정보 불러오기
+		request.setAttribute("couplist", couplist);
 		return "/product/checkOut";
 	}
 
 	// 결제완료
 	@PostMapping("/purchased")
-	public String purchasedPOST(String userid, OrderVO order, HttpServletRequest request) throws Exception{
-	
-	productService.addOrders(userid);
-	return null;
-	
+	public String purchasedPOST(Integer totalprice, Integer cnum, String userid, OrderVO order, HttpServletRequest request) throws Exception {
+	    productService.addOrders(userid);
+	    String[] pnames = request.getParameterValues("pname");
+
+	    for (String pname : pnames) {
+	        System.out.println(pname);
+	    }
+	    System.out.println("쿠폰번호 : " + (cnum != null ? cnum : "없음")
+	                     + " + 토탈가격 : " + totalprice
+	                     + "유저아이디 : " + userid );
+
+	    return null;
 	}
+	
 
 }

@@ -25,26 +25,31 @@
 		<!-- Shop Product Start -->
 		<div class="col-lg-9 col-md-12">
 			<div class="row pb-3">
+				<c:if test="${bplist.size()==0 }">
+					
+							<h3 style="text-align: center;">상품이 없습니다.</h3> 
+						
+				</c:if>
 				<c:forEach var="bplist" items="${bplist }">
-				<c:if test="${bplist.discountrate == 0 }">
-					<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-						<div class="card product-item border-0 mb-4">
-							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<a href='/product/productDetail?num=<c:out value="${bplist.num }"/>&pname=${bplist.pname}'>
-									<img class="img-fluid w-100" style="height: 240px" src="../resources/img/${bplist.imgUrl}" alt="">
-								</a>
-							</div>
-							<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="mb-3">${bplist.pname}</h6>
-								<div class="d-flex justify-content-center">
-									<%-- 통화 단위 지정 --%>
-									<h6>
-										<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="₩###,###" />
-									</h6>
+					<c:if test="${bplist.discountrate == 0 }">
+						<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+							<div class="card product-item border-0 mb-4">
+								<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+									<a href='/product/productDetail?num=<c:out value="${bplist.num }"/>&pname=${bplist.pname}'>
+										<img class="img-fluid w-100" style="height: 240px" src="../resources/img/${bplist.imgUrl}" alt="">
+									</a>
+								</div>
+								<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+									<h6 class="mb-3">${bplist.pname}</h6>
+									<div class="d-flex justify-content-center">
+										<%-- 통화 단위 지정 --%>
+										<h6>
+											<fmt:formatNumber value="${Integer.parseInt(bplist.price)}" pattern="₩###,###" />
+										</h6>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					</c:if>
 				</c:forEach>
 			</div>

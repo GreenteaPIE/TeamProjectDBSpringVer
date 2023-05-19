@@ -18,7 +18,7 @@
 <!-- Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 <!-- Libraries Stylesheet -->
-<link href="../css/owl.carousel.min.css" rel="stylesheet">
+<link href="../resources/css/owl.carousel.min.css" rel="stylesheet">
 <!-- Customized Bootstrap Stylesheet -->
 <link href="../resources/css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
@@ -56,7 +56,7 @@
 					</div>
 				</c:if>
 				<c:if test="${user == null}">
-					<a href="#" class="btn border" onclick="alert('로그인 후에 이용이 가능합니다.'); return false;">
+					<a class="btn border" onclick="alert('로그인 후에 이용이 가능합니다.'); return false;">
 						<i class="fas fa-shopping-cart text-primary"></i>
 						<span class="badge"></span>
 					</a>

@@ -56,7 +56,7 @@
 	<!-- 쿠폰 추가 -->
 	<insert id="addCoupon">
 
-		insert into coupon(num,
+		insert into coupon(cnum,
 		userid, couponname,
 		discountprice, imgurl)
 		values (coupon_seq.nextval,

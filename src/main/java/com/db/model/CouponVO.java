@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class CouponVO {
 	private String userid, couponname, imgurl;
-	private int discountprice, num, couponresult;
+	private int discountprice, cnum, couponresult;
 }

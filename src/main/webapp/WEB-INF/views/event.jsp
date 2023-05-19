@@ -66,7 +66,7 @@
 		<!-- 이번 달 할인 쿠폰 영역 -->
 		<div class="row mt-4">
 			<div class="col-md-12">
-				<h2 class="title">이번달의 할인 쿠폰</h2>
+				<h2 class="title">이달의 할인 쿠폰</h2>
 			</div>
 		</div>
 		<!-- 빈 공간 -->
