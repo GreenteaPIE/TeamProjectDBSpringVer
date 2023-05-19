@@ -5,6 +5,7 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <%--아임포트 라이브러리--%>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -30,17 +31,12 @@
 		cart = psize, num, quantity, price, cartnum -> 0 으로 변경
 		product = imgurl, pname
 		coupon = cnum -> 0으로 변경
-		user = userid
+		user = userid 
 		totalprice
 		 -->
-		
 		<input type="hidden" name="userid" value="${user.userid }">
-		
-		<input type="hidden" name="totalprice" value="3000">
-		<!-- pname 과 imgurl 은 num(product)를 가져가서 productvo에서 불러오기 -->
-		<input type="hidden" name="cnum" value="3">
-		<!-- cnum 쿠폰등록 번호 를 가져가서 result ->0 로 변경하기 -->
-		
+		<!--<input type="hidden" name="totalprice" value="">
+		 pname 과 imgurl 은 num(product)를 가져가서 productvo에서 불러오기 -->
 		<div class="container-fluid pt-5">
 			<div class="row px-xl-5">
 				<div class="col-lg-8">
@@ -48,22 +44,30 @@
 						<h4 class="font-weight-semi-bold mb-4">Billng Address</h4>
 						<div class="row">
 							<div class="col-md-6 form-group">
-								<label>이름</label> <input class="form-control" type="text" name="name" value="${user.name }" readonly>
+								<label>이름</label> <input class="form-control" type="text" name="name" placeholder="${user.name }">
 							</div>
 							<div class="col-md-6 form-group">
-								<label>E-mail</label> <input class="form-control" type="text" name="email" value="${user.email }" readonly>
+								<label>E-mail</label> <input class="form-control" type="text" name="email" placeholder="${user.email }">
 							</div>
 							<div class="col-md-6 form-group">
-								<label>전화번호</label> <input class="form-control" type="text" name="phone" value="${user.phone }" readonly>
+								<label>전화번호</label> <input class="form-control" type="text" name="phone" placeholder="${user.phone }">
 							</div>
 							<div class="col-md-6 form-group">
-								<label>우편번호</label> <input class="form-control" type="text" name="address1" value="${user.address1 }" readonly>
+								<label>우편번호</label> <input class="form-control address_input_1" type="text" name="address1" placeholder="${user.address1 }">
 							</div>
-							<div class="col-md-6 form-group">
-								<label>주소</label> <input class="form-control" type="text" name="address2" value="${user.address2 }" readonly>
+							<div class="col-md-12 form-group">
+								<label>주소</label> <input class="form-control address_input_2" type="text" name="address2" placeholder="${user.address2 }">
 							</div>
-							<div class="col-md-6 form-group">
-								<label>상세주소</label> <input class="form-control" type="text" name="zipcode" value="${user.address3 }" readonly>
+							<div class="col-md-12 form-group">
+								<label>상세주소</label> <input class="form-control address_input_3" type="text" name="address3" placeholder="${user.address3 }">
+							</div>
+							<div class="col-md-12 text-right">
+								<input type="button" onclick="execution_daum_address()" class="rbutton xsmall white btn btn-primary" value="우편번호 찾기">
+							</div>
+							<div class="col-md-12 form-group">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="useraddress"> <label class="custom-control-label" for="useraddress">주문자 정보와 동일</label>
+								</div>
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="custom-control custom-checkbox">
@@ -102,7 +106,7 @@
 												<fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" />
 											</p>
 										</div>
-										<input type="hidden" name="pname" value="${plist.pname}">
+										<input type="hidden" name="pname" id="pname" value="${plist.pname}">
 										<input type="hidden" name="imgurl" value="${plist.imgUrl}">
 										<input type="hidden" name="psize" value="${cart.psize }">
 										<input type="hidden" name="quantity" value="${cart.quantity }">
@@ -116,6 +120,7 @@
 								</c:forEach>
 							</c:forEach>
 							<br>
+							<hr class="mt-0">
 							<div class="d-flex justify-content-between mb-3 pt-1">
 								<h6 class="font-weight-medium">Subtotal</h6>
 								<h6 class="font-weight-medium" id="subtotalPrice">
@@ -136,7 +141,6 @@
 								<h5 class="font-weight-bold" id="totalDisplayPrice">
 									<fmt:setLocale value="ko_KR" />
 									<fmt:formatNumber type="currency" value="${subprice}" currencySymbol="₩" />
-									<input id="total" type="hidden" name="totalprice" value="${subprice}">
 								</h5>
 							</div>
 							<div>
@@ -150,12 +154,15 @@
 					<div class="input-group mb-5">
 						<div class="form-control form-control-custom">
 							<select name="coupon" class="select-no-outline">
+								<option value="0">쿠폰 선택 안함</option>
 								<c:forEach var="coup" items="${couplist}">
 									<c:if test="${coup.couponresult != 0 }">
 										<option value="${coup.discountprice}" data-num="${coup.cnum}">${coup.couponname}</option>
+										<c:set var="totalprice" value="${subprice - coup.discountprice}" />
 									</c:if>
 								</c:forEach>
-							</select>
+							</select> <input id="total" type="hidden" name="totalprice" value="${totalprice }" step="1"> <input type="hidden" name="cnum" value="">
+							<!-- cnum 쿠폰등록 번호 를 가져가서 result ->0 로 변경하기 -->
 						</div>
 						<div class="input-group-append">
 							<button class="btn btn-primary">Select Coupon</button>
@@ -192,6 +199,8 @@
 	</form>
 	<!--Checkout End -->
 	<script>
+	//결제 
+	
 const shiptoCheckbox = document.getElementById('shipto');
 const paymentRadios = document.getElementsByName('payment');
 const placeOrderBtn = document.getElementById('checkout-button');
@@ -243,17 +252,18 @@ function iamport() {
         }
     });
 }
-
+//쿠폰
 function numberWithCommas(x) {
 	  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	}
 
-	$(document).ready(function () {
+
+$(document).ready(function () {
 	  $("button.btn.btn-primary").on("click", function (e) {
-	    e.preventDefault();
+		  e.preventDefault();
 
 	    var discountPrice = parseFloat($("select[name='coupon']").val());
-	    var coupNum = $("select[name='coupon'] option:selected").data("cnum");
+	    var coupNum = $("select[name='coupon'] option:selected").data("num");
 	    var subPrice = parseFloat(
 	      $("#subtotalPrice").text().replace(/[^0-9.]/g, "")
 	    );
@@ -276,6 +286,8 @@ function numberWithCommas(x) {
 	      $("#totalDisplayPrice").html(
 	        "₩" + numberWithCommas(newTotalPrice.toFixed(0))
 	      );
+
+	      // Update the hidden total input value
 	      $("#total").val(newTotalPrice);
 
 	      // Assign the coupNum value to the input field with the 'cnum' name
@@ -283,6 +295,111 @@ function numberWithCommas(x) {
 	    }
 	  });
 	});
+	
+	 document.addEventListener('DOMContentLoaded', function() {
+		    // select 엘리먼트를 가져옵니다
+		    const selectElement = document.getElementsByName('coupon')[0];
+
+		    // 버튼 엘리먼트를 가져옵니다
+		    const button = document.querySelector('.input-group-append .btn');
+
+		    // select 값에 따라 버튼을 활성화/비활성화하는 함수
+		    function checkSelectedValue() {
+		      if (selectElement.value === "") {
+		        button.disabled = true;
+		      } else {
+		        button.disabled = false;
+		      }
+		    }
+
+		    // 함수를 처음 호출하여 버튼의 초기 상태를 설정합니다
+		    checkSelectedValue();
+
+		    // 변경 사항을 감시하기 위해 select 엘리먼트에 이벤트 리스너를 추가합니다
+		    selectElement.addEventListener('change', checkSelectedValue);
+		  });
+	 
+	 //주문자 정보 동일
+	 $(document).ready(function () {
+    $("#useraddress").on("change", function () {
+      if ($(this).is(":checked")) {
+        $("input[name='name']").val($("input[name='name']").attr("placeholder")).prop("readonly", true);
+        $("input[name='email']").val($("input[name='email']").attr("placeholder")).prop("readonly", true);
+        $("input[name='phone']").val($("input[name='phone']").attr("placeholder")).prop("readonly", true);
+        $("input[name='address1']").val($("input[name='address1']").attr("placeholder")).prop("readonly", true);
+        $("input[name='address2']").val($("input[name='address2']").attr("placeholder")).prop("readonly", true);
+        $("input[name='address3']").val($("input[name='address3']").attr("placeholder")).prop("readonly", true);
+      } else {
+        // Restore input fields to be editable and remove the value if the checkbox is unchecked.
+        $("input[type='text']").val("").prop("readonly", false);
+      }
+    });
+  });
+	 
+	// 다음 주소 연동
+		function execution_daum_address() {
+
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var addr = ''; // 주소 변수
+							var extraAddr = ''; // 참고항목 변수
+
+							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+								addr = data.roadAddress;
+							} else { // 사용자가 지번 주소를 선택했을 경우(J)
+								addr = data.jibunAddress;
+							}
+
+							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+							if (data.userSelectedType === 'R') {
+								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+								// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+								if (data.bname !== ''
+										&& /[동|로|가]$/g.test(data.bname)) {
+									extraAddr += data.bname;
+								}
+								// 건물명이 있고, 공동주택일 경우 추가한다.
+								if (data.buildingName !== ''
+										&& data.apartment === 'Y') {
+									extraAddr += (extraAddr !== '' ? ', '
+											+ data.buildingName
+											: data.buildingName);
+								}
+								// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+								if (extraAddr !== '') {
+									extraAddr = ' (' + extraAddr + ')';
+								}
+								// 조합된 참고항목을 해당 필드에 넣는다.
+								// document.getElementById("sample6_extraAddress").value = extraAddr;
+								addr += extraAddr;
+
+							} else {
+								//document.getElementById("sample6_extraAddress").value = '';
+								addr += ' ';
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							//document.getElementById('sample6_postcode').value = data.zonecode;
+							//document.getElementById("sample6_address").value = addr;
+							// 커서를 상세주소 필드로 이동한다.
+							$(".address_input_1").val(data.zonecode);
+							$(".address_input_2").val(addr);
+
+							//  document.getElementById("sample6_detailAddress").focus();
+
+							// 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
+							$(".address_input_3").attr("readonly", false);
+							$(".address_input_3").focus();
+						}
+					}).open();
+		}
+
 </script>
 	<hr>
 </body>

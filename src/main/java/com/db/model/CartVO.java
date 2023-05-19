@@ -13,4 +13,5 @@ public class CartVO {
 	private int quantity;
 	private int price;
 	private Timestamp orderdate;
+	private int result;
 }

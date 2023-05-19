@@ -226,16 +226,50 @@ public class ProductController {
 
 	// 결제완료
 	@PostMapping("/purchased")
-	public String purchasedPOST(Integer totalprice, Integer cnum, String userid, OrderVO order, HttpServletRequest request) throws Exception {
+	public String purchasedPOST(String userid, OrderVO order, HttpServletRequest request) throws Exception {
 	    productService.addOrders(userid);
+	    System.out.println("주문자: " + userid);
 	    String[] pnames = request.getParameterValues("pname");
-
-	    for (String pname : pnames) {
-	        System.out.println(pname);
+        String[] psizes = request.getParameterValues("psize");
+        String[] quantitys = request.getParameterValues("quantity");
+        String[] cartnums = request.getParameterValues("cartnum");
+        String[] prices = request.getParameterValues("price");
+        String[] imgurls = request.getParameterValues("imgurl");
+        for (String cartnum : cartnums) {
+	        System.out.println("장바구니num:" +cartnum);
 	    }
-	    System.out.println("쿠폰번호 : " + (cnum != null ? cnum : "없음")
-	                     + " + 토탈가격 : " + totalprice
-	                     + "유저아이디 : " + userid );
+        for (String imgurl : imgurls) {
+	        System.out.println("이미지:" +imgurl);
+	    }
+        for (String price : prices) {
+	        System.out.println("상품가격:" +price);
+	    }
+	    for (String pname : pnames) {
+	        System.out.println("상품이름:" +pname);
+	    }
+	    for (String psize : psizes) {
+	        System.out.println("사이즈:" +psize);
+	    }
+	    for (String quantity : quantitys) {
+	        System.out.println("수량:" +quantity);
+	    }
+	    String cnum = request.getParameter("cnum");
+	    System.out.println("선택한 쿠폰 : " + cnum);
+	    String totalprice = request.getParameter("totalprice");
+	    System.out.println("총금액 : " + totalprice);
+	    //System.out.println("totalprice" + totalprice + "couponnum");
+	    String name = request.getParameter("name");
+	    System.out.println("배송받을 이름 : " + name);
+	    String phone = request.getParameter("phone");
+	    System.out.println("배송받을 전화번호 : " + phone);
+	    String email = request.getParameter("email");
+	    System.out.println("배송받을 이메일 : " + email);
+	    String address1 = request.getParameter("address1");
+	    System.out.println("배송받을 우편번호 : " + address1);
+	    String address2 = request.getParameter("address2");
+	    System.out.println("배송받을 주소 : " + address2);
+	    String address3 = request.getParameter("address3");
+	    System.out.println("배송받을 상세주소 : " + address3);
 
 	    return null;
 	}

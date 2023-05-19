@@ -59,6 +59,7 @@ td .delhidden {
 								</tr>
 							</c:when>
 							<c:otherwise>
+							
 								<c:forEach var="cart" items="${clist}">
 									<!-- 장바구니 cartVO -->
 									<tr class="delhide">
@@ -67,6 +68,7 @@ td .delhidden {
 											<!--<td><input type="button" style="width: 35px; height: 35px; align-items: center; align-self: center;" class="btn btn-primary px-3 delhidden" value="D" onclick=""></td>
 													  -->
 											<c:if test="${cart.num == product.num}">
+											<c:if test="${cart.result == 1}">
 												<!--상품리스트품번과 장바구니 번호가 일치할 때  -->
 												<td class="align-middle">
 													<div class="d-flex align-items-center">
@@ -104,10 +106,12 @@ td .delhidden {
 													</div>
 												</td>
 												<td class="align-middle"><fmt:setLocale value="ko_KR" /> <fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" /></td>
+												</c:if>
 											</c:if>
 										</c:forEach>
 									</tr>
 								</c:forEach>
+								
 							</c:otherwise>
 						</c:choose>
 					</tbody>
