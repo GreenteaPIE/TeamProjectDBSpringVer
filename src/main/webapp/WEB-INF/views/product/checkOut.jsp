@@ -26,6 +26,7 @@
 	</div>
 	<!-- Page Header End -->
 	<!-- Checkout Start -->
+	
 	<form action="/product/purchased" method="post" name="frm" id="frm">
 		<!-- 가지고 넘어가야 할 값들 
 		cart = psize, num, quantity, price, cartnum -> 0 으로 변경
@@ -106,15 +107,14 @@
 												<fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" />
 											</p>
 										</div>
-										<input type="hidden" name="pname" id="pname" value="${plist.pname}">
-										<input type="hidden" name="imgurl" value="${plist.imgUrl}">
 										<input type="hidden" name="psize" value="${cart.psize }">
 										<input type="hidden" name="quantity" value="${cart.quantity }">
 										<input type="hidden" name="num" value="${cart.num }">
-										<input type="hidden" name="cartnum" value="${cart.cartnum }">
 										<!-- cartnum 을 가져가서 result -> 0으로 변경하기 -->
 										<input type="hidden" name="price" value="${cart.price }">
 										<!-- 할인된 가격은 cart에 저장되어있기 때문에 주문상세에서 불러오려면 cart에 저장된 price를 들고가야함 -->
+									
+										<input type="hidden" name="cartnum" value="${cart.cartnum }">
 										<c:set var="subprice" value="${subprice + cart.price * cart.quantity}" />
 									</c:if>
 								</c:forEach>
@@ -190,7 +190,7 @@
 							</div>
 						</div>
 						<div class="card-footer border-secondary bg-transparent">
-							<button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" id="checkout-button">Place Order</button>
+							<button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3 " id="checkout-button">Place Order</button>
 						</div>
 					</div>
 				</div>
@@ -206,18 +206,20 @@ const paymentRadios = document.getElementsByName('payment');
 const placeOrderBtn = document.getElementById('checkout-button');
 
 placeOrderBtn.addEventListener('click', function(event) {
-  event.preventDefault(); // 폼 제출을 막음
+	  event.preventDefault(); // 폼 제출을 막음
 
-  if (!shiptoCheckbox.checked) {
-    alert('약관에 동의해주세요.');
-  } else if (!Array.from(paymentRadios).some(radio => radio.checked)) {
-    alert('결제 방법을 선택해주세요.');
-  } else {
-    // 결제 요청 함수 호출
-    iamport();
-  }
-});
+	  // Select Coupon 버튼 클릭 이벤트를 강제로 실행
+	  $('button.btn.btn-primary').click();
 
+	  if (!shiptoCheckbox.checked) {
+	    alert('약관에 동의해주세요.');
+	  } else if (!Array.from(paymentRadios).some(radio => radio.checked)) {
+	    alert('결제 방법을 선택해주세요.');
+	  } else {
+	    // 결제 요청 함수 호출
+	    iamport();
+	  }
+	});
 function iamport() {
     var total = parseFloat($("#total").val()); // parseFloat로 숫자로 변환
     var pname = $("#pname").val();

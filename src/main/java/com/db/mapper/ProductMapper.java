@@ -3,11 +3,12 @@ package com.db.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
 import com.db.model.OrderVO;
 import com.db.model.ProductVO;
-import com.db.model.UserVO;
 
 public interface ProductMapper {
 
@@ -52,17 +53,28 @@ public interface ProductMapper {
 
 	// 장바구니안의 장바구니num으로 정보 불러오기
 	public CartVO findByCartNum(int cartnum);
-	
+
 	// 장바구니 수량 감소
 	public int decreaseQuantity(int cartnum);
-	
+
 	// 장바구니 수량 증가
 	public int increaseQuantity(int cartnum);
-	
+
 	// 장바구니 상품 삭제
 	public int cartDelete(int cartnum);
-	
-	// 결제 정보 추가(orders table)
-	public CartVO addOrders(String userid);
 
+	// 결제 정보 추가(orders table)
+	public void addOrders(String userid);
+
+	// order table에서 가장 최근 추가된 번호 불러오기
+	public OrderVO getOrderNum(int ordernumber);
+
+	// order detail 테이블에 추가
+	public void addOrderDetail(@Param("cart") CartVO cart, @Param("totalprice") int totalprice,
+			@Param("ordernumber") int ordernumber, @Param("name") String name, @Param("phone") String phone,
+			@Param("email") String email, @Param("address1") String address1, @Param("address2") String address2,
+			@Param("address3") String address3);
+
+	// orders table에 추가된 ordernumber 값 가져오기
+	public int getLatestOrderNumber(String userid);
 }

@@ -3,6 +3,7 @@ package com.db.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,6 @@ import com.db.mapper.ProductMapper;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
 import com.db.model.ProductVO;
-import com.db.model.UserVO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -122,9 +122,22 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public CartVO addOrders(String userid) throws Exception {
-		
-		return productmapper.addOrders(userid);
+	public void addOrders(String userid) throws Exception {
+
+		productmapper.addOrders(userid);
+	}
+
+	@Override
+	public void addOrderDetail(CartVO cart, int totalprice, int ordernumber, String name, String phone, String email,
+			String address1, String address2, String address3) throws Exception {
+		productmapper.addOrderDetail(cart, totalprice, ordernumber, name, phone, email, address1, address2, address3);
+	}
+
+	@Override
+	public int getLatestOrderNumber(String userid) throws Exception {
+		productmapper.addOrders(userid);
+		// 새로 생성된 주문 번호(orderNumber)를 반환합니다.
+		return productmapper.getLatestOrderNumber(userid);
 	}
 
 }

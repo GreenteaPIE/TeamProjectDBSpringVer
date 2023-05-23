@@ -226,16 +226,29 @@
 	</delete>
 
 	<!-- 결제정보 추가(orders table) -->
-	<select id="addOrders" resultType="com.db.model.OrderVO">
-		insert into orders(ordernumber, userid) values(orders_seq.nextval,
+	<insert id="addOrders" >
+		insert into
+		orders(ordernumber, userid) values(orders_seq.nextval,
 		#{userid})
-	</select>
+	</insert>
 
+	<!-- order detail 추가 -->
+	<insert id="addOrderDetail">
+    insert into order_detail(
+        orderdetailnumber, ordernumber,num, quantity, price,
+        psize, totalprice, name, email, 
+        address1, address2, address3, phone
+    ) values (
+        order_detail_seq.nextval, #{ordernumber},#{cart.num},
+        #{cart.quantity}, #{cart.price}, #{cart.psize}, #{totalprice}, #{name}, #{email}, #{address1},
+        #{address2}, #{address3}, #{phone}
+    )
+</insert>
 
-
-
-
-
+<!-- orders table ordernumber값 가져오기 -->
+<select id="getLatestOrderNumber" resultType="int">
+    SELECT MAX(orderNumber) FROM orders WHERE userid=#{userid}
+</select>
 
 
 </mapper>

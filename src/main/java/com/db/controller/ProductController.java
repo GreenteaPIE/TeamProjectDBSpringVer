@@ -6,17 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,9 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.db.model.CartVO;
 import com.db.model.CouponVO;
-import com.db.model.OrderVO;
 import com.db.model.ProductVO;
-import com.db.model.UserVO;
 import com.db.service.ProductService;
 import com.db.service.UserService;
 
@@ -226,51 +220,36 @@ public class ProductController {
 
 	// 결제완료
 	@PostMapping("/purchased")
-	public String purchasedPOST(String userid, OrderVO order, HttpServletRequest request) throws Exception {
-	    productService.addOrders(userid);
-	    System.out.println("주문자: " + userid);
-	    String[] pnames = request.getParameterValues("pname");
-        String[] psizes = request.getParameterValues("psize");
-        String[] quantitys = request.getParameterValues("quantity");
+	public String purchasedPOST(@Param("userid") String userid,@Param("totalprice") int totalprice, @Param("name") String name, @Param("email") String email, @Param("phone") String phone, @Param("address1") String address1, @Param("address2") String address2, @Param("address3") String address3, HttpServletRequest request) throws Exception {
+			
+        System.out.println("주문자: " + userid);
+	   
         String[] cartnums = request.getParameterValues("cartnum");
-        String[] prices = request.getParameterValues("price");
-        String[] imgurls = request.getParameterValues("imgurl");
+    
+      
         for (String cartnum : cartnums) {
 	        System.out.println("장바구니num:" +cartnum);
 	    }
-        for (String imgurl : imgurls) {
-	        System.out.println("이미지:" +imgurl);
-	    }
-        for (String price : prices) {
-	        System.out.println("상품가격:" +price);
-	    }
-	    for (String pname : pnames) {
-	        System.out.println("상품이름:" +pname);
-	    }
-	    for (String psize : psizes) {
-	        System.out.println("사이즈:" +psize);
-	    }
-	    for (String quantity : quantitys) {
-	        System.out.println("수량:" +quantity);
-	    }
+        
 	    String cnum = request.getParameter("cnum");
 	    System.out.println("선택한 쿠폰 : " + cnum);
-	    String totalprice = request.getParameter("totalprice");
-	    System.out.println("총금액 : " + totalprice);
-	    //System.out.println("totalprice" + totalprice + "couponnum");
-	    String name = request.getParameter("name");
-	    System.out.println("배송받을 이름 : " + name);
-	    String phone = request.getParameter("phone");
-	    System.out.println("배송받을 전화번호 : " + phone);
-	    String email = request.getParameter("email");
-	    System.out.println("배송받을 이메일 : " + email);
-	    String address1 = request.getParameter("address1");
-	    System.out.println("배송받을 우편번호 : " + address1);
-	    String address2 = request.getParameter("address2");
-	    System.out.println("배송받을 주소 : " + address2);
-	    String address3 = request.getParameter("address3");
-	    System.out.println("배송받을 상세주소 : " + address3);
+	    
 
+	    // 테스트
+		
+	    
+	    
+	    int orderNumber = productService.getLatestOrderNumber(userid);// orderNumber를 반환하도록 수정
+	    System.out.println(orderNumber);
+	    
+	    
+	    ArrayList<CartVO> cartlist = productService.getCartList(userid);
+	    for(CartVO cart : cartlist) {
+	    productService.addOrderDetail(cart,totalprice,orderNumber,name,phone,email,address1,address2,address3); //order_detail table에 저장
+	    }  //order_detail table 에 추가
+	    
+
+	    
 	    return null;
 	}
 	
