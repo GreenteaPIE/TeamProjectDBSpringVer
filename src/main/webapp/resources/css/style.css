@@ -5,7 +5,26 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
- 
+ .search_area {
+   display: inline-block;
+   margin-top: 20px;
+   margin-bottom: 20px;
+   margin-left: 300px;
+}
+
+.search_area input {
+   height: 30px;
+   width: 250px;
+}
+
+.search_area button {
+   width: 100px;
+   height: 36px;
+}
+
+.search_area select {
+   height: 30px;
+}
  
 :root { -
 	-blue: #007bff; -

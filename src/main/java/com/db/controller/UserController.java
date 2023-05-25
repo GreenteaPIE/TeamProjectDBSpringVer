@@ -1,7 +1,6 @@
 package com.db.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -16,6 +15,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.db.model.CartVO;
+import com.db.mapper.PageMakerDTO;
 import com.db.model.CouponVO;
+import com.db.model.Criteria;
+import com.db.model.OrderVO;
+import com.db.model.ProductVO;
 import com.db.model.UserVO;
+import com.db.service.BoardService;
+import com.db.service.ProductService;
 import com.db.service.UserService;
 
 @Controller
@@ -40,6 +45,12 @@ public class UserController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+
+	@Autowired
+	ProductService productService;
+
+	@Autowired
+	private BoardService bservice;
 
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
@@ -250,9 +261,10 @@ public class UserController {
 	// 환영 쿠폰
 	@PostMapping("/addWcoupon")
 	@ResponseBody
-	public String addWcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
-		     
+	public String addWcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
+			throws Exception {
+
 		int result = userService.addCoupon(coupon);
 		return result + "";
 
@@ -261,9 +273,10 @@ public class UserController {
 	// 브론즈 쿠폰
 	@PostMapping("/addBcoupon")
 	@ResponseBody
-	public String addBcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
-		     
+	public String addBcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
+			throws Exception {
+
 		int result = userService.addCoupon(coupon);
 		return result + "";
 
@@ -272,9 +285,10 @@ public class UserController {
 	// 실버 쿠폰
 	@PostMapping("/addScoupon")
 	@ResponseBody
-	public String addScouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
-		     
+	public String addScouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
+			throws Exception {
+
 		int result = userService.addCoupon(coupon);
 		return result + "";
 
@@ -283,9 +297,10 @@ public class UserController {
 	// 골드 쿠폰
 	@PostMapping("/addGcoupon")
 	@ResponseBody
-	public String addGcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
-		     
+	public String addGcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
+			throws Exception {
+
 		int result = userService.addCoupon(coupon);
 		return result + "";
 
@@ -294,22 +309,74 @@ public class UserController {
 	// 다이아 쿠폰
 	@PostMapping("/addDcoupon")
 	@ResponseBody
-	public String addDcouponPOST(@RequestParam String userid, @RequestParam String couponname,String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request) throws Exception {
-		     
+	public String addDcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
+			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
+			throws Exception {
+
 		int result = userService.addCoupon(coupon);
 		return result + "";
 
 	}
-	
+
 	// 보유 쿠폰 가져오기
 	@GetMapping("/myCoupon")
 	public String myCouponGET(String userid, HttpServletRequest request) {
-		
+
 		ArrayList<CouponVO> couplist = userService.getMyCoupon(userid);
 		request.setAttribute("couplist", couplist);
 		return "/user/myCoupon";
-		
+
+	}
+
+	// 나의 주문 내역
+	@GetMapping("/myPurchased")
+	public String myPuchasedGET(String userid, HttpServletRequest request) throws Exception {
+
+		ArrayList<OrderVO> olist = userService.getMyPurchased(userid);
+		request.setAttribute("olist", olist); // order_view table
+
+		return "/user/purchasedList";
+
+	}
+
+	// 나의 주문 내역 상세 조회
+	@GetMapping("/myPurchasedDetail")
+	public String myPurchasedDetailGET(int ordernumber, HttpServletRequest request) throws Exception {
+
+		ArrayList<ProductVO> plist = productService.getAllProduct(); // 모든 상품 가져오기
+		request.setAttribute("plist", plist);
+
+		ArrayList<OrderVO> olist = userService.getMyPurchasedDetail(ordernumber); //주문번호로 정보 가져오기
+		request.setAttribute("olist", olist);
+
+		return "/user/purchasedDetail";
+	}
+
+	// 주문 취소 요청
+	@GetMapping("/withdrawOrder")
+	@ResponseBody
+	public ResponseEntity<String> withdrawOrderGET(int ordernumber, HttpServletRequest request) {
+		System.out.println("취소요청 주문번호" + ordernumber);
+		userService.withdrawChangeResult(ordernumber);
+
+		return ResponseEntity.ok("Success");
+	}
+
+	// 내가 쓴글 확인
+	@GetMapping("/myWriting")
+	public void myWritingGET(HttpServletRequest request, Model model, Criteria cri,
+			@RequestParam(required = false) String category) {
+
+		logger.info("mypagecheck 페이지 진입");
+		cri.setCategory(category); // category 값을 저장합니다.
+
+		model.addAttribute("list", bservice.getListPaging(cri));
+
+		int total = bservice.getTotal(cri);
+
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+
+		model.addAttribute("pageMaker", pageMake);
 	}
 
 }

@@ -1,11 +1,14 @@
 package com.db.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.apache.ibatis.annotations.Param;
 
-import com.db.model.CartVO;
+import com.db.model.BoardVO;
 import com.db.model.CouponVO;
+import com.db.model.Criteria;
+import com.db.model.OrderVO;
 import com.db.model.UserVO;
 
 public interface UserService {
@@ -30,11 +33,23 @@ public interface UserService {
 
 	// 쿠폰 받기
 	public int addCoupon(CouponVO coupon) throws Exception;
-	
+
 	// 쿠폰 보유 확인
 	public CouponVO checkCoupon(CouponVO coupon);
-	
+
 	// 보유 쿠폰 확인
 	public ArrayList<CouponVO> getMyCoupon(String userid);
+
+	// 주문내역 리스트
+	public ArrayList<OrderVO> getMyPurchased(String userid);
+
+	// 주문내역 상세조회
+	public ArrayList<OrderVO> getMyPurchasedDetail(int ordernumber);
+
+	// 주문 취소 result -> 3 으로 변경
+	public int withdrawChangeResult(@Param("ordernumber") int ordernumber);
+	
+	//글 목록(페이징)
+	public List<BoardVO>getListPaging(Criteria cri);
 
 }

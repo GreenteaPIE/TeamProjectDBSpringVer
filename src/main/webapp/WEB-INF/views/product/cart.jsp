@@ -21,7 +21,7 @@ td .delhidden {
 </style>
 <jsp:include page="../header.jsp"></jsp:include>
 <body>
-<hr>
+	<hr>
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
@@ -59,7 +59,6 @@ td .delhidden {
 								</tr>
 							</c:when>
 							<c:otherwise>
-							
 								<c:forEach var="cart" items="${clist}">
 									<!-- 장바구니 cartVO -->
 									<tr class="delhide">
@@ -68,50 +67,49 @@ td .delhidden {
 											<!--<td><input type="button" style="width: 35px; height: 35px; align-items: center; align-self: center;" class="btn btn-primary px-3 delhidden" value="D" onclick=""></td>
 													  -->
 											<c:if test="${cart.num == product.num}">
-											<c:if test="${cart.result == 1}">
-												<!--상품리스트품번과 장바구니 번호가 일치할 때  -->
-												<td class="align-middle">
-													<div class="d-flex align-items-center">
-														<img src="../resources/img/${product.imgUrl}" alt="productImg" style="width: 55px; margin-right: 5px;">
-														<div class="text-left">
-															<a href='/product/productDetail?num=${product.num}&pname=${product.pname}'>${product.pname}</a>
+												<c:if test="${cart.result == 1}">
+													<!--상품리스트품번과 장바구니 번호가 일치할 때  -->
+													<td class="align-middle">
+														<div class="d-flex align-items-center">
+															<img src="../resources/img/${product.imgUrl}" alt="productImg" style="width: 55px; margin-right: 5px;">
+															<div class="text-left">
+																<a href='/product/productDetail?num=${product.num}&pname=${product.pname}'>${product.pname}</a>
+															</div>
 														</div>
-													</div>
-												</td>
-												<td class="align-middle"><c:choose>
-														<c:when test='${cart.psize  =="S" }'>S</c:when>
-														<c:when test='${cart.psize  =="M" }'>M</c:when>
-														<c:when test='${cart.psize  =="L" }'>L</c:when>
-														<c:when test='${cart.psize  =="XL" }'>XL</c:when>
-														<c:when test='${cart.psize  =="XS" }'>XS</c:when>
-														<c:when test='${cart.psize  =="XXL" }'>XXL</c:when>
-														<c:when test='${cart.psize  =="Free" }'>Free</c:when>
-													</c:choose></td>
-												<td class="align-middle"><fmt:setLocale value="ko_KR" /> <fmt:formatNumber type="currency" value="${cart.price}" currencySymbol="₩" /></td>
-												<td class="align-middle">
-													<div class="input-group quantity mx-auto" style="width: 120px;">
-														<div class="input-group-btn">
-															<button class="btn btn-primary btn-minus" onclick="decreaseQuantity(${cart.cartnum})">
-																<i class="fa fa-minus"></i>
-															</button>
+													</td>
+													<td class="align-middle"><c:choose>
+															<c:when test='${cart.psize  =="S" }'>S</c:when>
+															<c:when test='${cart.psize  =="M" }'>M</c:when>
+															<c:when test='${cart.psize  =="L" }'>L</c:when>
+															<c:when test='${cart.psize  =="XL" }'>XL</c:when>
+															<c:when test='${cart.psize  =="XS" }'>XS</c:when>
+															<c:when test='${cart.psize  =="XXL" }'>XXL</c:when>
+															<c:when test='${cart.psize  =="Free" }'>Free</c:when>
+														</c:choose></td>
+													<td class="align-middle"><fmt:setLocale value="ko_KR" /> <fmt:formatNumber type="currency" value="${cart.price}" currencySymbol="₩" /></td>
+													<td class="align-middle">
+														<div class="input-group quantity mx-auto" style="width: 120px;">
+															<div class="input-group-btn">
+																<button class="btn btn-primary btn-minus" onclick="decreaseQuantity(${cart.cartnum})">
+																	<i class="fa fa-minus"></i>
+																</button>
+															</div>
+															<input type="text" style="height: 38.5px;" name="quantity" class="form-control form-control-sm bg-secondary text-center" value="${cart.quantity}" id="quantity-${cart.cartnum}" readonly>
+															<div class="input-group-btn">
+																<button class="btn btn-primary btn-plus" onclick="increaseQuantity(${cart.cartnum})">
+																	<i class="fa fa-plus"></i>
+																</button>
+															</div>
+															<c:set var="totalPrice" value="${cart.price * cart.quantity}" />
+															<c:set var="subprice" value="${subprice + totalPrice}" />
 														</div>
-														<input type="text" style="height: 38.5px;" name="quantity" class="form-control form-control-sm bg-secondary text-center" value="${cart.quantity}" id="quantity-${cart.cartnum}" readonly>
-														<div class="input-group-btn">
-															<button class="btn btn-primary btn-plus" onclick="increaseQuantity(${cart.cartnum})">
-																<i class="fa fa-plus"></i>
-															</button>
-														</div>
-														<c:set var="totalPrice" value="${cart.price * cart.quantity}" />
-														<c:set var="subprice" value="${subprice + totalPrice}" />
-													</div>
-												</td>
-												<td class="align-middle"><fmt:setLocale value="ko_KR" /> <fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" /></td>
+													</td>
+													<td class="align-middle"><fmt:setLocale value="ko_KR" /> <fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" /></td>
 												</c:if>
 											</c:if>
 										</c:forEach>
 									</tr>
 								</c:forEach>
-								
 							</c:otherwise>
 						</c:choose>
 					</tbody>
@@ -146,14 +144,14 @@ td .delhidden {
 							</h5>
 						</div>
 						<c:if test="${clist.size()!=0}">
-						<a href="/product/checkOut?userid=${user.userid}">
-							<input type="button" class="btn btn-block btn-primary my-3 py-3" value="Proceed To Checkout">
-						</a>
+							<a href="/product/checkOut?userid=${user.userid}">
+								<input type="button" class="btn btn-block btn-primary my-3 py-3" value="Proceed To Checkout">
+							</a>
 						</c:if>
 						<c:if test="${clist.size()==0}">
-						<a href="#" onclick="alert('주문할 상품이 없습니다.'); return false;">
-							<input type="button" class="btn btn-block btn-primary my-3 py-3" value="Proceed To Checkout">
-						</a>
+							<a href="#" onclick="alert('주문할 상품이 없습니다.'); return false;">
+								<input type="button" class="btn btn-block btn-primary my-3 py-3" value="Proceed To Checkout">
+							</a>
 						</c:if>
 					</div>
 				</div>
@@ -211,7 +209,7 @@ td .delhidden {
 	    }
 	  }
 </script>
-<hr>
+	<hr>
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
 </html>

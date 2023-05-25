@@ -2,9 +2,11 @@ package com.db.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
 import com.db.model.OrderVO;
@@ -63,11 +65,23 @@ public interface ProductMapper {
 	// 장바구니 상품 삭제
 	public int cartDelete(int cartnum);
 
+	// 제품 이름으로 제품 불러오기
+	public ProductVO productDetailByPname(String name);
+
+	// 옥션 목록 가져오기
+	public ArrayList<AuctionVO> getAuctionList();
+
+	// 옥션 상세 보기
+	public AuctionVO getAuctionDetail(int num);
+
+	// 경매 입찰
+	public void dealAuction(AuctionVO auVo);
+
+	// 기간이 지난 경매(onOff설정)
+	public void endAuction(int num);
+
 	// 결제 정보 추가(orders table)
 	public void addOrders(String userid);
-
-	// order table에서 가장 최근 추가된 번호 불러오기
-	public OrderVO getOrderNum(int ordernumber);
 
 	// order detail 테이블에 추가
 	public void addOrderDetail(@Param("cart") CartVO cart, @Param("totalprice") int totalprice,
@@ -77,4 +91,17 @@ public interface ProductMapper {
 
 	// orders table에 추가된 ordernumber 값 가져오기
 	public int getLatestOrderNumber(String userid);
+
+	// order_view 에서 정보 가져오기
+	public ArrayList<OrderVO> getOrderList(int orderNumber);
+
+	// 주문완료한 장바구니 result -> 0 으로 변경
+	public int cartResultChange(@Param("cartnum") int cartnum, @Param("cart") CartVO cart);
+
+	// 사용한 쿠폰 result -> 0 으로 변경
+	public int useCoupon(@Param("cnum") int cnum);
+
+	// 주문완료 후 포인트 지급
+	void increaseUserPoint(Map<String, Object> params);
+
 }

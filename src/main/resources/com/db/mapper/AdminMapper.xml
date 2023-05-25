@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.AdminMapper">
+	<insert id="insertAuction">
+		insert into auction (userId, bName, pName, price,
+		startPrice, endTime,
+		onOff, pSize, imgUrl,num)
+		values(#{userId},
+		#{bName}, #{pName}, #{price}, #{startPrice}, #{endTime}, 1, #{pSize},
+		#{imgUrl},auction_seq.nextval)
+	</insert>
+	<select id="getUserList" resultType="com.db.model.UserVO">
+		select * from shopuser
+	</select>
+	<delete id="deleteUser">
+		delete shopuser where userid = #{userid}
+	</delete>
+	<select id="getUser" resultType="com.db.model.UserVO">
+		select * from shopuser where
+		userid = #{userid}
+	</select>
+
+	<update id="adminUserUpdate">
+
+		update shopuser set pass = #{pass}, name = #{name},
+		email = #{email}, point = #{point}, grade=#{grade},
+		address1 =
+		#{address1}, address2 = #{address2},
+		address3 = #{address3}, phone =
+		#{phone}, gender = #{gender}
+		where
+		userid = #{userid}
+
+	</update>
+
+	<insert id="brandEnroll">
+		insert into brand values(#{bname}, #{imgurl})
+	</insert>
+
+	<delete id="deleteBrand">
+		delete from brand where bname = #{bname}
+	</delete>
+
+	<!-- 신규 주문 가져오기 -->
+	<select id="getNewOrder" resultType="com.db.model.OrderVO">
+
+		select*from order_view where result = 1
+	</select>
+	
+	<!-- 처리 주문 가져오기 -->
+	<select id="getProcessOrder" resultType="com.db.model.OrderVO">
+
+		select*from order_view where result = 2
+	</select>
+	
+	<!-- 취소 주문 가져오기 -->
+	<select id="getWithdrawOrder" resultType="com.db.model.OrderVO">
+
+		select*from order_view where result = 4
+	</select>
+	
+	<!-- 판매된 주문 가져오기 -->
+	<select id="getSalesOrder" resultType="com.db.model.OrderVO">
+
+		select*from order_view where result = 3
+	</select>
+	
+	
+	<!-- 확인한 주문 orderdetail result 2로 변경 -->
+	<update id="checkOrderChangeResult">
+
+		update order_detail set result = 2 where
+		ordernumber=#{ordernumber}
+	</update>
+	
+	<!-- 발송처리한 주문 orderdetail result 3으로 변경 -->
+	<update id="shipmentChangeResult">
+
+		update order_detail set result = 3 where
+		ordernumber=#{ordernumber}
+	</update>
+	
+	<!-- 취소처리한 주문 orderdetail result 5으로 변경 -->
+	<update id="withdrawOrderChangeResult">
+
+		update order_detail set result = 5 where
+		ordernumber=#{ordernumber}
+	</update>
+	
+	
+	
+</mapper>

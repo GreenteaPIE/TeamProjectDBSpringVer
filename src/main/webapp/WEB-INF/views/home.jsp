@@ -6,7 +6,7 @@
 <jsp:include page="header.jsp"></jsp:include>
 </head>
 <body>
-<hr>
+	<hr>
 	<!-- Categories Start -->
 	<div class="container-fluid pt-5">
 		<div class="row px-xl-5 pb-3">

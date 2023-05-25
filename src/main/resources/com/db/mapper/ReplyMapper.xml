@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.ReplyMapper">
+
+	<!-- 게시판 리플 생성 -->
+		
+		<insert id="replyWriter" parameterType="com.db.model.FBoardReplyVO">
+  INSERT INTO fboard_reply(rno, num, writer, content, regDate)
+  VALUES(freply_seq.NEXTVAL, #{num}, #{writer}, #{content}, SYSTIMESTAMP)
+</insert>
+
+<!-- 댓글 조회 -->
+<select id="replyList" parameterType="int" resultType="com.db.model.FBoardReplyVO">
+	select
+		rno, num, writer, content, regDate
+	from fboard_reply
+		where num = #{num}		
+</select>
+
+<!-- 단일 댓글 조회 -->
+<select id="replySelect" parameterType="com.db.model.FBoardReplyVO" resultType="com.db.model.FBoardReplyVO">
+	select
+		rno, num, writer, content, regDate
+	from fboard_reply
+		where num = #{num}
+		and rno = #{rno}					
+</select>
+
+<!-- 댓글 수정 -->
+<update id="replyModify" parameterType="com.db.model.FBoardReplyVO">
+    update fboard_reply set
+        content = #{content}
+    where rno = #{rno}
+        and num = #{num}    
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="replyDelete" parameterType="com.db.model.FBoardReplyVO">
+	delete fboard_reply
+	where rno = #{rno}
+		and num = ${num}	
+</delete>
+
+
+</mapper>

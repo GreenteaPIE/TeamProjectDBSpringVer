@@ -171,7 +171,7 @@
 	<!-- 장바구니 상품 갯수 불러오기 -->
 	<select id="countCart" resultType="int" parameterType="String">
 		SELECT
-		COUNT(*) FROM cart WHERE userid = #{userid}
+		COUNT(*) FROM cart WHERE userid = #{userid} and result ='1'
 	</select>
 
 	<!-- 모든 상품을 중복 없이 불러오기 -->
@@ -226,29 +226,80 @@
 	</delete>
 
 	<!-- 결제정보 추가(orders table) -->
-	<insert id="addOrders" >
+	<insert id="addOrders">
 		insert into
-		orders(ordernumber, userid) values(orders_seq.nextval,
+		orders(ordernumber, userid)
+		values(orders_seq.nextval,
 		#{userid})
 	</insert>
 
 	<!-- order detail 추가 -->
 	<insert id="addOrderDetail">
-    insert into order_detail(
-        orderdetailnumber, ordernumber,num, quantity, price,
-        psize, totalprice, name, email, 
-        address1, address2, address3, phone
-    ) values (
-        order_detail_seq.nextval, #{ordernumber},#{cart.num},
-        #{cart.quantity}, #{cart.price}, #{cart.psize}, #{totalprice}, #{name}, #{email}, #{address1},
-        #{address2}, #{address3}, #{phone}
-    )
-</insert>
+		insert into order_detail(
+		orderdetailnumber,
+		ordernumber,num, quantity, price,
+		psize, totalprice, name, email,
+		address1, address2, address3, phone
+		) values (
+		order_detail_seq.nextval, #{ordernumber},#{cart.num},
+		#{cart.quantity}, #{cart.price}, #{cart.psize}, #{totalprice},
+		#{name}, #{email},
+		#{address1},
+		#{address2}, #{address3}, #{phone}
+		)
+	</insert>
 
-<!-- orders table ordernumber값 가져오기 -->
-<select id="getLatestOrderNumber" resultType="int">
-    SELECT MAX(orderNumber) FROM orders WHERE userid=#{userid}
-</select>
+	<!-- orders table ordernumber값 가져오기 -->
+	<select id="getLatestOrderNumber" resultType="int">
+		SELECT
+		MAX(orderNumber) FROM orders WHERE userid=#{userid}
+	</select>
 
+
+	<!-- order_view 에서 정보가져오기 -->
+	<select id="getOrderList" resultType="com.db.model.OrderVO">
+		select * from order_view
+		where ordernumber = #{ordernumber}
+	</select>
+    <!-- 제품 이름으로 제품상세 불러오기 -->
+    <select id="productDetailByPname" resultType="com.db.model.ProductVO">
+        select * from product where pname = #{pname} and rownum = 1
+    </select>
+
+
+	
+
+
+	<!-- 주문완료한 cart result 0으로 변경 -->
+	<update id="cartResultChange">
+
+		update cart set result = 0 where cartnum=#{cart.cartnum}
+	</update>
+
+	<!-- 사용한 coupon result 0으로 변경 -->
+	<update id="useCoupon">
+		update coupon set couponresult = 0 where cnum=#{cnum}
+	</update>
+
+	<!-- 주문완료 후 포인트 지급 -->
+	<update id="increaseUserPoint" parameterType="map">
+		UPDATE shopuser
+		SET point = point + (#{totalprice} * 0.01)
+		WHERE userid = #{userid}
+	</update>
+
+	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
+		select * from auction order by endTime, onOff desc
+	</select>
+	
+	<select id="getAuctionDetail" resultType="com.db.model.AuctionVO">
+		select * from auction where num = #{num}
+	</select>
+	<update id="dealAuction">
+		update auction set price=#{price}, userId=#{userId} where num = #{num}
+	</update>
+	<update id="endAuction">
+		update auction set onOff=0 where num = #{num}
+	</update>
 
 </mapper>

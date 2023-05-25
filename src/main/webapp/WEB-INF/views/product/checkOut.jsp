@@ -26,7 +26,6 @@
 	</div>
 	<!-- Page Header End -->
 	<!-- Checkout Start -->
-	
 	<form action="/product/purchased" method="post" name="frm" id="frm">
 		<!-- 가지고 넘어가야 할 값들 
 		cart = psize, num, quantity, price, cartnum -> 0 으로 변경
@@ -107,13 +106,13 @@
 												<fmt:formatNumber type="currency" value="${cart.price * cart.quantity}" currencySymbol="₩" />
 											</p>
 										</div>
+										<input type="hidden" name="pname" id="pname" value="${plist.pname}">
 										<input type="hidden" name="psize" value="${cart.psize }">
 										<input type="hidden" name="quantity" value="${cart.quantity }">
 										<input type="hidden" name="num" value="${cart.num }">
 										<!-- cartnum 을 가져가서 result -> 0으로 변경하기 -->
 										<input type="hidden" name="price" value="${cart.price }">
 										<!-- 할인된 가격은 cart에 저장되어있기 때문에 주문상세에서 불러오려면 cart에 저장된 price를 들고가야함 -->
-									
 										<input type="hidden" name="cartnum" value="${cart.cartnum }">
 										<c:set var="subprice" value="${subprice + cart.price * cart.quantity}" />
 									</c:if>

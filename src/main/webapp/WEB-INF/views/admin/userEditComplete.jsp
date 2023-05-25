@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<script type="text/javascript">
+window.opener.parent.location.href = "redirect:/admin/userManagementPage";
+window.close();
+</script>
 </body>
 </html>

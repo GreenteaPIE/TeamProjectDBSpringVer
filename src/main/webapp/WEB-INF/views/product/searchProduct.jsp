@@ -53,7 +53,7 @@
 										</c:if>
 									</h6>
 								</div>
-							</div> 
+							</div>
 						</div>
 					</div>
 				</c:forEach>

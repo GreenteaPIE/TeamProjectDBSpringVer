@@ -1,15 +1,19 @@
 package com.db.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.db.mapper.ProductMapper;
+import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.CartVO;
+import com.db.model.OrderVO;
 import com.db.model.ProductVO;
 
 @Service
@@ -138,6 +142,58 @@ public class ProductServiceImpl implements ProductService {
 		productmapper.addOrders(userid);
 		// 새로 생성된 주문 번호(orderNumber)를 반환합니다.
 		return productmapper.getLatestOrderNumber(userid);
+	}
+
+	@Override
+	public ArrayList<OrderVO> getOrderList(int orderNumber) throws Exception {
+	
+		return productmapper.getOrderList(orderNumber);
+	}
+
+	@Override
+	public int cartResultChange(@Param("cartnum") int cartnum,@Param("cart") CartVO cart) throws Exception {
+		
+		return productmapper.cartResultChange(cartnum, cart);
+	}
+
+	@Override
+	public int useCoupon(int cnum) throws Exception {
+		
+		return productmapper.useCoupon(cnum);
+	}
+
+	@Override
+	public void increaseUserPoint(String userid, int totalprice) throws Exception {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("userid", userid);
+	    params.put("totalprice", totalprice);
+	    
+	    productmapper.increaseUserPoint(params);
+	}
+
+    @Override
+    public ProductVO productDetailByPname(String pname) throws Exception {
+        return productmapper.productDetailByPname(pname);
+    }
+
+	@Override
+	public ArrayList<AuctionVO> getAuctionList() throws Exception {
+		return productmapper.getAuctionList();
+	}
+
+	@Override
+	public AuctionVO getAuctionDetail(int num) throws Exception {
+		return productmapper.getAuctionDetail(num);
+	}
+
+	@Override
+	public void dealAuction(AuctionVO auVo) throws Exception {
+		productmapper.dealAuction(auVo);
+	}
+
+	@Override
+	public void endAuction(int num) throws Exception {
+		productmapper.endAuction(num);
 	}
 
 }

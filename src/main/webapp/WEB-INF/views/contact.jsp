@@ -6,7 +6,7 @@
 <jsp:include page="header.jsp"></jsp:include>
 </head>
 <body>
-<hr>
+	<hr>
 	<!-- Page Header Start -->
 	<div class="container bg-secondary mb-3" style="max-width: 800px;">
 		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
@@ -53,9 +53,7 @@
 			<div class="col-lg-5 mb-5">
 				<h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
 				<p class="text-primary">
-					문의 사항이 있으시다면 우리 회사에 연락할 수 있습니다.
-					<br>
-					아래의 연락처 이메일을 참조하시기 바랍니다.
+					문의 사항이 있으시다면 우리 회사에 연락할 수 있습니다. <br> 아래의 연락처 이메일을 참조하시기 바랍니다.
 				</p>
 				<p>Customers with inquiries can contact our company. Please refer to the contact address email below.</p>
 				<div class="d-flex flex-column mb-3">

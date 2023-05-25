@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.BoardMapper">
+
+	<!-- 검색 조건문 -->
+	<sql id="criteria">
+		<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							userid like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'M'.toString()">
+							userid = #{keyword}
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+		 <!-- 카테고리 검색 처리 -->
+  <if test="category != null and (category == 'F'.toString() or category == 'S'.toString() or category == 'Q'.toString())">
+    AND category = #{category}
+  </if>
+
+	</sql>
+
+	<insert id="enroll">
+		insert into free_board(num, title, content, userid,
+		category) values (free_seq.nextval,
+		#{title},#{content},#{userid},#{category})
+
+	</insert>
+	<!-- 게시물 목록(페이징) -->
+	<select id="getListPaging" resultType="com.db.model.BoardVO"> 
+	
+ 	<![CDATA[ -->
+		
+		select num, title, content, userid, writedate, readcount, category from( 
+		
+	        select /*+INDEX_ASC(free_board idx_free_board_num_desc) */ rownum  as rn, num, title, content, userid, readcount, writedate, category
+		          
+ 		        from free_board where rownum <= #{pageNum} * #{amount}  
+ 	]]>
+		<if test="keyword != null">
+			<include refid="criteria"></include>
+		</if> 
+	
+ 	<![CDATA[ 
+			        
+ 			    ) 
+			        
+ 		where rn > (#{pageNum} -1) * #{amount} 
+	
+ 	]]>
+
+	</select>
+
+	<select id="getList" resultType="com.db.model.BoardVO">
+		SELECT * FROM free_board
+		ORDER BY CASE WHEN userid = 'admin2' THEN 0 ELSE 1 END, num DESC
+	</select>
+	<!-- 게시판 조회 -->
+
+	<select id="getPage" resultType="com.db.model.BoardVO">
+
+		select * from free_board where
+		num = #{num}
+
+	</select>
+	<!-- 게시판 수정 -->
+	<update id="modify">
+		UPDATE free_board SET title = #{title}, content = #{content} WHERE num
+		= #{num}
+
+		<!--update freeboard set title = #{title}, content = #{content}, updatedate 
+			= sysdate where num = #{num} -->
+
+
+	</update>
+
+	<delete id="delete">
+		<!-- 게시판 삭제 -->
+		delete from free_board where num = #{num}
+
+	</delete>
+
+	<!-- 게시물 총 개숫 -->
+	<select id="getTotal" resultType="int">
+
+		select count(*) from free_board
+
+		<if test="keyword != null">
+
+			where num > 0
+			<include refid="criteria"></include>
+
+		</if>
+
+	</select>
+
+	<update id="updateReadCount" parameterType="int">
+
+		update free_board set readcount = readcount+1 where num= #{num}
+
+	</update>
+
+	<select id="getReplyCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM fboard_reply WHERE num = #{num}
+	</select>
+
+
+
+
+</mapper>
+

@@ -18,6 +18,9 @@
 				</p>
 			</div>
 		</div>
+		<c:if test="${bplist.size()==0 }">
+			<h3 style="text-align: center;">상품이 존재하지 않습니다.</h3>
+		</c:if>
 	</div>
 	<!-- Page Header End -->
 	<!-- Shop Start -->
@@ -25,11 +28,6 @@
 		<!-- Shop Product Start -->
 		<div class="col-lg-9 col-md-12">
 			<div class="row pb-3">
-				<c:if test="${bplist.size()==0 }">
-					
-							<h3 style="text-align: center;">상품이 없습니다.</h3> 
-						
-				</c:if>
 				<c:forEach var="bplist" items="${bplist }">
 					<c:if test="${bplist.discountrate == 0 }">
 						<div class="col-lg-4 col-md-6 col-sm-12 pb-1">

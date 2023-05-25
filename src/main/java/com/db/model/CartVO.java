@@ -1,7 +1,6 @@
 package com.db.model;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import lombok.Data;
 

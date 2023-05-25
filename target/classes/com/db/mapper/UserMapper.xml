@@ -70,7 +70,8 @@
 	<select id="checkCoupon" resultType="com.db.model.CouponVO">
 
 		select*from coupon
-		where userid=#{userid} and couponname=#{couponname}
+		where
+		userid=#{userid} and couponname=#{couponname}
 
 	</select>
 
@@ -78,9 +79,33 @@
 	<select id="getMyCoupon" resultType="com.db.model.CouponVO">
 
 		select*from coupon
-		where userid=#{userid}
+		where
+		userid=#{userid}
 
 	</select>
 
+	<!-- 내 주문 내역 리스트 -->
+	<select id="getMyPurchased" resultType="com.db.model.OrderVO">
+
+		select*from order_view
+		where
+		userid=#{userid}
+
+	</select>
+
+	<!-- 내 주문 내역 상세 조회 -->
+	<select id="getMyPurchasedDetail"
+		resultType="com.db.model.OrderVO">
+		select * from order_view
+		where
+		orderNumber=#{orderNumber}
+	</select>
+
+	<!-- 주문 취소한 orderdetail result 4로 변경 -->
+	<update id="withdrawChangeResult">
+
+		update order_detail set result = 4 where
+		ordernumber=#{ordernumber}
+	</update>
 
 </mapper>

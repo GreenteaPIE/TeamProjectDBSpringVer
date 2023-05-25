@@ -101,11 +101,13 @@
 							<div class="nav-item dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">게시판</a>
 								<div class="dropdown-menu rounded-0 m-0">
-									<a href="DBServlet?command=free_board_list" class="dropdown-item">자유게시판</a>
-									<a href="DBServlet?command=qna_board_list" class="dropdown-item">Q&A게시판</a>
+									<a href="/board/list?pageNum=1&amount=10&category=F&keyword=&type=" class="dropdown-item">자유 게시판</a>
+									<a href="/board/list?pageNum=1&amount=10&category=Q&keyword=&type=" class="dropdown-item">질문 게시판</a>
+									<a href="/board/list?pageNum=1&amount=10&category=S&keyword=&type=" class="dropdown-item">공지사항</a>
 								</div>
 							</div>
-							<a href="#" class="nav-item nav-link">Auction</a>
+							<a href="/qna" class="nav-item nav-link">Q&A</a>
+							<a href="/product/auctionView" class="nav-item nav-link">Auction</a>
 							<a href="/product/saleList" class="nav-item nav-link">Sale</a>
 							<a href="/event" class="nav-item nav-link">Event</a>
 							<a href="/contact" class="nav-item nav-link">Contact</a>
@@ -126,11 +128,10 @@
 								<div class="nav-item dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
 									<div class="dropdown-menu rounded-0 m-0">
-										<a href="DBServlet?command=user_management" class="dropdown-item">회원 관리</a>
-										<a href="DBServlet?command=board_management" class="dropdown-item">게시판 관리</a>
-										<a href="DBServlet?command=auction" class="dropdown-item">옥션 관리</a>
-										<a href="DBServlet?command=product_management" class="dropdown-item">상품 관리</a>
-										<a href="DBServlet?command=sales_management" class="dropdown-item">매출 관리</a>
+										<a href="/admin/userManagementPage" class="dropdown-item">회원 관리</a>
+										<a href="/admin/auctionPage" class="dropdown-item">옥션 관리</a>
+										<a href="/admin/productManagementPage" class="dropdown-item">상품 관리</a>
+										<a href="/admin/sales_OrderManagement" class="dropdown-item">매출&주문 관리</a>
 									</div>
 								</div>
 							</c:if>
@@ -168,8 +169,8 @@
 											</div>
 											<hr>
 											<a href="/user/mypagechk" class="dropdown-item">내 정보 수정</a>
-											<a href="#" class="dropdown-item">나의 작성 글</a>
-											<a href="#" class="dropdown-item">나의 주문내역</a>
+											<a href="/user/myWriting?pageNum=1&amount=10&type=M&keyword=${user.userid }" class="dropdown-item">나의 작성 글</a>
+											<a href="/user/myPurchased?userid=${user.userid }" class="dropdown-item">나의 주문내역</a>
 											<a href="/user/myCoupon?userid=${user.userid }" class="dropdown-item">보유 쿠폰</a>
 											<hr>
 											<div style="text-align: center;">
