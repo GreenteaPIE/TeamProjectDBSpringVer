@@ -140,7 +140,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getLatestOrderNumber(String userid) throws Exception {
 		productmapper.addOrders(userid);
-		// 새로 생성된 주문 번호(orderNumber)를 반환합니다.
+		// orders 테이블에 입력후 새로 생성된 주문 번호(ordernumber)를 반환함.
 		return productmapper.getLatestOrderNumber(userid);
 	}
 

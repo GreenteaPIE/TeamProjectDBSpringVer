@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,10 +236,12 @@ public class AdminController {
 	// 주문 발송 요청
 	@GetMapping("/shipmentOrder")
 	@ResponseBody
-	public ResponseEntity<String> shipmentOrderGET(int ordernumber, HttpServletRequest request) {
+	public ResponseEntity<String> shipmentOrderGET(@Param("userid") String userid,
+			@Param("totalprice") Integer totalprice, int ordernumber, HttpServletRequest request) throws Exception {
 
-		adminService.shipmentChangeResult(ordernumber);
+		productService.increaseUserPoint(userid, totalprice); // 배송처리 후 포인트 지급
 
+		adminService.shipmentChangeResult(ordernumber); // 배송처리
 		return ResponseEntity.ok("Success");
 	}
 

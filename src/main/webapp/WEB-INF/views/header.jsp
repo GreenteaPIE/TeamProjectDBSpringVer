@@ -20,6 +20,15 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
 	
 </script>
+<style>
+body {
+  cursor: url("../resources/img/cursor.png"), auto;
+}
+* {
+  cursor: url("../resources/img/cursor.png"), auto;
+}
+</style>
+
 </head>
 <body>
 	<!-- Topbar Start -->
@@ -200,6 +209,7 @@
 				}
 			});
 		});
+
 	</script>
 </body>
 </html>

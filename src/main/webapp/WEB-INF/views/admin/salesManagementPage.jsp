@@ -24,8 +24,8 @@
 <body>
 	<hr>
 	<div class="container">
-		<div class="left" style="width: 45%">
-			<div style="border: solid #0D0D0D; margin-bottom: 30px;">
+		<div class="left" style="width: 50%">
+			<div style="border: solid #0D0D0D; margin-bottom: 30px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);">
 				<div class="container bg-secondary mb-3" style="max-width: 800px;">
 					<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
 						<h1 class="font-weight-semi-bold text-uppercase mb-3">Sales List</h1>
@@ -71,6 +71,8 @@
 								</c:choose>
 							</c:forEach>
 						</tbody>
+					</table><br>
+					<table class="table table-bordered text-center mb-0">
 						<tfoot class="bg-secondary text-dark">
 							<tr>
 								<th colspan="3">Total</th>
@@ -82,7 +84,7 @@
 			</div>
 		</div>
 		<div class="right" style="width: 45%">
-			<div style="border: solid #0D0D0D; margin-bottom: 30px;">
+			<div style="border: solid #0D0D0D; margin-bottom: 30px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);">
 				<div class="container bg-secondary mb-3" style="max-width: 800px;">
 					<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
 						<h1 class="font-weight-semi-bold text-uppercase mb-3">New Order List</h1>
@@ -134,7 +136,7 @@
 					</table>
 				</div>
 			</div>
-			<div style="border: solid #0D0D0D; margin-bottom: 30px;">
+			<div style="border: solid #0D0D0D; margin-bottom: 30px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);">
 				<div class="container bg-secondary mb-3" style="max-width: 800px;">
 					<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
 						<h1 class="font-weight-semi-bold text-uppercase mb-3">Process Order List</h1>
@@ -186,7 +188,7 @@
 					</table>
 				</div>
 			</div>
-			<div style="border: solid #0D0D0D; margin-bottom: 30px;">
+			<div style="border: solid #0D0D0D; margin-bottom: 30px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);">
 				<div class="container bg-secondary mb-3" style="max-width: 800px;">
 					<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
 						<h1 class="font-weight-semi-bold text-uppercase mb-3">WithDraw Order List</h1>

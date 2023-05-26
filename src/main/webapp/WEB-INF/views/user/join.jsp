@@ -98,11 +98,11 @@
 				<div class="fg-x700 form-group">
 					<input type="button" class="btn btn-primary btn-block join_button" value="가입하기">
 				</div>
-				<!-- form-group// -->
+				<!-- form-group// 
 				<p class="text-center">
 					카카오 / 네이버를 통한 로그인도 가능합니다.
 					<a href="user?cmd=loginForm">로그인</a>
-				</p>
+				</p>-->
 			</form>
 		</article>
 	</div>

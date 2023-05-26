@@ -29,6 +29,7 @@
 						<tr>
 							<th>주문한 사람</th>
 							<td>${olist[0].userid }</td>
+							<c:set var="userid" value="${olist[0].userid }"></c:set>
 						</tr>
 						<tr>
 							<th>배송받을 사람</th>
@@ -98,17 +99,17 @@
 				<tr>
 		</table>
 		<div class="card-footer border-secondary bg-transparent" align="center">
-			<button class="btn btn-block btn-primary my-3 py-3" style="width: 350px;" onclick="shipmentOrder('${ordernumber}', '${result}')">Shipment Order</button>
+<button class="btn btn-block btn-primary my-3 py-3" style="width: 350px;" onclick="shipmentOrder('${ordernumber}', '${result}', '${userid}', '${totalPrice}')">Shipment Order</button>
 			<button class="btn btn-block btn-primary my-3 py-3" style="width: 350px;" onclick="location.href='/admin/sales_OrderManagement'">Sales&Order List</button>
 		</div>
 	</div>
 	<hr>
 	<script>
-		function shipmentOrder(ordernumber, orderResult) {
+	function shipmentOrder(ordernumber, orderResult, userid, totalPrice){
 			if (orderResult === "2") {
 				if (confirm("주문을 배송처리 하시겠습니까?")) {
 					$.ajax({
-						url : `/admin/shipmentOrder?ordernumber=${ordernumber}`,
+						url : `/admin/shipmentOrder?ordernumber=${ordernumber}&userid=${userid}&totalprice=${totalPrice}`,
 						type : 'GET',
 						success : function(data) {
 							if (data === "Success") {

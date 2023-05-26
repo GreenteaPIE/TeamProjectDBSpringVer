@@ -4,11 +4,12 @@
 <html>
 <head>
 <jsp:include page="header.jsp"></jsp:include>
+
 </head>
 <body>
 	<hr>
 	<!-- Categories Start -->
-	<div class="container-fluid pt-5">
+	<div class="container-fluid pt-5 ">
 		<div class="row px-xl-5 pb-3">
 			<c:forEach var="blist" items="${blist }">
 				<div class="col-lg-4 col-md-6 pb-1">
