@@ -5,12 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
 	<hr>
+	<div class="container bg-secondary mb-3" style="max-width: 800px;">
+		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			<c:choose>
+				<c:when test="${category == 'F'}">
+					<h1 class="font-weight-semi-bold text-uppercase mb-3">자유 게시판</h1>
+				</c:when>
+				<c:when test="${category == 'Q'}">
+					<h1 class="font-weight-semi-bold text-uppercase mb-3">질문 게시판</h1>
+				</c:when>
+				<c:when test="${category == 'S'}">
+					<h1 class="font-weight-semi-bold text-uppercase mb-3">공지사항</h1>
+				</c:when>
+			</c:choose>
+			<div class="d-inline-flex">
+				<p class="m-0">
+					<a href="/">Home</a>
+				</p>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div style="height: 550px">
 			<div class="row">
@@ -26,7 +45,6 @@
 						</tr>
 					</thead>
 					<c:forEach items="${list}" var="list">
-						<%--     <c:if test="${list.userid == admin2 }"> --%>
 						<tr class="record">
 							<td><c:out value="${list.num}" /></td>
 							<td><c:choose>
@@ -66,7 +84,8 @@
 					<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':'' }"/>>제목 + 내용</option>
 					<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':'' }"/>>제목 + 작성자</option>
 					<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW'?'selected':'' }"/>>제목 + 내용 + 작성자</option>
-				</select> <input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+				</select>
+				<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
 				<button class="btn btn-primary pull-right">Search</button>
 			</div>
 		</div>
@@ -99,7 +118,11 @@
 				</div>
 			</div>
 			<form id="moveForm" method="get">
-				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"> <input type="hidden" name="amount" value="${pageMaker.cri.amount}"> <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"> <input type="hidden" name="type" value="${pageMaker.cri.type}"> <input type="hidden" name="category" value="${pageMaker.cri.category}">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+				<input type="hidden" name="type" value="${pageMaker.cri.type}">
+				<input type="hidden" name="category" value="${pageMaker.cri.category}">
 			</form>
 		</div>
 	</div>

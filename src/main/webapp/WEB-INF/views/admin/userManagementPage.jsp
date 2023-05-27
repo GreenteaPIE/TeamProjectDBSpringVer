@@ -40,7 +40,7 @@ tr:hover .hiddentd {
 }
 
 table.table {
-	font-size: 12px; /* 원하는 폰트 크기로 변경 가능 */
+	font-size: 11px;
 }
 </style>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -65,10 +65,9 @@ table.table {
 						<th style="background-color: #eeeeee; text-align: center;">아이디</th>
 						<th style="background-color: #eeeeee; text-align: center;">이름</th>
 						<th style="background-color: #eeeeee; text-align: center;">성별</th>
-						<th style="background-color: #eeeeee; text-align: center; width: 40%;">이메일</th>
-						<th style="background-color: #eeeeee; text-align: center;">주소</th>
-						<th style="background-color: #eeeeee; text-align: center;">상세주소</th>
+						<th style="background-color: #eeeeee; text-align: center;">이메일</th>
 						<th style="background-color: #eeeeee; text-align: center;">우편번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">주소</th>
 						<th style="background-color: #eeeeee; text-align: center;">전화번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">등급</th>
 						<th style="background-color: #eeeeee; text-align: center;">포인트</th>
@@ -89,9 +88,8 @@ table.table {
 							</c:when>
 						</c:choose>
 						<td>${list.email }</td>
-						<td>${list.address3 }</td>
-						<td>${list.address2 }</td>
 						<td>${list.address1 }</td>
+						<td>${list.address2 },${list.address3 }</td>
 						<td>${list.phone }</td>
 						<c:choose>
 							<c:when test="${list.grade == 0 }">
@@ -101,16 +99,13 @@ table.table {
 								<td>관리자</td>
 							</c:when>
 							<c:when test="${list.grade == 2 }">
-								<td>골드</td>
+								<td>실버</td>
 							</c:when>
 							<c:when test="${list.grade == 3 }">
-								<td>플래티넘</td>
+								<td>골드</td>
 							</c:when>
 							<c:when test="${list.grade == 4 }">
-								<td>VIP</td>
-							</c:when>
-							<c:when test="${list.grade == 5 }">
-								<td>VVIP</td>
+								<td>다이아</td>
 							</c:when>
 							<c:otherwise>
 								<td>관리자</td>
@@ -131,7 +126,8 @@ table.table {
 				<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>유저 아이디</option>
 				<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>전화번호</option>
 				<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>이름</option>
-			</select> <input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+			</select>
+			<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
 			<button class="btn btn-primary pull-right">Search</button>
 		</div>
 	</div>
@@ -164,14 +160,18 @@ table.table {
 			</div>
 		</div>
 		<form id="moveForm" method="get">
-			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"> <input type="hidden" name="amount" value="${pageMaker.cri.amount}"> <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"> <input type="hidden" name="type" value="${pageMaker.cri.type}"> <input type="hidden" name="category" value="${pageMaker.cri.category}">
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+			<input type="hidden" name="type" value="${pageMaker.cri.type}">
+			<input type="hidden" name="category" value="${pageMaker.cri.category}">
 		</form>
 	</div>
 	<hr>
 	<script>
 		function open_win(url) {
 			// 새 창의 속성들을 설정하는 문자열입니다.
-			var specs = "width=900,height=500,left=200,top=200";
+			var specs = "width=900,height=600,left=200,top=200";
 
 			// 새 창을 엽니다.
 			window.open(url, "_blank", specs);

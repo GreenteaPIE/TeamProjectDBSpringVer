@@ -125,7 +125,8 @@ public class BoardController {
 
 	// 게시판 목록 페이지 접속(페이징)
 	@GetMapping("/list")
-	public void boardListGET(Model model, Criteria cri, @RequestParam(required = false) String category) {
+	public void boardListGET(HttpServletRequest request, Model model, Criteria cri,
+			@RequestParam(required = false) String category) {
 
 		log.info("boardListGET");
 
@@ -134,7 +135,7 @@ public class BoardController {
 		model.addAttribute("list", bservice.getListPaging(cri));
 
 		int total = bservice.getTotal(cri);
-
+		request.setAttribute("category", category);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 
 		model.addAttribute("pageMaker", pageMake);

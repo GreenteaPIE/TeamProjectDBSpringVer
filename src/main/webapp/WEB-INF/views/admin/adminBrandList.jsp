@@ -35,7 +35,6 @@ img {
 				</c:forEach>
 			</div>
 		</div>
-		<input type="button" class="btn btn-primary px-3" value="뒤로가기" onclick="location.href='adminBrandList'">
 	</div>
 	<hr>
 </body>

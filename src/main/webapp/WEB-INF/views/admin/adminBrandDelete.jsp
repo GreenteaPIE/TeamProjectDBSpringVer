@@ -16,7 +16,7 @@ img {
 	top: 50%;
 	left: 50%;
 	color: white;
-	font-size: 4em;
+	font-size: 3em;
 	font-weight: 300;
 	transform: translate(-50%, -50%);
 	text-align: center;
@@ -54,37 +54,41 @@ img {
 <jsp:include page="../header.jsp"></jsp:include>
 <body>
 	<hr>
-	<div id="wrap" align="center">
-		<hr>
-		<h1 style="margin-top: 80px;" class="font-weight-semi-bold text-uppercase mb-3">브랜드 삭제</h1>
-		<input type="button" style="margin: 40px 0" class="btn btn-primary px-3" value="뒤로가기" onclick="location.href='adminBrandList'">
-		<!-- Categories Start -->
-		<div class="container-fluid pt-5">
-			<div class="row px-xl-5 pb-3">
-				<c:forEach var="blist" items="${blist }">
-					<div class="col-lg-4 col-md-6 pb-1">
-						<div class="cat-item text-center" style="padding: 30px;">
-							<a href='' class="cat-img position-relative overflow-hidden mb-3">
-								<img class="img-fluid" src="../resources/img/${blist.imgurl}" alt="">
-							</a>
-							<div class="blur"></div>
-							<button class="delete-btn font-weight-semi-bold m-0" onclick="deleteBrand('${blist.bname}')">브랜드 삭제</button>
-							<form action="deleteBrand.do" method="post" id="${blist.bname}">
-								<input type="hidden" name="bname" value="${blist.bname}">
-							</form>
-							<h5 class="font-weight-semi-bold m-0"></h5>
-						</div>
-					</div>
-				</c:forEach>
+	<div class="container bg-secondary mb-3" style="max-width: 800px;">
+		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">브랜드 삭제</h1>
+			<div class="d-inline-flex">
+				<p class="m-0">
+					<a href="adminBrandList">Brand List</a>
+				</p>
 			</div>
 		</div>
-		<input type="button" class="btn btn-primary px-3" value="뒤로가기" onclick="location.href='adminBrandList'">
+	</div>
+	<!-- Categories Start -->
+	<div class="container-fluid pt-5">
+		<div class="row px-xl-5 pb-3">
+			<c:forEach var="blist" items="${blist }">
+				<div class="col-lg-4 col-md-6 pb-1">
+					<div class="cat-item text-center" style="padding: 30px;">
+						<a href='' class="cat-img position-relative overflow-hidden mb-3">
+							<img class="img-fluid" src="../resources/img/${blist.imgurl}" alt="">
+						</a>
+						<div class="blur"></div>
+						<button class="delete-btn font-weight-semi-bold m-0" onclick="deleteBrand('${blist.bname}')">브랜드 삭제</button>
+						<form action="deleteBrand.do" method="post" id="${blist.bname}">
+							<input type="hidden" name="bname" value="${blist.bname}">
+						</form>
+						<h5 class="font-weight-semi-bold m-0"></h5>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
 	</div>
 	<hr>
 	<script>
 		function deleteBrand(bname) {
-			if (confirm("삭제하면 브랜드 내의 모든 상품이 사라집니다. 브랜드<"+bname+">을(를) 삭제하시겠습니까?")) {
-				$("#"+bname).submit();
+			if (confirm("삭제하면 브랜드 내의 모든 상품이 사라집니다. \n브랜드<"+bname+">을(를) 삭제하시겠습니까?")) {
+				$("#" + bname).submit();
 			}
 		}
 	</script>

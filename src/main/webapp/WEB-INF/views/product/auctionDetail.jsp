@@ -5,26 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Auction</title>
 <script type="text/javascript" src="../resources/js/auction.js"></script>
 <jsp:include page="../header.jsp"></jsp:include>
 <style>
-@keyframes flashing {
-  0% {
-    color: transparent;
+  @keyframes flashing {
+    0% {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+    100% {
+      color: transparent;
+    }
   }
-  50% {
-    color: black;
+  
+  .animated {
+    animation: flashing 1s linear infinite;
   }
-  100% {
-    color: transparent;
-  }
-}
-
-.animated {
-  animation: flashing 1s linear infinite;
-}
 </style>
+
 </head>
 <hr>
 <body onload="startTimer()">
@@ -47,10 +47,21 @@
 	<div class="container-fluid py-5">
 		<div class="row px-xl-5">
 			<div class="col-lg-5 pb-5">
-				<div id="auction-carousel" class="carousel slide" data-ride="carousel">
+				<div id="product-carousel" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner border">
-						<img class="w-100 h-100" style="height: 280px" src="../resources/img/${auction.imgUrl}" alt="Image">
+						<div class="carousel-item active">
+							<img class="w-100 pimg" src="../resources/img/${ auction.imgUrl}" alt="Image">
+						</div>
+						<div class="carousel-item">
+							<img class="w-100 pimg" src="../resources/img/${ auction.imgUrl}" alt="Image">
+						</div>
 					</div>
+					<a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+						<i class="fa fa-2x fa-angle-left text-dark"></i>
+					</a>
+					<a class="carousel-control-next" href="#product-carousel" data-slide="next">
+						<i class="fa fa-2x fa-angle-right text-dark"></i>
+					</a>
 				</div>
 			</div>
 			<div class="col-lg-7 pb-5">
@@ -94,7 +105,9 @@
 						</div>
 					</c:if>
 					<div class="d-flex align-items-center mb-4 pt-2">
-						<input type="hidden" name="num" value="${auction.num }"> <input type="hidden" name="onOff" value="${auction.onOff }"> <input type="hidden" name="originProduct" value="${originProduct.pname }">
+						<input type="hidden" name="num" value="${auction.num }">
+						<input type="hidden" name="onOff" value="${auction.onOff }">
+						<input type="hidden" name="originProduct" value="${originProduct.pname }">
 						<!-- 입력 가격과 현재 가격을 비교를 위한 input -->
 						<input type="hidden" name="currentPrice" id="currentPrice" value="${auction.price }">
 						<c:choose>
@@ -104,7 +117,6 @@
 										<c:when test="${auction.endPrice > 0}">
 											<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="이미 구매 완료한 상품입니다." onclick="#" disabled="disabled">
 										</c:when>
-										
 									</c:choose>
 								</c:if>
 								<input type="button" value="뒤로가기" class="btn btn-primary px-3" onclick="location.href='/product/auctionView'">

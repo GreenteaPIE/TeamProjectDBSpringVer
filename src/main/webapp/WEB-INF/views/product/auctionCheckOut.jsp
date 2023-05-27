@@ -26,18 +26,8 @@
 	</div>
 	<!-- Page Header End -->
 	<!-- Checkout Start -->
-
 	<form action="/product/auctionPurchased" method="post" name="frm" id="frm">
-		<!-- 가지고 넘어가야 할 값들 
-		cart = psize, num, quantity, price, cartnum -> 0 으로 변경
-		product = imgurl, pname
-		coupon = cnum -> 0으로 변경
-		user = userid 
-		totalprice
-		 -->
 		<input type="hidden" name="userid" value="${user.userid }">
-		<!--<input type="hidden" name="totalprice" value="">
-		 pname 과 imgurl 은 num(product)를 가져가서 productvo에서 불러오기 -->
 		<div class="container-fluid pt-5">
 			<div class="row px-xl-5">
 				<div class="col-lg-8">
@@ -45,42 +35,34 @@
 						<h4 class="font-weight-semi-bold mb-4">Billng Address</h4>
 						<div class="row">
 							<div class="col-md-6 form-group">
-								<label>이름</label>
-								<input class="form-control" type="text" name="name" placeholder="${user.name }">
+								<label>이름</label> <input class="form-control" type="text" name="name" placeholder="${user.name }">
 							</div>
 							<div class="col-md-6 form-group">
-								<label>E-mail</label>
-								<input class="form-control" type="text" name="email" placeholder="${user.email }">
+								<label>E-mail</label> <input class="form-control" type="text" name="email" placeholder="${user.email }">
 							</div>
 							<div class="col-md-6 form-group">
-								<label>전화번호</label>
-								<input class="form-control" type="text" name="phone" placeholder="${user.phone }">
+								<label>전화번호</label> <input class="form-control" type="text" name="phone" placeholder="${user.phone }">
 							</div>
 							<div class="col-md-6 form-group">
-								<label>우편번호</label>
-								<input class="form-control address_input_1" type="text" name="address1" placeholder="${user.address1 }">
+								<label>우편번호</label> <input class="form-control address_input_1" type="text" name="address1" placeholder="${user.address1 }">
 							</div>
 							<div class="col-md-12 form-group">
-								<label>주소</label>
-								<input class="form-control address_input_2" type="text" name="address2" placeholder="${user.address2 }">
+								<label>주소</label> <input class="form-control address_input_2" type="text" name="address2" placeholder="${user.address2 }">
 							</div>
 							<div class="col-md-12 form-group">
-								<label>상세주소</label>
-								<input class="form-control address_input_3" type="text" name="address3" placeholder="${user.address3 }">
+								<label>상세주소</label> <input class="form-control address_input_3" type="text" name="address3" placeholder="${user.address3 }">
 							</div>
 							<div class="col-md-12 text-right">
 								<input type="button" onclick="execution_daum_address()" class="rbutton xsmall white btn btn-primary" value="우편번호 찾기">
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="useraddress">
-									<label class="custom-control-label" for="useraddress">주문자 정보와 동일</label>
+									<input type="checkbox" class="custom-control-input" id="useraddress"> <label class="custom-control-label" for="useraddress">주문자 정보와 동일</label>
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="shipto">
-									<label class="custom-control-label" for="shipto" data-toggle="collapse" data-target="#shipping-address">약관 동의</label>
+									<input type="checkbox" class="custom-control-input" id="shipto"> <label class="custom-control-label" for="shipto" data-toggle="collapse" data-target="#shipping-address">약관 동의</label>
 								</div>
 							</div>
 						</div>
@@ -112,19 +94,9 @@
 									<fmt:formatNumber type="currency" value="${auVo.price}" currencySymbol="₩" />
 								</p>
 							</div>
-							<input type="hidden" name="pname" id="pname" value="${auVo.pname}">
-							<input type="hidden" name="psize" value="${auVo.psize }">
-							<input type="hidden" name="quantity" value="1">
-							<input type="hidden" name="num" value="${auVo.num }">
-							<!-- cartnum 을 가져가서 result -> 0으로 변경하기 -->
-							<input type="hidden" name="price" value="${auVo.price }">
-							<!-- 할인된 가격은 cart에 저장되어있기 때문에 주문상세에서 불러오려면 cart에 저장된 price를 들고가야함 -->
-							<input type="hidden" name="auNum" value="${auVo.num }">
-							<!-- ㄴ 옥션 테이블에 endPrice를 설정해주기 위한 값 -->
-							<input type="hidden" name="endPrice" value="${auVo.price }">
+							<input type="hidden" name="pname" id="pname" value="${auVo.pname}"> <input type="hidden" name="psize" value="${auVo.psize }"> <input type="hidden" name="quantity" value="1"> <input type="hidden" name="num" value="${auVo.num }"> <input type="hidden" name="price" value="${auVo.price }"> <input type="hidden" name="auNum" value="${auVo.num }"> <input type="hidden" name="endPrice" value="${auVo.price }">
 							<c:set var="subprice" value="${subprice + auVo.price}" />
 							<br>
-							
 							<hr class="mt-0">
 							<div class="d-flex justify-content-between mb-3 pt-1">
 								<h6 class="font-weight-medium">Subtotal</h6>
@@ -133,7 +105,6 @@
 									<fmt:formatNumber type="currency" value="${subprice}" currencySymbol="₩" />
 								</h6>
 							</div>
-							 
 							<div class="d-flex justify-content-between">
 								<h6 class="font-weight-medium">Shipping</h6>
 								<h6 class="font-weight-medium">
@@ -159,7 +130,7 @@
 					</div>
 					<div class="input-group mb-5">
 						<div class="form-control form-control-custom">
-							<h5 class="font-weight-medium mb-3">쿠폰 적용불가</h5>
+							<h5 class="font-weight-medium mb-3" align="center">쿠폰 적용불가</h5>
 							<c:set var="totalprice" value="${subprice}" />
 							<input id="total" type="hidden" name="totalprice" value="${totalprice }" step="1">
 						</div>
@@ -174,20 +145,17 @@
 						<div class="card-body">
 							<div class="form-group">
 								<div class="custom-control custom-radio">
-									<input type="radio" class="custom-control-input" name="payment" id="paypal">
-									<label class="custom-control-label" for="paypal">신용카드</label>
+									<input type="radio" class="custom-control-input" name="payment" id="paypal"> <label class="custom-control-label" for="paypal">신용카드</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="custom-control custom-radio">
-									<input type="radio" class="custom-control-input" name="payment" id="directcheck">
-									<label class="custom-control-label" for="directcheck">삼성페이</label>
+									<input type="radio" class="custom-control-input" name="payment" id="directcheck"> <label class="custom-control-label" for="directcheck">삼성페이</label>
 								</div>
 							</div>
 							<div class="">
 								<div class="custom-control custom-radio">
-									<input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-									<label class="custom-control-label" for="banktransfer">무통장입금</label>
+									<input type="radio" class="custom-control-input" name="payment" id="banktransfer"> <label class="custom-control-label" for="banktransfer">무통장입금</label>
 								</div>
 							</div>
 						</div>
@@ -256,78 +224,6 @@ function iamport() {
         }
     });
 }
-//쿠폰
-/*
-function numberWithCommas(x) {
-	  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-	}
-
-
-$(document).ready(function () {
-	  $("button.btn.btn-primary").on("click", function (e) {
-		  e.preventDefault();
-
-	    var discountPrice = parseFloat($("select[name='coupon']").val());
-	    var coupNum = $("select[name='coupon'] option:selected").data("num");
-	    var subPrice = parseFloat(
-	      $("#subtotalPrice").text().replace(/[^0-9.]/g, "")
-	    );
-	    var totalPrice = parseFloat(
-	      $("#totalDisplayPrice").text().replace(/[^0-9.]/g, "")
-	    );
-
-	    if (subPrice - discountPrice < 0) {
-	      alert("상품 가격 보다 높은 할인쿠폰을 사용 하실 수 없습니다");
-	      $("select[name='coupon']").prop("selectedIndex", 0);
-	    } else {
-	      var newTotalPrice = subPrice - discountPrice;
-
-	      // Update the discount price
-	      $("#DiscountPrice").html(
-	        "₩" + numberWithCommas(discountPrice.toFixed(0))
-	      );
-
-	      $("#subtotalPrice").html("₩" + numberWithCommas(subPrice.toFixed(0)));
-	      $("#totalDisplayPrice").html(
-	        "₩" + numberWithCommas(newTotalPrice.toFixed(0))
-	      );
-
-	      // Update the hidden total input value
-	      $("#total").val(newTotalPrice);
-
-	      // Assign the coupNum value to the input field with the 'cnum' name
-	      $("input[name='cnum']").val(coupNum);
-	    }
-	  });
-	});
-	
-	
-	
-	 document.addEventListener('DOMContentLoaded', function() {
-		    // select 엘리먼트를 가져옵니다
-		    const selectElement = document.getElementsByName('coupon')[0];
-
-		    // 버튼 엘리먼트를 가져옵니다
-		    const button = document.querySelector('.input-group-append .btn');
-
-		    // select 값에 따라 버튼을 활성화/비활성화하는 함수
-		    function checkSelectedValue() {
-		      if (selectElement.value === "") {
-		        button.disabled = true;
-		      } else {
-		        button.disabled = false;
-		      }
-		    }
-
-		    // 함수를 처음 호출하여 버튼의 초기 상태를 설정합니다
-		    checkSelectedValue();
-
-		    // 변경 사항을 감시하기 위해 select 엘리먼트에 이벤트 리스너를 추가합니다
-		    selectElement.addEventListener('change', checkSelectedValue);
-		  });
-	 
-	 */
-	 
 	 //주문자 정보 동일
 	 $(document).ready(function () {
     $("#useraddress").on("change", function () {

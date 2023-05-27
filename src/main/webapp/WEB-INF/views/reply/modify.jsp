@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 상세보기</title>
+<title>DIIB</title>
 <!-- Libraries Stylesheet -->
 <link href="../css/owl.carousel.min.css" rel="stylesheet">
 <!-- Customized Bootstrap Stylesheet -->
@@ -19,14 +19,16 @@
 	<form method="post" action="/reply/modify">
 		<div class="container">
 			<div class="form-group">
-				<label for="writer">댓글 작성자</label> <input type="text" class="form-control" name="writer" id="writer" readonly="readonly" value="${reply.writer}">
+				<label for="writer">댓글 작성자</label>
+				<input type="text" class="form-control" name="writer" id="writer" readonly="readonly" value="${reply.writer}">
 			</div>
 			<div class="form-group">
 				<label for="content">댓글 내용</label>
 				<textarea class="form-control" rows="5" name="content" id="content">${reply.content}</textarea>
 			</div>
 			<div class="form-group">
-				<input type="hidden" name="num" value="${reply.num}"> <input type="hidden" name="rno" value="${reply.rno}">
+				<input type="hidden" name="num" value="${reply.num}">
+				<input type="hidden" name="rno" value="${reply.rno}">
 			</div>
 			<button type="submit" class="btn btn-primary">댓글 수정</button>
 		</div>

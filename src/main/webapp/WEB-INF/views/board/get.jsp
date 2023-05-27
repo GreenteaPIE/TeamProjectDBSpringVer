@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/freeboard.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -76,7 +75,7 @@
 						<c:if test="${reply.writer eq user.userid or user.userid eq 'admin'}">
 							<p class="text-right">
 								<a href="#" onclick="openModifyWindow('${pageInfo.num}', '${reply.rno}')" class="text-decoration-none">
-									<button type="button" class="btn btn-sm btn-secondary text-right">수정</button>
+									<button type="button" class="btn btn-sm btn-primary text-right">수정</button>
 								</a>
 								<a href="/reply/delete?num=${pageInfo.num}&rno=${reply.rno}" class="text-decoration-none">
 									<button type="button" class="btn btn-sm btn-primary text-right">삭제</button>
@@ -92,7 +91,8 @@
 			<form method="post" action="/reply/write" class="mt-3">
 				<div class="row mb-3">
 					<div class="col">
-						<label for="writer" class="form-label">댓글 작성자</label> <input type="hidden" class="form-control" name="writer" id="writer" value="${user.userid}">
+						<label for="writer" class="form-label">댓글 작성자</label>
+						<input type="hidden" class="form-control" name="writer" id="writer" value="${user.userid}">
 						<span>${user.userid}</span>
 						<c:if test="${empty user.userid}">
 							<b>로그인 필요</b>
@@ -133,7 +133,11 @@
 		</c:if>
 	</div>
 	<form id="infoForm" action="/board/modify" method="get">
-		<input type="hidden" id="num" name="num" value='<c:out value="${pageInfo.num}"/>'> <input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'> <input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'> <input type="hidden" name="type" value="${cri.type}"> <input type="hidden" name="keyword" value="${cri.keyword}">
+		<input type="hidden" id="num" name="num" value='<c:out value="${pageInfo.num}"/>'>
+		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+		<input type="hidden" name="type" value="${cri.type}">
+		<input type="hidden" name="keyword" value="${cri.keyword}">
 	</form>
 	<script>
 		let form = $("#infoForm");

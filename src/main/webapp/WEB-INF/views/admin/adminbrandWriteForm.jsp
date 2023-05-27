@@ -4,9 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>브랜드 등록</title>
-<!-- 
-<script type="text/javascript" src="script/admin.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <style>
 .image-regit {
@@ -53,18 +50,16 @@
 </head>
 <body>
 	<hr>
-	<div>
-		<!-- Page Header Start -->
-		<div class="container bg-secondary mb-3" style="max-width: 800px;">
-			<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
-				<h1 class="font-weight-semi-bold text-uppercase mb-3">브랜드 등록</h1>
+	<div class="container bg-secondary mb-3" style="max-width: 800px;">
+		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">브랜드 등록</h1>
+			<div class="d-inline-flex">
 				<p class="m-0">
 					<a href="adminBrandList">Brand List</a>
 				</p>
 			</div>
 		</div>
 	</div>
-	<!-- Page Header End -->
 	<!-- Shop Detail Start -->
 	<div class="container-fluid py-5">
 		<form action="brandWrite.do" method="post" name="frm" enctype="multipart/form-data">
@@ -73,7 +68,8 @@
 					<div id="product-carousel" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner border" style="height: 500px;">
 							<div class="blur">이미지 등록</div>
-							<input type="file" class="btn btn-primary px-3 image-regit" name="uploadFile" id="file-upload-1" onchange="previewFile(), selectSameFile(event)"> <img style="width: 100%;" class="img-fluid preview-img" src="" alt="">
+							<input type="file" class="btn btn-primary px-3 image-regit" name="uploadFile" id="file-upload-1" onchange="previewFile(), selectSameFile(event)">
+							<img style="width: 100%;" class="img-fluid preview-img" src="" alt="">
 						</div>
 					</div>
 				</div>

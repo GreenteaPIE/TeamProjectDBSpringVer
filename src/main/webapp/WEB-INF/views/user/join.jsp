@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>
 <meta charset="UTF-8">
-<title>userJoin</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
 	
 </script>
@@ -53,7 +52,8 @@
 				<span class="mail_input_box_warn"></span>
 				<div class="mail_check_wrap">
 					<div class="form-group input-group fg-x700">
-						<input class="mail_check_input form-control mail_check_input_box" id="mail_check_input_box_false" disabled="disabled"> <input type="button" class="btn btn-primary mail_check_button" value="인증번호 전송">
+						<input class="mail_check_input form-control mail_check_input_box" id="mail_check_input_box_false" disabled="disabled">
+						<input type="button" class="btn btn-primary mail_check_button" value="인증번호 전송">
 					</div>
 					<div class="clearfix"></div>
 					<span id="mail_check_input_box_warn"></span>
@@ -75,11 +75,16 @@
 							<i class="fa fa-building"></i>
 						</span>
 					</div>
-					<input type="text" id="address1" class="form-control address_input_1" name="address1" placeholder="우편번호" readonly="readonly" /> <br />
+					<input type="text" id="address1" class="form-control address_input_1" name="address1" placeholder="우편번호" readonly="readonly" />
+					<br />
 					<div class="form-group input-group fg-x700">
 						<input type="text" id="address2" class="form-control address_input_2" name="address2" placeholder="주소" readonly="readonly" />
 					</div>
-					<br /> <input type="text" id="address3" class="form-control address_input_3" name="address3" placeholder="상세주소" /> <br /> <input type="button" onclick="execution_daum_address()" class="rbutton xsmall white btn btn-primary" value="우편번호 찾기"> <br>
+					<br />
+					<input type="text" id="address3" class="form-control address_input_3" name="address3" placeholder="상세주소" />
+					<br />
+					<input type="button" onclick="execution_daum_address()" class="rbutton xsmall white btn btn-primary" value="우편번호 찾기">
+					<br>
 				</div>
 				<!-- form-group end.// -->
 				<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
@@ -90,7 +95,8 @@
 							<i class="fa fa-lock"></i>
 						</span>
 					</div>
-					<input id="pass" name="pass" class="form-control pw_input" placeholder="비밀번호 입력" type="password" required> <input id="passCheck" name="" class="form-control pwck_input" placeholder="비밀번호 확인" type="password" required>
+					<input id="pass" name="pass" class="form-control pw_input" placeholder="비밀번호 입력" type="password" required>
+					<input id="passCheck" name="" class="form-control pwck_input" placeholder="비밀번호 확인" type="password" required>
 				</div>
 				<span class="pwck_input_re_1">비밀번호가 일치합니다.</span>
 				<span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>

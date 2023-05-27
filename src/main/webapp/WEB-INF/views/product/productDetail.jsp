@@ -28,8 +28,19 @@
 			<div class="col-lg-5 pb-5">
 				<div id="product-carousel" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner border">
-						<img class="w-100 pimg" src="../resources/img/${ pdlist.imgUrl}" alt="Image">
+						<div class="carousel-item active">
+							<img class="w-100 pimg" src="../resources/img/${ pdlist.imgUrl}" alt="Image">
+						</div>
+						<div class="carousel-item">
+							<img class="w-100 pimg" src="../resources/img/${ pdlist.imgUrl}" alt="Image">
+						</div>
 					</div>
+					<a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+						<i class="fa fa-2x fa-angle-left text-dark"></i>
+					</a>
+					<a class="carousel-control-next" href="#product-carousel" data-slide="next">
+						<i class="fa fa-2x fa-angle-right text-dark"></i>
+					</a>
 				</div>
 			</div>
 			<div class="col-lg-7 pb-5">
@@ -55,7 +66,8 @@
 					<p class="text-dark font-weight-medium mb-0 mr-3">Sizes</p>
 				</div>
 				<form name="addcart" method="post" onsubmit="return validateForm();">
-					<input type="hidden" name="num" value="${pdlist.num }"> <input type="hidden" name="userid" value="${user.userid }">
+					<input type="hidden" name="num" value="${pdlist.num }">
+					<input type="hidden" name="userid" value="${user.userid }">
 					<c:if test="${pdlist.discountrate==0}">
 						<input type="hidden" name="price" value="${Integer.parseInt(pdlist.price)}">
 					</c:if>
@@ -64,7 +76,8 @@
 					</c:if>
 					<c:forEach var="ps" items="${ps }">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="${ps.psize }" name="psize" value="${ps.psize }"> <label class="custom-control-label" for="${ps.psize }">${ps.psize }</label>
+							<input type="radio" class="custom-control-input" id="${ps.psize }" name="psize" value="${ps.psize }">
+							<label class="custom-control-label" for="${ps.psize }">${ps.psize }</label>
 						</div>
 					</c:forEach>
 					<div class="d-flex align-items-center mb-4 pt-2">
@@ -93,6 +106,42 @@
 						</c:if>
 					</div>
 				</form>
+			</div>
+		</div>
+		<div class="row px-xl-5">
+			<div class="col">
+				<div class="nav nav-tabs justify-content-center border-secondary mb-4">
+					<a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
+					<a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
+				</div>
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="tab-pane-1">
+						<h4 class="mb-3">Product Description</h4>
+						<p>상품 설명</p>
+					</div>
+					<div class="tab-pane fade" id="tab-pane-2">
+						<h4 class="mb-3">Additional Information</h4>
+						<p>상품 정보</p>
+						<div class="row">
+							<div class="col-md-6">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item px-0">정보1</li>
+									<li class="list-group-item px-0">정보2</li>
+									<li class="list-group-item px-0">정보3</li>
+									<li class="list-group-item px-0">정보4</li>
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item px-0">정보1-1</li>
+									<li class="list-group-item px-0">정보2-2</li>
+									<li class="list-group-item px-0">정보3-3</li>
+									<li class="list-group-item px-0">정보4-4</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

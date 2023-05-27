@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 게시물 작성</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 <body>
@@ -29,7 +28,7 @@
 										<option value="S">공지사항</option>
 									</c:if>
 							</select></td>
-							<td colspan="1">작성자 : <input type="hidden" class="form-control" name="userid" value="${user.userid }">${user.userid }
+							<td colspan="1">작성자  <input type="hidden" class="form-control" name="userid" value="${user.userid }">${user.userid }
 							</td>
 						</tr>
 						<tr>

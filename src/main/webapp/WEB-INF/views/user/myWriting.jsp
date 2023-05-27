@@ -5,12 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
 	<hr>
+	<div class="container bg-secondary mb-3" style="max-width: 800px;">
+		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">나의 작성 글</h1>
+			<div class="d-inline-flex">
+				<p class="m-0">
+					<a href="/">Home</a>
+				</p>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div style="height: 550px">
 			<div class="row">
@@ -34,7 +43,7 @@
 									<c:when test="${list.category == 'Q'}">[질&nbsp;&nbsp;&nbsp;문]</c:when>
 									<c:when test="${list.category == 'S'}">[공지사항]</c:when>
 								</c:choose></td>
-							<td><a class="move" href='<c:out value="${list.num}"/>'>
+							<td style="text-align: left;"><a class="move" href='<c:out value="${list.num}"/>'>
 									<c:out value="${list.title}" />
 									(
 									<c:out value="${list.reply_count}" />
@@ -77,7 +86,11 @@
 				</div>
 			</div>
 			<form id="moveForm" method="get">
-				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"> <input type="hidden" name="amount" value="${pageMaker.cri.amount}"> <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"> <input type="hidden" name="type" value="${pageMaker.cri.type}"> <input type="hidden" name="category" value="${pageMaker.cri.category}">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+				<input type="hidden" name="type" value="${pageMaker.cri.type}">
+				<input type="hidden" name="category" value="${pageMaker.cri.category}">
 			</form>
 		</div>
 	</div>

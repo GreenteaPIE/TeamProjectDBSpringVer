@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Auction</title>
 <script>
 	
 </script>
@@ -23,6 +22,9 @@
 				</p>
 			</div>
 		</div>
+		<c:if test="${AuctionList.size()==0 }">
+			<h3 style="text-align: center;">진행된 옥션이 없습니다.</h3>
+		</c:if>
 	</div>
 	<!-- Page Header End -->
 	<!-- Shop Start -->
@@ -56,7 +58,7 @@
 							<c:if test="${user.userid eq AuctionList.userid}">
 								<c:choose>
 									<c:when test="${AuctionList.endPrice > 0}">
-										<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="이미 구매 완료한 상품입니다." onclick="#" disabled="disabled">
+										<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매 완료" onclick="#" disabled="disabled">
 									</c:when>
 									<c:otherwise>
 										<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">

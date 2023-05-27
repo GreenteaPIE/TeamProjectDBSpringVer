@@ -52,10 +52,18 @@ html, body {
 </style>
 <body>
 	<hr>
+	<div class="container bg-secondary mb-3" style="max-width: 800px;">
+		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">FAQ <small class="text-muted">자주 묻는 질문</small></h1>
+			<div class="d-inline-flex">
+				<p class="m-0">
+					<a href="/">Home</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	
 	<div class="container">
-		<h3 style="text-align: center; padding-top: 50px;">
-			FAQ <small class="text-muted">자주 묻는 질문</small>
-		</h3>
 		<button id="btn-all-close">FAQ ALL Close</button>
 		<br>
 		<table class="table table-bordered table-hover">

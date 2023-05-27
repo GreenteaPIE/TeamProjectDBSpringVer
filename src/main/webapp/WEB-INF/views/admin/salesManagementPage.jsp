@@ -23,6 +23,16 @@
 </head>
 <body>
 	<hr>
+	<div class="container bg-secondary mb-3" style="max-width: 800px;">
+		<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			<h1 class="font-weight-semi-bold text-uppercase mb-3">매출&주문 관리</h1>
+			<div class="d-inline-flex">
+				<p class="m-0">
+					<a href="/">Home</a>
+				</p>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div class="left" style="width: 50%">
 			<div style="border: solid #0D0D0D; margin-bottom: 30px; box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);">
@@ -49,8 +59,8 @@
 						<tbody class="align-middle">
 							<c:if test="${salesOrderlist.size()==0}">
 								<tr>
-									<td class="align-middle" colspan="3">
-										<h3>판매완료된 주문이 없습니다.</h3>
+									<td class="align-middle" colspan="4">
+										<h3>판매 완료된 주문이 없습니다.</h3>
 									</td>
 								</tr>
 							</c:if>
@@ -162,7 +172,7 @@
 							<c:if test="${processOrderlist.size()==0}">
 								<tr>
 									<td class="align-middle" colspan="3">
-										<h3>배송요청할 주문이 없습니다.</h3>
+										<h3>배송 요청할 주문이 없습니다.</h3>
 									</td>
 								</tr>
 							</c:if>
