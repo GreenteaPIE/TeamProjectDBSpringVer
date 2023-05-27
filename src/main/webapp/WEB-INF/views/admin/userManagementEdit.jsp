@@ -15,11 +15,11 @@
 <body>
 	<div id="wrap" align="center">
 		<h1>유저 정보 수정</h1>
-		<form action="userEditComplete.do" method="post" name="frm">
+		<form action="userEditComplete.do" method="post" name="frm" id="frm">
 			<table class="list">
 				<tr>
 					<th>아이디</th>
-					<td><input name="userid" value="${shopUser.userid }" readonly="readonly"></td>
+					<td><input type="text" name="userid" value="${shopUser.userid }" readonly="readonly"></td>
 					<th>비밀번호</th>
 					<td><input type="text" name="pass" value="${shopUser.pass }" readonly="readonly"></td>
 					<th>이름</th>
@@ -108,8 +108,37 @@
 					<td><fmt:formatDate value="${shopUser.enter }" /></td>
 				</tr>
 			</table>
-			<input class="modify" value="수정" type="submit">
+			<input type="submit" value="수정">
 		</form>
 	</div>
+	<script>	
+	$(document).ready(function() {
+		  $('#frm').submit(function(event) {
+		    event.preventDefault(); // 기본 제출 동작을 막습니다.
+
+		    var formData = $(this).serialize(); // 폼 데이터를 직렬화합니다.
+
+		    $.ajax({
+		    	url: '/admin/userEditComplete.do',
+			    type: 'post', // POST 방식으로 변경
+		      data: formData,
+		      success: function(response) {
+		       	if(response == 'success'){
+		       		alert("수정 완료");
+		       		window.close();
+			    	if (window.opener && !window.opener.closed) {
+			  	      window.opener.location.reload();
+			  	    }
+		       	}
+		      },
+		      error: function(xhr, status, error) {
+		        // Ajax 요청이 실패했을 때 실행되는 콜백 함수입니다.
+		        console.error('오류가 발생했습니다:', error);
+		      }
+		    });
+		  });
+		});
+
+	</script>
 </body>
 </html>

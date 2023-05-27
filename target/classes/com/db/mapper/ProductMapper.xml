@@ -261,19 +261,25 @@
 		select * from order_view
 		where ordernumber = #{ordernumber}
 	</select>
-    <!-- 제품 이름으로 제품상세 불러오기 -->
-    <select id="productDetailByPname" resultType="com.db.model.ProductVO">
-        select * from product where pname = #{pname} and rownum = 1
-    </select>
+	<!-- 제품 이름으로 제품상세 불러오기 -->
+	<select id="productDetailByPname"
+		resultType="com.db.model.ProductVO">
+		select * from product where pname = #{pname} and rownum = 1
+	</select>
 
 
-	
+	<!-- 제품 이름,사이즈로 제품상세 불러오기 -->
+	<select id="productDetailByPnamepSize"
+		resultType="com.db.model.ProductVO">
+		select * from product where pname = #{param1} and psize = #{param2}
+	</select>
 
 
 	<!-- 주문완료한 cart result 0으로 변경 -->
 	<update id="cartResultChange">
 
-		update cart set result = 0 where cartnum=#{cart.cartnum}
+		update cart set result = 0 where
+		cartnum=#{cart.cartnum}
 	</update>
 
 	<!-- 사용한 coupon result 0으로 변경 -->
@@ -284,22 +290,29 @@
 	<!-- 주문완료 후 포인트 지급 -->
 	<update id="increaseUserPoint" parameterType="map">
 		UPDATE shopuser
-		SET point = point + (#{totalprice} * 0.01)
+		SET
+		point = point + (#{totalprice} * 0.01)
 		WHERE userid = #{userid}
 	</update>
 
 	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
-		select * from auction order by endTime, onOff desc
+		select * from auction
+		order by onOff desc ,endTime desc
 	</select>
-	
-	<select id="getAuctionDetail" resultType="com.db.model.AuctionVO">
+
+	<select id="getAuctionDetail"
+		resultType="com.db.model.AuctionVO">
 		select * from auction where num = #{num}
 	</select>
 	<update id="dealAuction">
-		update auction set price=#{price}, userId=#{userId} where num = #{num}
+		update auction set price=#{price}, userid=#{userid}
+		where num = #{num}
 	</update>
 	<update id="endAuction">
 		update auction set onOff=0 where num = #{num}
+	</update>
+	<update id="setAuctionEndPrice">
+		update auction set endprice = #{arg0} where num = #{arg1}
 	</update>
 
 </mapper>

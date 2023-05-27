@@ -34,12 +34,12 @@
 					<div class="col-lg-4 col-md-6 col-sm-12 pb-1" align="center">
 						<div class="card product-item border-0 mb-4">
 							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<a href="auctionDetail?num=${AuctionList.num}&pName=${AuctionList.pName}">
+								<a href="auctionDetail?num=${AuctionList.num}&pName=${AuctionList.pname}">
 									<img class="img-fluid w-100" style="height: 280px" src="../resources/img/${AuctionList.imgUrl}" alt="">
 								</a>
 							</div>
 							<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="text-truncate mb-3">${AuctionList.pName}</h6>
+								<h6 class="text-truncate mb-3">${AuctionList.pname}</h6>
 								<c:if test="${AuctionList.onOff == 1}">
 									<p>경매 진행중</p>
 								</c:if>
@@ -53,8 +53,15 @@
 							</div>
 						</div>
 						<c:if test="${AuctionList.onOff == 0}">
-							<c:if test="${loginUser.userid eq AuctionList.userId}">
-								<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='DBServlet?command=Auction_Buy_Page&pName=${AuctionList.pName}&pSize=${AuctionList.pSize }&dp=${Integer.parseInt(AuctionList.price)}'">
+							<c:if test="${user.userid eq AuctionList.userid}">
+								<c:choose>
+									<c:when test="${AuctionList.endPrice > 0}">
+										<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="이미 구매 완료한 상품입니다." onclick="#" disabled="disabled">
+									</c:when>
+									<c:otherwise>
+										<input type="button" class="btn btn-primary px-3" style="width: 100%;" value="구매" onclick="location.href='/product/auctionCheckOut?auNum=${AuctionList.num}'">
+									</c:otherwise>
+								</c:choose>
 							</c:if>
 						</c:if>
 					</div>

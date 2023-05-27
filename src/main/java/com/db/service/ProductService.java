@@ -89,11 +89,17 @@ public interface ProductService {
 	// 상품 상세(제품 이름으로 검색
 	public ProductVO productDetailByPname(String pname) throws Exception;
 
+	// 제품 이름,사이즈로 제품 불러오기
+	public ProductVO productDetailByPnamepSize(String pname, String psize) throws Exception;
+
 	// 옥션 목록 가져오기
 	public ArrayList<AuctionVO> getAuctionList() throws Exception;
 
 	// 옥션 상세 보기
 	public AuctionVO getAuctionDetail(int num) throws Exception;
+
+	// 옥션 endPrice 설정
+	public void setAuctionEndPrice(int num, int endPrice) throws Exception;
 
 	// 경매 입찰
 	public void dealAuction(AuctionVO auVo) throws Exception;

@@ -1,6 +1,7 @@
 package com.db.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.db.mapper.AdminMapper;
 import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
+import com.db.model.Criteria;
 import com.db.model.OrderVO;
 import com.db.model.UserVO;
 
@@ -93,6 +95,16 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<OrderVO> getSalesOrder() throws Exception {
 	
 		return mapper.getSalesOrder();
+	}
+
+	@Override
+	public List<UserVO> getUserListPaging(Criteria cri) throws Exception {
+		return mapper.getUserListPaging(cri);
+	}
+
+	@Override
+	public int getUserTotal(Criteria cri) throws Exception {
+		return mapper.getUserTotal(cri);
 	}
 	
 }

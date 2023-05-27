@@ -196,4 +196,15 @@ public class ProductServiceImpl implements ProductService {
 		productmapper.endAuction(num);
 	}
 
+	@Override
+	public ProductVO productDetailByPnamepSize(String pname, String psize) throws Exception {
+		return productmapper.productDetailByPnamepSize(pname, psize);
+	}
+
+	@Override
+	public void setAuctionEndPrice(int num, int endPrice) throws Exception {
+		productmapper.setAuctionEndPrice(num, endPrice);
+		
+	}
+
 }

@@ -53,13 +53,13 @@
 					<p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
 				</div>
 				<form action="/admin/addAuction.do" method="post">
-					<input type="hidden" name="pName" value="${product.pname }"> <input type="hidden" name="bName" value="${product.bname }"> <input type="hidden" name="price" value="0"> <input type="hidden" name="imgUrl" value="${product.imgUrl }">
+					<input type="hidden" name="pname" value="${product.pname }"> <input type="hidden" name="bname" value="${product.bname }"> <input type="hidden" name="price" value="0"> <input type="hidden" name="imgUrl" value="${product.imgUrl }">
 					<c:forEach var="size" items="${pSize }">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="${size.psize }" name="pSize" value="${size.psize }"> <label class="custom-control-label" for="${size.psize }">${size.psize }</label>
+							<input type="radio" class="custom-control-input" id="${size.psize }" name="psize" value="${size.psize }"> <label class="custom-control-label" for="${size.psize }">${size.psize }</label>
 						</div>
 					</c:forEach>
-					<input type="hidden" class="form-control" name="userId" value="${user.userid }">
+					<input type="hidden" class="form-control" name="userid" value="${user.userid }">
 					<div class="d-flex mb-3" style="margin-top: 40px;">
 						<p class="text-dark font-weight-medium mb-0 mr-3">시작가:</p>
 					</div>
