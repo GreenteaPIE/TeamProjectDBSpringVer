@@ -258,58 +258,10 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	// 환영 쿠폰
-	@PostMapping("/addWcoupon")
+	// 쿠폰 받기
+	@PostMapping("/addCoupon")
 	@ResponseBody
 	public String addWcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
-			throws Exception {
-
-		int result = userService.addCoupon(coupon);
-		return result + "";
-
-	}
-
-	// 브론즈 쿠폰
-	@PostMapping("/addBcoupon")
-	@ResponseBody
-	public String addBcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
-			throws Exception {
-
-		int result = userService.addCoupon(coupon);
-		return result + "";
-
-	}
-
-	// 실버 쿠폰
-	@PostMapping("/addScoupon")
-	@ResponseBody
-	public String addScouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
-			throws Exception {
-
-		int result = userService.addCoupon(coupon);
-		return result + "";
-
-	}
-
-	// 골드 쿠폰
-	@PostMapping("/addGcoupon")
-	@ResponseBody
-	public String addGcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
-			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
-			throws Exception {
-
-		int result = userService.addCoupon(coupon);
-		return result + "";
-
-	}
-
-	// 다이아 쿠폰
-	@PostMapping("/addDcoupon")
-	@ResponseBody
-	public String addDcouponPOST(@RequestParam String userid, @RequestParam String couponname, String imgurl,
 			@RequestParam int discountprice, @ModelAttribute CouponVO coupon, HttpServletRequest request)
 			throws Exception {
 

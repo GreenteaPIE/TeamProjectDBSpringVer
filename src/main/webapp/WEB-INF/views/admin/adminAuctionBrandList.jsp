@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>옥션 등록</title>
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
@@ -17,7 +16,7 @@
 			<h1 class="font-weight-semi-bold text-uppercase mb-3">옥션 등록</h1>
 			<div class="d-inline-flex">
 				<p class="m-0">
-					<a href="index.jsp">Home</a>
+					<a href="/">Home</a>
 				</p>
 			</div>
 		</div>

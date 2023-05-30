@@ -57,56 +57,17 @@ public class ProductController {
 		}
 
 	}
-
-	// 브랜드 상의 상품 리스트
-	@GetMapping("/brandTopList")
-	public String brandTopListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
-
-		request.setAttribute("bname", bname);
-
-		try {
-			ArrayList<ProductVO> bplist = productService.brandCateGoriesTopList(bname);
-			request.setAttribute("bplist", bplist);
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
+	
+	// 브랜드 카테고리 상품 리스트
+	@GetMapping("/categoriesList")
+	public String categoriesListGET(String bname, int kind, HttpServletRequest request) throws Exception {
+		
+		request.setAttribute("bname", bname); 
+		
+		ArrayList<ProductVO> bplist = productService.categoriesList(bname, kind);
+		request.setAttribute("bplist", bplist);
+		
 		return "/product/brandProductList";
-
-	}
-
-	// 브랜드 하의 상품 리스트
-	@GetMapping("/brandBottomList")
-	public String brandBottomListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
-
-		request.setAttribute("bname", bname);
-
-		try {
-			ArrayList<ProductVO> bplist = productService.brandCateGoriesBottomList(bname);
-			request.setAttribute("bplist", bplist);
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return "/product/brandProductList";
-	}
-
-	// 브랜드 잡화 상품 리스트
-	@GetMapping("/brandBoutiList")
-	public String brandBoutiListGET(String bname, HttpServletRequest request, RedirectAttributes rttr) {
-
-		request.setAttribute("bname", bname);
-
-		try {
-			ArrayList<ProductVO> bplist = productService.brandCateGoriesBoutiList(bname);
-			request.setAttribute("bplist", bplist);
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return "/product/brandProductList";
-
 	}
 
 	// 상품 검색

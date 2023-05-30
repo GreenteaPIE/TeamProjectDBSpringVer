@@ -86,9 +86,9 @@ body {
 									<i class="fa fa-angle-down float-right mt-1"></i>
 								</a>
 								<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-									<a href='/product/brandTopList?bname=<c:out value="${blist.bname }"/>' class="dropdown-item">TOP</a>
-									<a href='/product/brandBottomList?bname=<c:out value="${blist.bname }"/>' class="dropdown-item">BOTTOM</a>
-									<a href='/product/brandBoutiList?bname=<c:out value="${blist.bname }"/>' class="dropdown-item">boutique collection</a>
+									<a href='/product/categoriesList?bname=<c:out value="${blist.bname }"/>&kind=1' class="dropdown-item">TOP</a>
+									<a href='/product/categoriesList?bname=<c:out value="${blist.bname }"/>&kind=2' class="dropdown-item">BOTTOM</a>
+									<a href='/product/categoriesList?bname=<c:out value="${blist.bname }"/>&kind=3' class="dropdown-item">boutique collection</a>
 								</div>
 							</div>
 						</c:forEach>
@@ -138,7 +138,7 @@ body {
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
 									<div class="dropdown-menu rounded-0 m-0">
 										<a href="/admin/userManagementPage" class="dropdown-item">회원 관리</a>
-										<a href="/admin/auctionPage" class="dropdown-item">옥션 관리</a>
+										<a href="/admin/adminAuctionBrandList" class="dropdown-item">옥션 관리</a>
 										<a href="/admin/productManagementPage" class="dropdown-item">상품 관리</a>
 										<a href="/admin/sales_OrderManagement" class="dropdown-item">매출&주문 관리</a>
 									</div>

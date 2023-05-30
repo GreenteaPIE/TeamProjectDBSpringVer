@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>브랜드 리스트 관리</title>
 <script type="text/javascript" src="../resources/js/admin.js"></script>
 <style type="text/css">
 img {

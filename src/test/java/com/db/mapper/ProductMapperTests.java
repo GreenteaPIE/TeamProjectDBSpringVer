@@ -27,7 +27,7 @@ public class ProductMapperTests {
 	
 	@Test
 	public void brandProductList() throws Exception{
-		String bname = "hermes";
+		String bname = "louisvuitton";
 		productmapper.brandProductList(bname);
 		
 	}
@@ -126,11 +126,18 @@ public class ProductMapperTests {
 		int cartnum = 1;
 		productmapper.cartDelete(cartnum);
 	}
-	*/
+	
 	
 	@Test
 	public void addorders() throws Exception{
 		String userid = "user";
 		productmapper.addOrders(userid);
+	}
+	*/
+	@Test
+	public void brandProductList() throws Exception{
+		String bname = "hermes";
+		productmapper.categoriesList(bname,1);
+		
 	}
 }

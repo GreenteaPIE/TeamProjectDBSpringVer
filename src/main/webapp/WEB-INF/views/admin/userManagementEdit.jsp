@@ -7,7 +7,6 @@
 <link href="../resources/css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<div id="wrap" align="center">

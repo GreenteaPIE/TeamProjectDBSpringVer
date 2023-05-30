@@ -37,7 +37,7 @@
 			</h1>
 			<div class="d-inline-flex">
 				<p class="m-0">
-					<a href="index.jsp">Home</a>
+					<a href="/">Home</a>
 				</p>
 			</div>
 		</div>

@@ -48,11 +48,6 @@ public class AdminController {
 
 	// 옥션 시작
 
-	@GetMapping("auctionPage")
-	public void AuctionPage() {
-		System.out.println("auctionPage 접속");
-	}
-
 	@GetMapping("adminAuctionBrandList")
 	public void AdminAuctionBrandListGET(Model model) throws Exception {
 		System.out.println("adminAuctionBrandList 접속");

@@ -6,7 +6,6 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>유저 관리 페이지</title>
 <style>
 th {
 	border: solid 1px gray;

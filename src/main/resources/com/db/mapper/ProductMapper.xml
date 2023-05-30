@@ -30,17 +30,15 @@
 		#{bname} )WHERE RN = 1
 
 	</select>
-
-	<!-- 브랜드 상품 카테고리TOP 리스트 -->
-	<select id="brandCateGoriesTopList"
-		resultType="com.db.model.ProductVO">
-
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
+	
+	<!-- 브랜드 상품 카테고리 리스트 -->
+	<select id="categoriesList" resultType="com.db.model.ProductVO">
+		SELECT num, pgender, bname, kind, pname, imgUrl, psize,
 		balance, price, purchasedNum, explain, writedate, readcount,
 		discountrate
 		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl,
-		pSize, balance,
+		SELECT num, pgender, bname, kind, pname, imgUrl,
+		psize, balance,
 		price,
 		purchasedNum, explain, writedate, readcount,
 		discountrate,
@@ -48,56 +46,9 @@
 		(PARTITION BY pName ORDER BY num) RN
 		FROM PRODUCT
 		WHERE bname LIKE
-		#{bname} AND kind = 1
+		#{bname} AND kind = #{kind}
 		)
 		WHERE RN = 1
-
-	</select>
-
-	<!-- 브랜드 상품 카테고리Bottom 리스트 -->
-	<select id="brandCateGoriesBottomList"
-		resultType="com.db.model.ProductVO">
-
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
-		balance, price, purchasedNum, explain, writedate, readcount,
-		discountrate
-		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl,
-		pSize, balance,
-		price,
-		purchasedNum, explain, writedate, readcount,
-		discountrate,
-		ROW_NUMBER() OVER
-		(PARTITION BY pName ORDER BY num) RN
-		FROM PRODUCT
-		WHERE bname LIKE
-		#{bname} AND kind = 2
-		)
-		WHERE RN = 1
-
-	</select>
-
-	<!-- 브랜드 상품 카테고리Bouti 리스트 -->
-	<select id="brandCateGoriesBoutiList"
-		resultType="com.db.model.ProductVO">
-
-		SELECT num, pGender, bName, kind, pName, imgUrl, pSize,
-		balance, price, purchasedNum, explain, writedate, readcount,
-		discountrate
-		FROM (
-		SELECT num, pGender, bName, kind, pName, imgUrl,
-		pSize, balance,
-		price,
-		purchasedNum, explain, writedate, readcount,
-		discountrate,
-		ROW_NUMBER() OVER
-		(PARTITION BY pName ORDER BY num) RN
-		FROM PRODUCT
-		WHERE bname LIKE
-		#{bname} AND kind = 3
-		)
-		WHERE RN = 1
-
 	</select>
 
 	<!-- 상품 검색 리스트 -->

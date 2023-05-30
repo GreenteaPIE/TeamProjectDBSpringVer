@@ -44,7 +44,7 @@
 		<c:if test="${user != null}">
 			<div class="row">
 				<div class="col-md-6">
-					<a href="javascript:void(0);" id="wcoupon-link">
+					<a href="javascript:void(0);" id="WelcomeCoupon-link">
 						<img class="img-fluid w-100" style="height: 240px; width: 450px" src="../resources/img/welcomecoupon.png" alt="">
 					</a>
 				</div>
@@ -77,28 +77,28 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div style="padding: 10px;">
-						<a href="javascript:void(0);" id="bcoupon-link">
+						<a href="javascript:void(0);" id="BronzeCoupon-link">
 							<img class="img-fluid w-100" style="height: 240px; width: 450px" src="../resources/img/bronzecoupon.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div style="padding: 10px;">
-						<a href="javascript:void(0);" id="gcoupon-link">
+						<a href="javascript:void(0);" id="GoldCoupon-link">
 							<img class="img-fluid w-100" style="height: 240px; width: 450px" src="../resources/img/goldcoupon.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div style="padding: 10px;">
-						<a href="javascript:void(0);" id="scoupon-link">
+						<a href="javascript:void(0);" id="SilverCoupon-link">
 							<img class="img-fluid w-100" style="height: 240px; width: 450px" src="../resources/img/silvercoupon.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div style="padding: 10px;">
-						<a href="javascript:void(0);" id="dcoupon-link">
+						<a href="javascript:void(0);" id="DiaCoupon-link">
 							<img class="img-fluid w-100" style="height: 240px; width: 450px" src="../resources/img/diacoupon.png" alt="">
 						</a>
 					</div>
@@ -137,170 +137,61 @@
 				</div>
 			</div>
 		</c:if>
-		<hr>
-		<script>
+	</div>
+	<hr>
+	<script>
+	    function issueCoupon(couponName, discountPrice, imgUrl, requiredGrade) {
+	        if (${user.grade} < requiredGrade) {
+	            alert('등급이 낮아 쿠폰을 받으실 수 없습니다.');
+	        } else {
+	            var xhttp = new XMLHttpRequest();
+	            xhttp.onreadystatechange = function() {
+	                if (this.readyState === 4 && this.status === 200) {
+	                    var result = parseInt(this.responseText);
+	                    switch(result) {
+	                        case 1:
+	                            alert('쿠폰 지급 완료');
+	                            var couponLink = document.getElementById(couponName + '-link');
+	                            couponLink.style.pointerEvents = 'none';
+	                            couponLink.style.opacity = 0.5;
+	                            break;
+	                        case 2:
+	                            alert('이미 지급된 쿠폰입니다');
+	                            var couponLink = document.getElementById(couponName + '-link');
+	                            couponLink.style.pointerEvents = 'none';
+	                            couponLink.style.opacity = 0.5;
+	                            break;
+	                        default:
+	                            alert('오류가 발생했습니다. 관리자에게 문의하세요');
+	                            break;
+	                    }
+	                }
+	            };
+	            xhttp.open('POST', '/user/addCoupon?userid=' + encodeURIComponent('${user.userid}') + '&couponname=' + couponName + '&discountprice=' + discountPrice + '&imgurl=' + imgUrl, true);
+	            xhttp.send();
+	        }
+	    }
 
-	 document.getElementById('gcoupon-link').addEventListener('click', function() {
-		    if (${user.grade} < 3) {
-		        alert("등급이 낮아 쿠폰을 받으실 수 없습니다.");
-		    } else {
-		        // AJAX 호출
-		        var xhttp = new XMLHttpRequest();
-		        xhttp.onreadystatechange = function() {
-		            if (this.readyState === 4 && this.status === 200) {
-		                var result = parseInt(this.responseText);
-		                switch(result) {
-		                    case 1:
-		                        alert("쿠폰 지급 완료");
-		                        var couponLink = document.getElementById('gcoupon-link');
-		                        couponLink.style.pointerEvents = 'none';
-		                        couponLink.style.opacity = 0.5;
-		                        break;
-		                    case 2:
-		                        alert("이미 지급된 쿠폰입니다");
-		                        var couponLink = document.getElementById('gcoupon-link');
-		                        couponLink.style.pointerEvents = 'none';
-		                        couponLink.style.opacity = 0.5;
-		                        break;
-		                    default:
-		                        alert("오류가 발생했습니다. 관리자에게 문의하세요");
-		                        break;
-		                }
-		            }
-		        };
-		        xhttp.open("POST", "/user/addBcoupon?userid=" + encodeURIComponent("${user.userid}") + "&couponname=GoldCoupon&discountprice=500000&imgurl=goldcoupon.png", true);
-		        xhttp.send();
-		    }
-		});
-	 
-	 document.getElementById('scoupon-link').addEventListener('click', function() {
-		    if (${user.grade} < 2) {
-		        alert("등급이 낮아 쿠폰을 받으실 수 없습니다.");
-		    } else {
-		        // AJAX 호출
-		        var xhttp = new XMLHttpRequest();
-		        xhttp.onreadystatechange = function() {
-		            if (this.readyState === 4 && this.status === 200) {
-		                var result = parseInt(this.responseText);
-		                switch(result) {
-		                    case 1:
-		                        alert("쿠폰 지급 완료");
-		                        var couponLink = document.getElementById('scoupon-link');
-		                        couponLink.style.pointerEvents = 'none';
-		                        couponLink.style.opacity = 0.5;
-		                        break;
-		                    case 2:
-		                        alert("이미 지급된 쿠폰입니다");
-		                        var couponLink = document.getElementById('scoupon-link');
-		                        couponLink.style.pointerEvents = 'none';
-		                        couponLink.style.opacity = 0.5;
-		                        break;
-		                    default:
-		                        alert("오류가 발생했습니다. 관리자에게 문의하세요");
-		                        break;
-		                }
-		            }
-		        };
-		        xhttp.open("POST", "/user/addScoupon?userid=" + encodeURIComponent("${user.userid}") + "&couponname=SilverCoupon&discountprice=100000&imgurl=silvercoupon.png", true);
-		        xhttp.send();
-		    }
-		});
-	 
-	 document.getElementById('dcoupon-link').addEventListener('click', function() {
-		    if (${user.grade} < 4) {
-		        alert("등급이 낮아 쿠폰을 받으실 수 없습니다.");
-		    } else {
-		        // AJAX 호출
-		        var xhttp = new XMLHttpRequest();
-		        xhttp.onreadystatechange = function() {
-		            if (this.readyState === 4 && this.status === 200) {
-		                var result = parseInt(this.responseText);
-		                switch(result) {
-		                    case 1:
-		                        alert("쿠폰 지급 완료");
-		                        var couponLink = document.getElementById('dcoupon-link');
-		                        couponLink.style.pointerEvents = 'none';
-		                        couponLink.style.opacity = 0.5;
-		                        break;
-		                    case 2:
-		                        alert("이미 지급된 쿠폰입니다");
-		                        var couponLink = document.getElementById('dcoupon-link');
-		                        couponLink.style.pointerEvents = 'none';
-		                        couponLink.style.opacity = 0.5;
-		                        break;
-		                    default:
-		                        alert("오류가 발생했습니다. 관리자에게 문의하세요");
-		                        break;
-		                }
-		            }
-		        };
-		        xhttp.open("POST", "/user/addDcoupon?userid=" + encodeURIComponent("${user.userid}") + "&couponname=DiaCoupon&discountprice=1000000&imgurl=diacoupon.png", true);
-		        xhttp.send();
-		    }
-		});
-	 
-	 
-	 
-	 document.getElementById('bcoupon-link').addEventListener('click', function() {
-		    // AJAX 호출
-		    var xhttp = new XMLHttpRequest();
-		    xhttp.onreadystatechange = function() {
-		        if (this.readyState === 4 && this.status === 200) {
-		            var result = parseInt(this.responseText);
-		            switch(result) {
-		                case 1:
-		                    alert("쿠폰 지급 완료");
-		                    var couponLink = document.getElementById('bcoupon-link');
-		                    couponLink.style.pointerEvents = 'none';
-		                    couponLink.style.opacity = 0.5;
-		                    break;
-		                case 2:
-		                    alert("이미 지급된 쿠폰입니다");
-		                    var couponLink = document.getElementById('bcoupon-link');
-		                    couponLink.style.pointerEvents = 'none';
-		                    couponLink.style.opacity = 0.5;
-		                    break;
-		                default:
-		                    alert("오류가 발생했습니다. 관리자에게 문의하세요");
-		                    break;
-		            }
-		        }
-		    };
-		    xhttp.open("POST", "/user/addBcoupon?userid=" + encodeURIComponent("${user.userid}") + "&couponname=BronzeCoupon&discountprice=5000&imgurl=bronzecoupon.png", true);
-		    xhttp.send();
-		});
-	 
-	 document.getElementById('wcoupon-link').addEventListener('click', function() {
-		    // AJAX 호출
-		    var xhttp = new XMLHttpRequest();
-		    xhttp.onreadystatechange = function() {
-		        if (this.readyState === 4 && this.status === 200) {
-		            var result = parseInt(this.responseText);
-		            switch(result) {
-		                case 1:
-		                    alert("쿠폰 지급 완료");
-		                    var couponLink = document.getElementById('wcoupon-link');
-		                    couponLink.style.pointerEvents = 'none';
-		                    couponLink.style.opacity = 0.5;
-		                    break;
-		                case 2:
-		                    alert("이미 지급된 쿠폰입니다");
-		                    var couponLink = document.getElementById('wcoupon-link');
-		                    couponLink.style.pointerEvents = 'none';
-		                    couponLink.style.opacity = 0.5;
-		                    break;
-		                default:
-		                    alert("오류가 발생했습니다. 관리자에게 문의하세요");
-		                    break;
-		            }
-		        }
-		    };
-		    xhttp.open("POST", "/user/addWcoupon?userid=" + encodeURIComponent("${user.userid}") + "&couponname=WelcomeCoupon&discountprice=10000&imgurl=welcomecoupon.png", true);
-		    xhttp.send();
-		});
+	    document.getElementById('GoldCoupon-link').addEventListener('click', function() {
+	        issueCoupon('GoldCoupon', 500000, 'goldcoupon.png', 3);
+	    });
 
-	   
-</script>
+	    document.getElementById('SilverCoupon-link').addEventListener('click', function() {
+	        issueCoupon('SilverCoupon', 100000, 'silvercoupon.png', 2);
+	    });
+
+	    document.getElementById('DiaCoupon-link').addEventListener('click', function() {
+	        issueCoupon('DiaCoupon', 1000000, 'diacoupon.png', 4);
+	    });
+
+	    document.getElementById('BronzeCoupon-link').addEventListener('click', function() {
+	        issueCoupon('BronzeCoupon', 5000, 'bronzecoupon.png', 0);
+	    });
+
+	    document.getElementById('WelcomeCoupon-link').addEventListener('click', function() {
+	        issueCoupon('WelcomeCoupon', 10000, 'welcomecoupon.png', 0);
+	    });
+	</script>
 </body>
 <jsp:include page="footer.jsp"></jsp:include>
 </html>

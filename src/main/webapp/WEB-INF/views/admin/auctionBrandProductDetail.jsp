@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>옥션 등록</title>
 <script>
 		// 5초마다 메시지를 출력하는 타이머 함수
 		function startTimer() {
@@ -26,7 +25,7 @@
 			<p class="m-0" style="font-size: 1.6em;">${product.bname}</p>
 			<div class="d-inline-flex">
 				<p class="m-0">
-					<a href="index.jsp">Home</a>
+					<a href="/">Home</a>
 				</p>
 			</div>
 			<div id="timer"></div>

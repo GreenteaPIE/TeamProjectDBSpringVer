@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>브랜드 리스트 관리</title>
 <style type="text/css">
 img {
 	width: 400px;
