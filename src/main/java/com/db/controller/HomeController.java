@@ -48,7 +48,7 @@ public class HomeController {
 
 		try {
 			ArrayList<BrandVO> bvo = productService.brandList();
-			session.setAttribute("blist", bvo);
+			session.setAttribute("blist", bvo); // 브랜드 리스트를 세션에 불러옴
 
 		} catch (Exception e) {
 			e.printStackTrace();

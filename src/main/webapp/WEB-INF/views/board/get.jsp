@@ -138,6 +138,7 @@
 		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 		<input type="hidden" name="type" value="${cri.type}">
 		<input type="hidden" name="keyword" value="${cri.keyword}">
+		<input type="hidden" name="category" value="${pageInfo.category }">
 	</form>
 	<script>
 		let form = $("#infoForm");
