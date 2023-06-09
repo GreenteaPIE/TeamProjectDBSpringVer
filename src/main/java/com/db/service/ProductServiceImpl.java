@@ -82,13 +82,7 @@ public class ProductServiceImpl implements ProductService {
 
 		return productmapper.getAllProductNoDup();
 	}
-
-	@Override
-	public CartVO findByCartNum(int cartnum) throws Exception {
-
-		return productmapper.findByCartNum(cartnum);
-	}
-
+	
 	@Override
 	public int decreaseQuantity(int cartnum) throws Exception {
 

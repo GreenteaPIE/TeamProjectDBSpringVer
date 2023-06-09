@@ -64,8 +64,6 @@ td .delhidden {
 									<tr class="delhide">
 										<c:forEach var="product" items="${plist }">
 											<!-- 상품리스트 -->
-											<!--<td><input type="button" style="width: 35px; height: 35px; align-items: center; align-self: center;" class="btn btn-primary px-3 delhidden" value="D" onclick=""></td>
-													  -->
 											<c:if test="${cart.num == product.num}">
 												<c:if test="${cart.result == 1}">
 													<!--상품리스트품번과 장바구니 번호가 일치할 때  -->

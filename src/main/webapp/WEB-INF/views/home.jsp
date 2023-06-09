@@ -55,7 +55,6 @@
         </div>
     </div>
     <!-- Featured End -->
-	
 	<hr>
 </body>
 <jsp:include page="footer.jsp"></jsp:include>

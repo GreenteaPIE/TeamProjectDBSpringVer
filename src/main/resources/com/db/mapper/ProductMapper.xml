@@ -145,12 +145,6 @@
 
 	</select>
 
-	<!-- 장바구니num으로 정보 불러오기 -->
-	<select id="findByCartNum" resultType="com.db.model.CartVO">
-		select * from cart where
-		cartnum =#{cartnum}
-	</select>
-
 	<!-- 장바구니 수량감소 -->
 	<update id="decreaseQuantity">
 

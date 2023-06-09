@@ -47,9 +47,6 @@ public interface ProductMapper {
 	// 모든 상품을 중복 없이 불러오기
 	public ArrayList<ProductVO> getAllProductNoDup();
 
-	// 장바구니안의 장바구니num으로 정보 불러오기
-	public CartVO findByCartNum(int cartnum);
-
 	// 장바구니 수량 감소
 	public int decreaseQuantity(int cartnum);
 
