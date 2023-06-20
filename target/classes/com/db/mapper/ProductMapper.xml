@@ -30,23 +30,29 @@
 		#{bname} )WHERE RN = 1
 
 	</select>
-	
+
 	<!-- 브랜드 상품 카테고리 리스트 -->
 	<select id="categoriesList" resultType="com.db.model.ProductVO">
-		SELECT num, pgender, bname, kind, pname, imgUrl, psize,
-		balance, price, purchasedNum, explain, writedate, readcount,
+		SELECT num, pgender,
+		bname, kind, pname, imgUrl, psize,
+		balance, price, purchasedNum,
+		explain, writedate, readcount,
 		discountrate
 		FROM (
-		SELECT num, pgender, bname, kind, pname, imgUrl,
+		SELECT num, pgender,
+		bname, kind, pname, imgUrl,
 		psize, balance,
 		price,
-		purchasedNum, explain, writedate, readcount,
+		purchasedNum, explain,
+		writedate, readcount,
 		discountrate,
 		ROW_NUMBER() OVER
-		(PARTITION BY pName ORDER BY num) RN
+		(PARTITION BY pName
+		ORDER BY num) RN
 		FROM PRODUCT
 		WHERE bname LIKE
-		#{bname} AND kind = #{kind}
+		#{bname} AND kind =
+		#{kind}
 		)
 		WHERE RN = 1
 	</select>
@@ -200,12 +206,12 @@
 		MAX(orderNumber) FROM orders WHERE userid=#{userid}
 	</select>
 
-
 	<!-- order_view 에서 정보가져오기 -->
 	<select id="getOrderList" resultType="com.db.model.OrderVO">
 		select * from order_view
 		where ordernumber = #{ordernumber}
 	</select>
+	
 	<!-- 제품 이름으로 제품상세 불러오기 -->
 	<select id="productDetailByPname"
 		resultType="com.db.model.ProductVO">
@@ -216,7 +222,8 @@
 	<!-- 제품 이름,사이즈로 제품상세 불러오기 -->
 	<select id="productDetailByPnamepSize"
 		resultType="com.db.model.ProductVO">
-		select * from product where pname = #{param1} and psize = #{param2}
+		select * from product where pname = #{param1} and psize =
+		#{param2}
 	</select>
 
 
@@ -257,7 +264,8 @@
 		update auction set onOff=0 where num = #{num}
 	</update>
 	<update id="setAuctionEndPrice">
-		update auction set endprice = #{arg0} where num = #{arg1}
+		update auction set endprice = #{arg0} where num =
+		#{arg1}
 	</update>
 
 </mapper>

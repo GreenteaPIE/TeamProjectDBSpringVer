@@ -9,6 +9,7 @@ import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.Criteria;
 import com.db.model.OrderVO;
+import com.db.model.ProductVO;
 import com.db.model.UserVO;
 
 public interface AdminService {
@@ -28,6 +29,24 @@ public interface AdminService {
 	public void brandEnroll(BrandVO bVo) throws Exception; // 브랜드 추가
 
 	public void deleteBrand(String bname) throws Exception; // 브랜드 삭제
+	
+	// <상품 관리>
+	public List<ProductVO> getProductList(Criteria cri); // 등록된 상품 전체 가져오기
+
+	public List<BrandVO> getBrandList(Criteria cri); // 등록된 상품 전체 가져오기
+
+	public int productGetTotal(Criteria cri);// 등록된 상품의 수
+
+	public int brandGetTotal(Criteria cri);// 등록된 브랜드의 수
+
+	public void productEnroll(ProductVO product); // 상품 추가
+
+	public ProductVO productGetDetail(int num); // 상품 정보 읽기
+
+	public int productDelete(int num); // 선택 상품 삭제
+
+	public int productModify(ProductVO product); // 선택 상품 수정
+	// 상품 관리 끝
 
 	// 신규주문 가져오기
 	public ArrayList<OrderVO> getNewOrder() throws Exception;

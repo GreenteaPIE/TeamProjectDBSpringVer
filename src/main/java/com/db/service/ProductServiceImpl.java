@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
 
 		return productmapper.getAllProductNoDup();
 	}
-	
+
 	@Override
 	public int decreaseQuantity(int cartnum) throws Exception {
 
@@ -122,35 +122,35 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ArrayList<OrderVO> getOrderList(int orderNumber) throws Exception {
-	
+
 		return productmapper.getOrderList(orderNumber);
 	}
 
 	@Override
-	public int cartResultChange(@Param("cartnum") int cartnum,@Param("cart") CartVO cart) throws Exception {
-		
+	public int cartResultChange(@Param("cartnum") int cartnum, @Param("cart") CartVO cart) throws Exception {
+
 		return productmapper.cartResultChange(cartnum, cart);
 	}
 
 	@Override
 	public int useCoupon(int cnum) throws Exception {
-		
+
 		return productmapper.useCoupon(cnum);
 	}
 
 	@Override
 	public void increaseUserPoint(String userid, int totalprice) throws Exception {
-	    Map<String, Object> params = new HashMap<>();
-	    params.put("userid", userid);
-	    params.put("totalprice", totalprice);
-	    
-	    productmapper.increaseUserPoint(params);
+		Map<String, Object> params = new HashMap<>();
+		params.put("userid", userid);
+		params.put("totalprice", totalprice);
+
+		productmapper.increaseUserPoint(params);
 	}
 
-    @Override
-    public ProductVO productDetailByPname(String pname) throws Exception {
-        return productmapper.productDetailByPname(pname);
-    }
+	@Override
+	public ProductVO productDetailByPname(String pname) throws Exception {
+		return productmapper.productDetailByPname(pname);
+	}
 
 	@Override
 	public ArrayList<AuctionVO> getAuctionList() throws Exception {
@@ -180,12 +180,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void setAuctionEndPrice(int num, int endPrice) throws Exception {
 		productmapper.setAuctionEndPrice(num, endPrice);
-		
+
 	}
 
 	@Override
 	public ArrayList<ProductVO> categoriesList(String bname, int kind) throws Exception {
-		
+
 		return productmapper.categoriesList(bname, kind);
 	}
 

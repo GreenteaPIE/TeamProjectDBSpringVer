@@ -46,7 +46,7 @@ public interface UserMapper {
 	// 주문내역 상세조회
 	public ArrayList<OrderVO> getMyPurchasedDetail(int ordernumber);
 	
-	// 주문 취소 result -> 3 으로 변경
+	// 주문 취소 result -> 4 으로 변경
 	public int withdrawChangeResult(@Param("ordernumber") int ordernumber);
 
 	//글 목록(페이징)

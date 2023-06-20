@@ -1,20 +1,28 @@
 package com.db.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -321,4 +329,229 @@ public class AdminController {
 		return "/admin/salesOrder";
 	}
 
+	
+	// 상품 리스트
+		@GetMapping("adminProductList")
+		public void adminProductListGET(Criteria cri, Model model) {
+			logger.info("adminController, adminProductListGET 진입 .... ");
+			/* 상품 목록 출력 */
+			List productList = adminService.getProductList(cri);
+			model.addAttribute("productList", productList);
+
+			/* 페이지 이동 인터페이스 데이터 */
+			int total = adminService.productGetTotal(cri);
+			PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+			model.addAttribute("pageMaker", pageMaker);
+		}
+
+		// 상품 등록
+		@GetMapping("adminProductWriteForm")
+		public void adiminProductWriteFormGET() {
+			logger.info("adminController, adminProductWriteForm 진입 ... ");
+		}
+
+		@PostMapping(value = "uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<String> uploadAjaxActionPOST(@RequestParam("uploadFile") MultipartFile[] uploadFile,
+				HttpSession session) {
+			logger.info("uploadAjaxActionPOST 진입 ... ");
+
+			String osName = System.getProperty("os.name").toLowerCase();
+			String uploadFolder;
+			
+			if (osName.contains("win")) { // Windows
+				System.out.println("현재 접속 중인 os : "+osName);
+				uploadFolder = "C:\\Users\\User\\OneDrive\\바탕 화면\\Develop\\DiamondBlakc-SpringVer\\src\\main\\webapp\\resources\\img\\";
+				System.out.println("지금 설정된 uploadFolder 경로 : "+uploadFolder);
+			} else if (osName.contains("nix") || osName.contains("nux") || osName.contains("mac")) { // Linux, macOS
+				System.out.println("현재 접속 중인 os : "+osName);
+				uploadFolder = System.getProperty("user.home") + "/workspace/upload/tmp";
+				System.out.println("지금 설정된 uploadFolder 경로 : "+uploadFolder);
+			} else {
+				throw new UnsupportedOperationException("지원되지 않는 운영체제입니다.");
+			}
+
+			/* 폴더 생성 */
+			File uploadPath = new File(uploadFolder);
+
+			if (!uploadPath.exists()) {
+				uploadPath.mkdirs();
+			}
+
+			List<ProductVO> productVOList = new ArrayList<>();
+
+			for (MultipartFile multipartFile : uploadFile) {
+
+				/* 파일 이름 */
+				String uploadFileName = multipartFile.getOriginalFilename();
+
+				/* uuid 적용 파일 이름 */
+//				String uuid = UUID.randomUUID().toString();
+
+//				uploadFileName = uuid + "_" + uploadFileName;
+				uploadFileName = uploadFileName;
+
+				/* 파일 위치, 파일 이름을 합친 File 객체 */
+				File saveFile = new File(uploadPath, uploadFileName);
+
+				/* 파일 저장 */
+				try {
+					multipartFile.transferTo(saveFile);
+
+					/* 이미지 객체 */
+					ProductVO productVO = new ProductVO();
+					productVO.setImgUrl(uploadFileName); // 파일 경로를 imgUrl로 저장
+					productVOList.add(productVO);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			// imgUrl 값을 세션에 저장
+			session.setAttribute("imgUrlList", productVOList);
+
+			// You can build a JSON response object here with the desired data
+			String jsonResponse = "{\"message\": \"File uploaded successfully.\"}";
+			return ResponseEntity.status(HttpStatus.OK).body(jsonResponse);
+		}
+
+		@GetMapping("/display")
+		public ResponseEntity<byte[]> getImage(@RequestParam("fileName") String fileName) {
+			logger.info("getImage 진입 ... ");
+
+			String osName = System.getProperty("os.name").toLowerCase();
+			String filePath;
+			if (osName.contains("win")) { // Windows
+				System.out.println("현재 접속 중인 os : "+osName);
+				filePath="C:\\Users\\User\\OneDrive\\바탕 화면\\Develop\\DiamondBlakc-SpringVer\\src\\main\\webapp\\resources\\img\\";
+			} else if (osName.contains("nix") || osName.contains("nux") || osName.contains("mac")) { // Linux, macOS
+				System.out.println("현재 접속 중인 os : "+osName);
+				filePath = System.getProperty("user.home") + "/workspace/upload/tmp";
+			} else {
+				throw new UnsupportedOperationException("지원되지 않는 운영체제입니다.");
+			}
+			
+			File file = new File(filePath + fileName);
+
+			logger.info("fileName : " + fileName);
+			logger.info("file : " + file);
+
+			ResponseEntity<byte[]> result = null;
+
+			try {
+				HttpHeaders header = new HttpHeaders();
+				header.add("Content-type", Files.probeContentType(file.toPath()));
+				result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return result;
+		}
+
+		@PostMapping("adminProductWriteForm")
+		public String adminProductWriteFormPOST(ProductVO product, HttpSession session, RedirectAttributes rttr) {
+			logger.info("adminController, adminProductWriteForm POST 진입 ... ");
+
+			// 세션에서 imgUrl 값 가져오기
+			List<ProductVO> imgUrlList = (List<ProductVO>) session.getAttribute("imgUrlList");
+
+			// imgUrl 값이 null이 아니고 리스트에 값들이 있는 경우 설정
+			if (imgUrlList != null && !imgUrlList.isEmpty()) {
+				// 첫 번째 이미지 url을 가져옵니다.
+				String imgUrl = imgUrlList.get(0).getImgUrl();
+				product.setImgUrl(imgUrl);
+			}
+
+			// imgUrl 값 사용 후 세션에서 제거 (선택사항)
+			session.removeAttribute("imgUrlList");
+
+			adminService.productEnroll(product); // 데이터베이스에 저장
+			rttr.addFlashAttribute("enroll_result", product.getPname());
+			return "redirect:/admin/adminProductList";
+		}
+
+		// 상품등록 시 브랜드 검색창
+		@GetMapping("brandPop")
+		public void brandPopGET(Criteria cri, Model model) throws Exception {
+			logger.info("adminController, brandPop 진입 ... ");
+
+			/* 브랜드 목록 출력 */
+			List brandList = adminService.getBrandList(cri);
+
+			if (!brandList.isEmpty()) {
+				model.addAttribute("brandList", brandList); // 브랜드 존재 경우
+			} else {
+				model.addAttribute("listCheck", "empty"); // 브랜드 존재하지 않을 경우
+			}
+
+			/* 페이지 이동 인터페이스 데이터 */
+			int total = adminService.productGetTotal(cri);
+			PageMakerDTO pageMaker = new PageMakerDTO(cri, total);
+			model.addAttribute("pageMaker", pageMaker);
+
+		}
+
+		// 상품 정보
+		@GetMapping("adminProductDetail")
+		public void adiminProductDetailGET(int num, Criteria cri, Model model) {
+			logger.info("adminController, adminProductDetail 진입 ... " + num);
+
+			/* 목록 페이지 조건 정보 */
+			model.addAttribute("cri", cri);
+
+			/* 조회 페이지 정보 */
+			model.addAttribute("productDetail", adminService.productGetDetail(num));
+		}
+
+		// 상품 수정
+		@GetMapping("adminProductModify")
+		public void adimProductModifyGET(int num, Model model) {
+			logger.info("adminController, adminProductModify 진입 ... " + num);
+			/* 조회 페이지 정보 */
+			model.addAttribute("productDetail", adminService.productGetDetail(num));
+		}
+
+		/* 상품 정보 수정 */
+		@Transactional
+		@PostMapping("/adminProductModify")
+		public String adminProductModifyPOST(ProductVO product, HttpSession session, RedirectAttributes rttr)
+				throws Exception {
+			logger.info("adminProductModifyPOST.........." + product);
+
+			// 세션에서 imgUrl 값 가져오기
+			List<ProductVO> imgUrlList = (List<ProductVO>) session.getAttribute("imgUrlList");
+
+			// imgUrl 값이 존재하면 새로운 파일 업로드 후 가져온 이미지 경로를 저장하고, imgUrl 값이 없다면 기존 경로를 그대로 저장하기
+			if (imgUrlList != null && !imgUrlList.isEmpty()) {
+				String imgUrl = imgUrlList.get(0).getImgUrl();
+				product.setImgUrl(imgUrl);
+			} else {
+				ProductVO oldProduct = adminService.productGetDetail(product.getNum());
+				product.setImgUrl(oldProduct.getImgUrl());
+			}
+
+			// imgUrl 값 사용 후 세션에서 제거 (선택사항)
+			session.removeAttribute("imgUrlList");
+
+			int result = adminService.productModify(product);
+			logger.info("result : " + result);
+			rttr.addFlashAttribute("modify_result", result);
+
+			return "redirect:/admin/adminProductList";
+		}
+
+		// 상품 삭제
+		@PostMapping("/adminProductDelete")
+		public String productDeletePOST(int num, RedirectAttributes rttr) {
+			logger.info("productDeletePOST..........");
+			int result = adminService.productDelete(num);
+			rttr.addFlashAttribute("delete_result", result);
+			return "redirect:/admin/adminProductList";
+
+		}
+
+		
+	
+	
+	// 상품관리 끝
 }

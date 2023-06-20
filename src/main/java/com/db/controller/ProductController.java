@@ -41,7 +41,7 @@ public class ProductController {
 
 	@Autowired
 	UserService userService;
-
+	
 	// 브랜드 상품 리스트 페이지 이동
 	@GetMapping("brandProductList")
 	public void brandProductListGET(String bname, HttpServletRequest request) {
@@ -51,6 +51,7 @@ public class ProductController {
 		try {
 			ArrayList<ProductVO> bplist = productService.brandProductList(bname);
 			request.setAttribute("bplist", bplist); // 브랜드명으로 상품을 불러옴
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();

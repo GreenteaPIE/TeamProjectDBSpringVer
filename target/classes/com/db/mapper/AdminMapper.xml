@@ -161,4 +161,104 @@
 
 	</select>
 
+	<!-- 등록된 상품목록 전체 가져오기 -->
+	<select id="getProductList" resultType="com.db.model.ProductVO">
+		<![CDATA[
+			select * from (
+				select /*+INDEX_DESC(SYS_C008634)*/
+					rownum as rn, num, bname, pname, pGender, kind, imgurl, psize, balance, price, explain, writedate, readcount, purchasedNum, discountrate
+				from product
+				where 
+				]]>
+		<if test="keyword !=null">
+			pname like '%'||#{keyword}||'%' and
+		</if>
+		<![CDATA[
+			rownum <= #{pageNum}*#{amount}
+			)
+			where rn > (#{pageNum}-1)*#{amount}
+			order by writedate desc
+			]]>
+	</select>
+
+	<!-- 등록된 브랜드 목록 가져오기 + 검색 -->
+	<select id="getBrandList" resultType="com.db.model.BrandVO">
+	<![CDATA[
+			select * from (
+				select /*+INDEX_DESC(SYS_C008746)*/
+					rownum as rn, bname
+				from brand
+				where 
+				]]>
+		<if test="keyword !=null">
+			bname like '%'||#{keyword}||'%' and
+		</if>
+		<![CDATA[
+			rownum <= #{pageNum}*#{amount}
+			)
+			where rn > (#{pageNum}-1)*#{amount}
+			]]>
+	</select>
+
+	<!-- 등록된 상품 갯수 가져오기 -->
+	<select id="productGetTotal" resultType="int">
+		select count(*) from product
+		<if test="keyword!=null">
+			where pname like '%' || #{keyword} || '%'
+		</if>
+	</select>
+
+	<!-- 등록된 브랜드 갯수 가져오기 -->
+	<select id="brandGetTotal" resultType="int">
+		select count(*) from brand
+		<if test="keyword!=null">
+			where bname like '%' || #{keyword} || '%'
+		</if>
+	</select>
+
+	<!-- 상품등록 -->
+	<insert id="productEnroll">
+		<selectKey keyProperty="num" resultType="int" order="BEFORE">
+			select
+			product_seq.nextval + 256 from dual
+		</selectKey>
+		insert into product(num, pGender, bname, pname, kind,
+		imgurl, psize,
+		price, discountrate, balance, purchasednum, explain)
+		values(#{num},
+		#{pGender}, #{bname}, #{pname}, #{kind}, #{imgUrl, jdbcType=VARCHAR},
+		#{psize}, #{price},
+		#{discountrate}, #{balance}, #{purchasedNum},
+		#{explain})
+	</insert>
+
+	<!-- 상품정보 -->
+	<select id="productGetDetail"
+		resultType="com.db.model.ProductVO">
+		select * from product where num=#{num}
+	</select>
+
+	<!-- 상품 삭제 -->
+	<delete id="productDelete">
+		delete from product where num=#{num}
+	</delete>
+
+	<!-- 상품 수정 -->
+	<update id="productModify">
+		update product set
+		bname = #{bname},
+		pname = #{pname},
+		pGender = #{pGender},
+		kind = #{kind},
+		psize = #{psize},
+		price = #{price},
+		discountrate =
+		#{discountrate},
+		balance = #{balance},
+		explain =
+		#{explain},
+		imgUrl=#{imgUrl, jdbcType=VARCHAR}
+		where num=#{num}
+	</update>
+	
 </mapper>

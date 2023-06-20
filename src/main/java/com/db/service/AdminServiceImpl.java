@@ -11,6 +11,7 @@ import com.db.model.AuctionVO;
 import com.db.model.BrandVO;
 import com.db.model.Criteria;
 import com.db.model.OrderVO;
+import com.db.model.ProductVO;
 import com.db.model.UserVO;
 
 @Service
@@ -105,6 +106,49 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int getUserTotal(Criteria cri) throws Exception {
 		return mapper.getUserTotal(cri);
+	}
+	@Override
+	public List<ProductVO> getProductList(Criteria cri) {
+		return mapper.getProductList(cri);
+	}
+
+	@Override
+	public List<BrandVO> getBrandList(Criteria cri) {
+		return mapper.getBrandList(cri);
+	}
+
+	@Override
+	public int productGetTotal(Criteria cri) {
+		return mapper.productGetTotal(cri);
+	}
+
+	@Override
+	public int brandGetTotal(Criteria cri) {
+		return mapper.brandGetTotal(cri);
+	}
+
+	@Override
+	public void productEnroll(ProductVO product) {
+		mapper.productEnroll(product);
+
+	}
+
+	@Override
+	public ProductVO productGetDetail(int num) {
+		System.out.println("(service) productGetDetail ..... " + num);
+		return mapper.productGetDetail(num);
+	}
+
+	@Override
+	public int productDelete(int num) {
+		System.out.println("(service) productDelete ..... " + num);
+		return mapper.productDelete(num);
+	}
+
+	@Override
+	public int productModify(ProductVO product) {
+		System.out.println("(service) productModify ..... ");
+		return mapper.productModify(product);
 	}
 	
 }

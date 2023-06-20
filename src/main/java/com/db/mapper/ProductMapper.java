@@ -19,7 +19,7 @@ public interface ProductMapper {
 
 	// 브랜드 상품 리스트
 	public ArrayList<ProductVO> brandProductList(String bname);
-	
+
 	// 브랜드 카테고리 리스트
 	public ArrayList<ProductVO> categoriesList(@Param("bname") String bname, @Param("kind") int kind);
 

@@ -56,6 +56,30 @@
 	</div>
 	<!-- Shop End -->
 	<hr>
+	<script>
+    function sortProductsByPrice() {
+        const bplist = ${bplist};
+        bplist.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        renderProducts(bplist);
+    }
+    function renderProducts(productList) {
+        let productListHTML = '';
+
+        productList.forEach(product => {
+            if (product.discountrate === 0) {
+                productListHTML +=
+                    `<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                        <div class="card product-item border-0 mb-4">
+                            ...
+                        </div>
+                    </div>`;
+            }
+        });
+
+        document.querySelector('.row.pb-3').innerHTML = productListHTML;
+    }
+</script>
+	
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
 </html>
