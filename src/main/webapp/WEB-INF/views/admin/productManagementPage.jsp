@@ -19,8 +19,8 @@
 				<div class="mypage-btns">
 					<div class="mypage-menu">
 						<ul>
-							<button type="button" onclick="location.href='adminBrandList'">브랜드 관리</button>
-							<button type="button" onclick="location.href='adminProductList'">상품 관리</button>
+							<button onclick="location.href='adminBrandList'">브랜드 관리</button>
+							<button onclick="location.href='adminProductList'">상품 관리</button>
 						</ul>
 					</div> 
 				</div>

@@ -49,14 +49,6 @@ public class BoardController {
 	@Inject
 	private ReplyService replyService;
 
-//	@GetMapping("/list")
-//	public void boardListGET(Model model) {
-//		log.info("게시판 목록 페이지 진입");
-//		
-//		model.addAttribute("list", bservice.getList());
-
-//	}
-
 	@GetMapping("/enroll")
 	public void boardEnrollGET() {
 		log.info("게시판 등록 페이지 진입");
@@ -130,7 +122,7 @@ public class BoardController {
 
 		log.info("boardListGET");
 
-		cri.setCategory(category); // category 값을 저장합니다.
+		cri.setCategory(category); // category 값을 저장
 
 		model.addAttribute("list", bservice.getListPaging(cri));
 
