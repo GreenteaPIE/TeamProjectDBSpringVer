@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.db.model.BoardVO;
 import com.db.model.Criteria;
-import com.db.model.FBoardReplyVO;
 
 
 public interface BoardService {

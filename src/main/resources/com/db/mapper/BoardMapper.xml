@@ -33,6 +33,7 @@
 
 	</sql>
 
+    <!-- 게시판 등록 -->
 	<insert id="enroll">
 		insert into free_board(num, title, content, userid,
 		category) values (free_seq.nextval,
@@ -66,7 +67,7 @@
 
 	<select id="getList" resultType="com.db.model.BoardVO">
 		SELECT * FROM free_board
-		ORDER BY CASE WHEN userid = 'admin2' THEN 0 ELSE 1 END, num DESC
+<!-- 		ORDER BY CASE WHEN userid = 'admin2' THEN 0 ELSE 1 END, num DESC -->
 	</select>
 	<!-- 게시판 조회 -->
 

@@ -62,7 +62,7 @@ public class BoardController {
 
 		bservice.enroll(board);
 
-		rttr.addFlashAttribute("result", "enrol success");
+		//rttr.addFlashAttribute("result", "enroll success");
 
 		return "redirect:/board/list?pageNum=1&amount=10&keyword=&type=&category=" + cri.getCategory();
 
@@ -170,7 +170,7 @@ public class BoardController {
 			out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
 
 			String callback = request.getParameter("CKEditorFuncNum");
-			printWriter = response.getWriter();
+			printWriter = response.getWriter();  // 서버에 요청
 			String fileUrl = "/board/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
 
 			// 업로드시 메시지 출력
