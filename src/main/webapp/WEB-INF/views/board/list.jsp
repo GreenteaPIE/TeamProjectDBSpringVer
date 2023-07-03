@@ -140,7 +140,7 @@
 					return;
 				}
 
-				if (result === "enrol success") {
+				if (result === "enroll success") {
 					alert("등록이 완료되었습니다.");
 				}
 				if (result === "modify success") {

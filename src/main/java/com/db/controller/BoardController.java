@@ -62,7 +62,7 @@ public class BoardController {
 
 		bservice.enroll(board);
 
-		//rttr.addFlashAttribute("result", "enroll success");
+		rttr.addFlashAttribute("result", "enroll success");
 
 		return "redirect:/board/list?pageNum=1&amount=10&keyword=&type=&category=" + cri.getCategory();
 
@@ -127,7 +127,9 @@ public class BoardController {
 		model.addAttribute("list", bservice.getListPaging(cri));
 
 		int total = bservice.getTotal(cri);
-		request.setAttribute("category", category);
+		
+		request.setAttribute("category", category); // 받은 category 로 어떤 게시판인지 표시해줌
+		
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 
 		model.addAttribute("pageMaker", pageMake);

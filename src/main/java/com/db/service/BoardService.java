@@ -27,9 +27,8 @@ public interface BoardService {
 		//게시판 목록(페이징)
 		public List<BoardVO>getListPaging(Criteria cri);
 		
-		/* 게시판 총 갯수 */
+		// 게시판 총 갯수
 		public int getTotal(Criteria cri);	
-		
 
 		// 게시판 조회수 업데이트
 		public void updateReadCount(int num);

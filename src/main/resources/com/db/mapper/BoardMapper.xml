@@ -26,14 +26,15 @@
 				</trim>
 			</foreach>
 		</trim>
-		 <!-- 카테고리 검색 처리 -->
-  <if test="category != null and (category == 'F'.toString() or category == 'S'.toString() or category == 'Q'.toString())">
-    AND category = #{category}
-  </if>
+		<!-- 카테고리 검색 처리 -->
+		<if
+			test="category != null and (category == 'F'.toString() or category == 'S'.toString() or category == 'Q'.toString())">
+			AND category = #{category}
+		</if>
 
 	</sql>
 
-    <!-- 게시판 등록 -->
+	<!-- 게시판 등록 -->
 	<insert id="enroll">
 		insert into free_board(num, title, content, userid,
 		category) values (free_seq.nextval,
@@ -64,12 +65,11 @@
  	]]>
 
 	</select>
-
+	<!-- 게시판 조회 -->
 	<select id="getList" resultType="com.db.model.BoardVO">
 		SELECT * FROM free_board
-<!-- 		ORDER BY CASE WHEN userid = 'admin2' THEN 0 ELSE 1 END, num DESC -->
 	</select>
-	<!-- 게시판 조회 -->
+
 
 	<select id="getPage" resultType="com.db.model.BoardVO">
 
@@ -94,7 +94,7 @@
 
 	</delete>
 
-	<!-- 게시물 총 개숫 -->
+	<!-- 게시물 총 갯수 -->
 	<select id="getTotal" resultType="int">
 
 		select count(*) from free_board
@@ -110,7 +110,8 @@
 
 	<update id="updateReadCount" parameterType="int">
 
-		update free_board set readcount = readcount+1 where num= #{num}
+		update free_board set
+		readcount = readcount+1 where num= #{num}
 
 	</update>
 
