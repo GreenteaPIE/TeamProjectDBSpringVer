@@ -1,13 +1,10 @@
 package com.db.mapper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.db.model.BoardVO;
 import com.db.model.CouponVO;
-import com.db.model.Criteria;
 import com.db.model.OrderVO;
 import com.db.model.UserVO;
 
@@ -49,6 +46,4 @@ public interface UserMapper {
 	// 주문 취소 result -> 4 으로 변경
 	public int withdrawChangeResult(@Param("ordernumber") int ordernumber);
 
-	//글 목록(페이징)
-	public List<BoardVO>getListPaging(Criteria cri);
 }

@@ -319,7 +319,6 @@ public class UserController {
 	public void myWritingGET(HttpServletRequest request, Model model, Criteria cri,
 			@RequestParam(required = false) String category) {
 
-		logger.info("mypagecheck 페이지 진입");
 		cri.setCategory(category); // category 값을 저장합니다.
 
 		model.addAttribute("list", bservice.getListPaging(cri));

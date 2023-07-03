@@ -56,7 +56,7 @@
 	</form>
 	<script>
 		let form = $("#infoForm"); // 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
-		let mForm = $("#modifyForm"); // 페이지 데이터 수정 from
+		let mForm = $("#modifyForm"); // 페이지 데이터 수정 form
 
 		/* 목록 페이지 이동 버튼 */
 		$("#list_btn").on("click", function(e) {

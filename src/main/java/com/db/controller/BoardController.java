@@ -69,10 +69,9 @@ public class BoardController {
 	}
 
 	// 게시판 조회
-
 	@GetMapping("/get")
 	public void boardGetPageGET(@RequestParam("num") int num, Model model, Criteria cri) throws Exception {
-		bservice.updateReadCount(num);
+		bservice.updateReadCount(num); //조회수 업데이트
 		log.info("게시글번호:" + num);
 		model.addAttribute("pageInfo", bservice.getPage(num));
 		model.addAttribute("cri", cri);
@@ -86,7 +85,6 @@ public class BoardController {
 	}
 
 	// 수정 페이지 이동
-
 	@GetMapping("/modify")
 	public void boardModifyGET(int num, Model model, Criteria cri) {
 		model.addAttribute("pageInfo", bservice.getPage(num));
@@ -94,8 +92,7 @@ public class BoardController {
 		model.addAttribute("cri", cri);
 	}
 
-	// 페이지 수정
-
+	// 게시판 수정
 	@PostMapping("/modify")
 	public String boardModifyPOST(BoardVO board, RedirectAttributes rttr, Criteria cri) {
 		bservice.modify(board);
@@ -105,7 +102,7 @@ public class BoardController {
 		return "redirect:/board/list?pageNum=1&amount=10&keyword=&type=&category=" + cri.getCategory();
 	}
 
-	// 페이지 삭제
+	// 게시판 삭제
 	@PostMapping("/delete")
 	public String boardDeletePOST(int num, RedirectAttributes rttr, Criteria cri) {
 		bservice.delete(num);

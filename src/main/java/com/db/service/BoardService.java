@@ -20,7 +20,6 @@ public interface BoardService {
 		//게시판 수정
 		public int modify(BoardVO board);
 	 
-
 		//게시판 삭제
 		public int delete(int num);
 

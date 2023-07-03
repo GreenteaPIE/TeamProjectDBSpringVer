@@ -1,15 +1,12 @@
 package com.db.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.db.mapper.UserMapper;
-import com.db.model.BoardVO;
 import com.db.model.CouponVO;
-import com.db.model.Criteria;
 import com.db.model.OrderVO;
 import com.db.model.UserVO;
 
@@ -107,21 +104,5 @@ public class UserServiceImpl implements UserService {
 		
 		return usermapper.withdrawChangeResult(ordernumber);
 	}
-
-	@Override
-	public List<BoardVO> getListPaging(Criteria cri) {
-	    // 1. 게시물 목록을 가져옵니다.
-	    List<BoardVO> list = bservice.getListPaging(cri);
-
-	    // 2. 각 게시물에 대해 댓글 개수를 가져와서 replyCount를 설정합니다.
-	    for (BoardVO boardVO : list) {
-	        int replyCount = bservice.getReplyCount(boardVO.getNum()); // 댓글 개수를 가져오는 새로운 메소드 호출
-	        boardVO.setReply_count(replyCount); // 가져온 댓글 개수를 변수를 선언하지 않았기 때문에 발생한 오류입니다. `mapper.getListPaging(cri)` 결과를 담을 `list` 변수를 추가하면 해 BoardVO의 replyCount에 설정
-	    }
-
-	    return list;
-	}
-
-
 
 }

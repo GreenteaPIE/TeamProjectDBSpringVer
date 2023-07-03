@@ -9,7 +9,7 @@ public interface ReplyMapper {
 	// 댓글 조회
 	public List<FBoardReplyVO> replyList(int num)throws Exception;
 
-	// 댓글 조회
+	// 댓글 작성
 	public void replyWriter(FBoardReplyVO vo)throws Exception;
 
 	// 댓글 수정

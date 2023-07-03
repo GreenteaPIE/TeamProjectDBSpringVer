@@ -35,7 +35,7 @@ public class ReplyController {
 		vo.setNum(num);
 		vo.setRno(rno);
 
-		FBoardReplyVO reply = service.replySelect(vo);
+		FBoardReplyVO reply = service.replySelect(vo); //수정 버튼을 클릭한 댓글을 불러옴
 
 		model.addAttribute("reply", reply);
 	}

@@ -41,6 +41,7 @@
 		#{title},#{content},#{userid},#{category})
 
 	</insert>
+	
 	<!-- 게시물 목록(페이징) -->
 	<select id="getListPaging" resultType="com.db.model.BoardVO"> 
 	
@@ -65,18 +66,20 @@
  	]]>
 
 	</select>
-	<!-- 게시판 조회 -->
+
+	<!-- 게시판 리스트 -->
 	<select id="getList" resultType="com.db.model.BoardVO">
 		SELECT * FROM free_board
 	</select>
 
-
+	<!-- 게시판 조회 -->
 	<select id="getPage" resultType="com.db.model.BoardVO">
 
 		select * from free_board where
 		num = #{num}
 
 	</select>
+
 	<!-- 게시판 수정 -->
 	<update id="modify">
 		UPDATE free_board SET title = #{title}, content = #{content} WHERE num
@@ -84,8 +87,6 @@
 
 		<!--update freeboard set title = #{title}, content = #{content}, updatedate 
 			= sysdate where num = #{num} -->
-
-
 	</update>
 
 	<delete id="delete">
@@ -108,6 +109,7 @@
 
 	</select>
 
+	<!-- 조회수 업데이트 -->
 	<update id="updateReadCount" parameterType="int">
 
 		update free_board set
@@ -115,12 +117,10 @@
 
 	</update>
 
+	<!-- 댓글 수 -->
 	<select id="getReplyCount" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM fboard_reply WHERE num = #{num}
 	</select>
-
-
-
 
 </mapper>
 
