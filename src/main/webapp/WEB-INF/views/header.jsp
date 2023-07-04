@@ -139,7 +139,7 @@ body {
 									<div class="dropdown-menu rounded-0 m-0">
 										<a href="/admin/userManagementPage" class="dropdown-item">회원 관리</a>
 										<a href="/admin/adminAuctionBrandList" class="dropdown-item">옥션 관리</a>
-										<a href="/admin/productManagementPage" class="dropdown-item">상품 관리</a>
+										<a href="/admin/productManagementPage" class="dropdown-item">브랜드&상품 관리</a>
 										<a href="/admin/sales_OrderManagement" class="dropdown-item">매출&주문 관리</a>
 									</div>
 								</div>

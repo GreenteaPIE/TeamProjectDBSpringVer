@@ -108,7 +108,7 @@
 				if (confirm("주문을 취소 처리 하시겠습니까?")) {
 					$.ajax({
 						url : `/admin/withdrawOrder?ordernumber=${ordernumber}`,
-						type : 'GET',
+						type : 'POST',
 						success : function(data) {
 							if (data === "Success") {
 								alert("취소 처리 되었습니다.");

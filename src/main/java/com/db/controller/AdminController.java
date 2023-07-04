@@ -55,7 +55,7 @@ public class AdminController {
 	AdminService adminService;
 
 	// 옥션 시작
-
+    //브랜드 리스트 페이지
 	@GetMapping("adminAuctionBrandList")
 	public void AdminAuctionBrandListGET(Model model) throws Exception {
 		System.out.println("adminAuctionBrandList 접속");
@@ -63,14 +63,16 @@ public class AdminController {
 		System.out.println("list: " + list);
 		model.addAttribute("list", list);
 	}
-
+	
+    //브랜드 상품 리스트 페이지
 	@GetMapping("adminAuctionBrandProductList")
 	public void AdminAuctionBrnadProductListGET(Model model, String bname) throws Exception {
 		System.out.println("adminAuctionBrandProductList 접속");
 		ArrayList<ProductVO> list = productService.brandProductList(bname);
 		model.addAttribute("list", list);
 	}
-
+    
+	//브랜드 상품 디테일 페이지
 	@GetMapping("auctionBrandProductDetail")
 	public void AuctionBrandProductDetailGET(String pname, String bname, Model model) throws Exception {
 		System.out.println("auctionBrandProductDetail 접속");
@@ -80,6 +82,7 @@ public class AdminController {
 		model.addAttribute("pSize", sList);
 	}
 
+	//옥션 시작
 	@PostMapping("addAuction.do")
 	public String addAuctionPOST(AuctionVO vo, RedirectAttributes rttr, String dateTimeInput) throws Exception {
 
@@ -95,14 +98,6 @@ public class AdminController {
 		}
 
 		return "redirect:/";
-	}
-
-	// 옥션 결제
-	@GetMapping("auctionBuyPage")
-	public void auctionBuyPageGET(int num, Model model) throws Exception {
-		AuctionVO auVo = productService.getAuctionDetail(num);
-		model.addAttribute("auction", auVo);
-
 	}
 	// 옥션 끝
 
@@ -259,7 +254,7 @@ public class AdminController {
 	}
 
 	// 주문 발송 요청
-	@GetMapping("/shipmentOrder")
+	@PostMapping("/shipmentOrder")
 	@ResponseBody
 	public ResponseEntity<String> shipmentOrderGET(@Param("userid") String userid,
 			@Param("totalprice") Integer totalprice, int ordernumber, HttpServletRequest request) throws Exception {
@@ -284,7 +279,7 @@ public class AdminController {
 	}
 
 	// 주문 처리
-	@GetMapping("/checkOrder")
+	@PostMapping("/checkOrder")
 	@ResponseBody
 	public ResponseEntity<String> checkOrderGET(int ordernumber, HttpServletRequest request) {
 
@@ -307,7 +302,7 @@ public class AdminController {
 	}
 
 	// 취소처리 확인
-	@GetMapping("/withdrawOrder")
+	@PostMapping("/withdrawOrder")
 	@ResponseBody
 	public ResponseEntity<String> withdrawOrderGET(int ordernumber, HttpServletRequest request) {
 
@@ -511,7 +506,7 @@ public class AdminController {
 			model.addAttribute("productDetail", adminService.productGetDetail(num));
 		}
 
-		/* 상품 정보 수정 */
+		// 상품 정보 수정
 		@Transactional
 		@PostMapping("/adminProductModify")
 		public String adminProductModifyPOST(ProductVO product, HttpSession session, RedirectAttributes rttr)

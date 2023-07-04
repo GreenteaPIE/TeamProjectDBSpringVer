@@ -109,7 +109,7 @@
 				if (confirm("주문을 배송처리 하시겠습니까?")) {
 					$.ajax({
 						url : `/admin/shipmentOrder?ordernumber=${ordernumber}&userid=${userid}&totalprice=${totalPrice}`,
-						type : 'GET',
+						type : 'POST',
 						success : function(data) {
 							if (data === "Success") {
 								alert("주문이 배송처리 되었습니다.");

@@ -108,7 +108,7 @@
 				if (confirm("주문처리 하시겠습니까?")) {
 					$.ajax({
 						url : `/admin/checkOrder?ordernumber=${ordernumber}`,
-						type : 'GET',
+						type : 'POST',
 						success : function(data) {
 							if (data === "Success") {
 								alert("주문이 처리 되었습니다.");

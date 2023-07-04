@@ -247,22 +247,30 @@
 		WHERE userid = #{userid}
 	</update>
 
+    <!-- 옥션 리스트 -->
 	<select id="getAuctionList" resultType="com.db.model.AuctionVO">
 		select * from auction
 		order by onOff desc ,endTime desc
 	</select>
 
+    <!-- 옥션 디테일 페이지 -->
 	<select id="getAuctionDetail"
 		resultType="com.db.model.AuctionVO">
 		select * from auction where num = #{num}
 	</select>
+	
+	<!-- 옥션 입찰 -->
 	<update id="dealAuction">
 		update auction set price=#{price}, userid=#{userid}
 		where num = #{num}
 	</update>
+	
+	<!-- 옥션 만료 -->
 	<update id="endAuction">
 		update auction set onOff=0 where num = #{num}
 	</update>
+	
+	<!-- 옥션 낙찰가 -->
 	<update id="setAuctionEndPrice">
 		update auction set endprice = #{arg0} where num =
 		#{arg1}
