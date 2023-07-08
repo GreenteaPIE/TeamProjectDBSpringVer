@@ -187,6 +187,7 @@ table.table {
 
 		});
 
+		//검색 기능
 		$(".search_area button").on("click", function(e) {
 			e.preventDefault();
 

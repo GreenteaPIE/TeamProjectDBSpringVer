@@ -101,7 +101,7 @@ public class AdminController {
 	}
 	// 옥션 끝
 
-	// 회원관리 시작
+	// 회원관리
 	// 회원관리 페이지
 	@GetMapping("userManagementPage")
 	public void userManagementpageGET(Model model, Criteria cri, @RequestParam(required = false) String category)

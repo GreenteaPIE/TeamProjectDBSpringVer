@@ -31,6 +31,16 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public List<UserVO> getUserListPaging(Criteria cri) throws Exception {
+		return mapper.getUserListPaging(cri);
+	}
+
+	@Override
+	public int getUserTotal(Criteria cri) throws Exception {
+		return mapper.getUserTotal(cri);
+	}
+	
+	@Override
 	public void deleteUser(String userid) throws Exception {
 		mapper.deleteUser(userid);
 	}
@@ -98,15 +108,6 @@ public class AdminServiceImpl implements AdminService{
 		return mapper.getSalesOrder();
 	}
 
-	@Override
-	public List<UserVO> getUserListPaging(Criteria cri) throws Exception {
-		return mapper.getUserListPaging(cri);
-	}
-
-	@Override
-	public int getUserTotal(Criteria cri) throws Exception {
-		return mapper.getUserTotal(cri);
-	}
 	@Override
 	public List<ProductVO> getProductList(Criteria cri) {
 		return mapper.getProductList(cri);

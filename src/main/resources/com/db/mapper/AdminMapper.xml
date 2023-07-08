@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.db.mapper.AdminMapper">
-<!-- 옥션등록 -->
+	<!-- 옥션등록 -->
 	<insert id="insertAuction">
 		insert into auction (userid, bname, pname, price,
 		startPrice, endTime,
@@ -12,17 +12,17 @@
 		#{bname}, #{pname}, #{price}, #{startPrice}, #{endTime}, 1, #{psize},
 		#{imgUrl},auction_seq.nextval)
 	</insert>
-	
+
 	<!-- 유저목록 -->
 	<select id="getUserList" resultType="com.db.model.UserVO">
 		select * from shopuser
 	</select>
-	
+
 	<!-- 유저 삭제 -->
 	<delete id="deleteUser">
 		delete shopuser where userid = #{userid}
 	</delete>
-	
+
 	<!-- 유저 상세보기 -->
 	<select id="getUser" resultType="com.db.model.UserVO">
 		select * from shopuser where
@@ -31,9 +31,12 @@
 
 	<!-- 유저 업데이트 -->
 	<update id="adminUserUpdate">
-		update shopuser set name = #{name}, email = #{email}, point = #{point}, grade=#{grade},
-		address1 = #{address1}, address2 = #{address2},
-		address3 = #{address3}, phone =	#{phone}, gender = #{gender}
+		update shopuser set name = #{name}, email = #{email},
+		point = #{point}, grade=#{grade},
+		address1 = #{address1}, address2 =
+		#{address2},
+		address3 = #{address3}, phone = #{phone}, gender =
+		#{gender}
 		where userid = #{userid}
 	</update>
 
@@ -41,60 +44,64 @@
 	<insert id="brandEnroll">
 		insert into brand values(#{bname}, #{imgurl})
 	</insert>
-	
+
 	<!-- 브랜드 삭제 -->
 	<delete id="deleteBrand">
 		delete from brand where bname = #{bname}
 	</delete>
-	
-	
+
+
 
 	<!-- 신규 주문 가져오기 -->
 	<select id="getNewOrder" resultType="com.db.model.OrderVO">
 
-		select*from order_view where result = 1
+		select*from order_view where
+		result = 1
 	</select>
-	
+
 	<!-- 처리 주문 가져오기 -->
 	<select id="getProcessOrder" resultType="com.db.model.OrderVO">
 
-		select*from order_view where result = 2
+		select*from order_view
+		where result = 2
 	</select>
-	
+
 	<!-- 취소 주문 가져오기 -->
 	<select id="getWithdrawOrder" resultType="com.db.model.OrderVO">
 
-		select*from order_view where result = 4
+		select*from order_view
+		where result = 4
 	</select>
-	
+
 	<!-- 판매된 주문 가져오기 -->
 	<select id="getSalesOrder" resultType="com.db.model.OrderVO">
 
-		select*from order_view where result = 3
+		select*from order_view
+		where result = 3
 	</select>
-	
-	
+
+
 	<!-- 확인한 주문 orderdetail result 2로 변경 -->
 	<update id="checkOrderChangeResult">
 
 		update order_detail set result = 2 where
 		ordernumber=#{ordernumber}
 	</update>
-	
+
 	<!-- 발송처리한 주문 orderdetail result 3으로 변경 -->
 	<update id="shipmentChangeResult">
 
 		update order_detail set result = 3 where
 		ordernumber=#{ordernumber}
 	</update>
-	
+
 	<!-- 취소처리한 주문 orderdetail result 5으로 변경 -->
 	<update id="withdrawOrderChangeResult">
 
 		update order_detail set result = 5 where
 		ordernumber=#{ordernumber}
 	</update>
-	
+
 	<!-- 검색 조건문 -->
 	<sql id="criteria">
 		<trim prefix="AND (" suffix=")" prefixOverrides="OR">
@@ -117,13 +124,14 @@
 				</trim>
 			</foreach>
 		</trim>
-		 <!-- 카테고리 검색 처리 -->
-  <if test="category != null and (category == 'F'.toString() or category == 'S'.toString() or category == 'Q'.toString())">
-    AND category = #{category}
-  </if>
+		<!-- 카테고리 검색 처리 -->
+		<if
+			test="category != null and (category == 'F'.toString() or category == 'S'.toString() or category == 'Q'.toString())">
+			AND category = #{category}
+		</if>
 
 	</sql>
-	
+
 	<!-- 회원 목록(페이징) -->
 	<select id="getUserListPaging" resultType="com.db.model.UserVO"> 
 	
@@ -148,7 +156,7 @@
  	]]>
 
 	</select>
-	
+
 	<!-- 총 회원 수 -->
 	<select id="getUserTotal" resultType="int">
 
@@ -262,5 +270,5 @@
 		imgUrl=#{imgUrl, jdbcType=VARCHAR}
 		where num=#{num}
 	</update>
-	
+
 </mapper>
