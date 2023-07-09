@@ -133,6 +133,7 @@ body {
 								<a href="/user/login" class="nav-item nav-link">로그인</a>
 								<a href="/user/join" class="nav-item nav-link">회원가입</a>
 							</c:if>
+							<!-- 어드민 -->
 							<c:if test="${user.grade == 1}">
 								<div class="nav-item dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">관리자</a>
@@ -144,6 +145,7 @@ body {
 									</div>
 								</div>
 							</c:if>
+							<!-- 일반유저 -->
 							<c:if test="${user != null }">
 								<c:if test="${user.grade != 1 }">
 									<div class="nav-item dropdown">

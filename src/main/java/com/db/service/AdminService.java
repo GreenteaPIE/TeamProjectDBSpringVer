@@ -38,7 +38,7 @@ public interface AdminService {
 	// 상품 관리
 	public List<ProductVO> getProductList(Criteria cri); // 등록된 상품 전체 가져오기
 
-	public List<BrandVO> getBrandList(Criteria cri); // 등록된 상품 전체 가져오기
+	public List<BrandVO> getBrandList(Criteria cri); // 등록된 브랜드 전체 가져오기
 
 	public int productGetTotal(Criteria cri);// 등록된 상품의 수
 
@@ -52,6 +52,7 @@ public interface AdminService {
 
 	public int productModify(ProductVO product); // 선택 상품 수정
 
+	// 주문 관리
 	public ArrayList<OrderVO> getNewOrder() throws Exception; // 신규주문 가져오기
 
 	public ArrayList<OrderVO> getProcessOrder() throws Exception; // 처리주문 가져오기
