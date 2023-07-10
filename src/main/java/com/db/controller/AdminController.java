@@ -82,7 +82,7 @@ public class AdminController {
 		model.addAttribute("pSize", sList);
 	}
 
-	// 옥션 시작
+	// 옥션 등록
 	@PostMapping("addAuction.do")
 	public String addAuctionPOST(AuctionVO vo, RedirectAttributes rttr, String dateTimeInput) throws Exception {
 
@@ -99,7 +99,6 @@ public class AdminController {
 
 		return "redirect:/";
 	}
-	// 옥션 끝
 
 	// 회원관리
 	// 회원관리 페이지
@@ -146,7 +145,6 @@ public class AdminController {
 		String response = "success";
 		return response;
 	}
-	// 회원관리 끝
 
 	// 브랜드 관리
 	// 브랜드, 상품관리 페이지
@@ -220,7 +218,7 @@ public class AdminController {
 		adminService.deleteBrand(bname);
 		return "redirect:/admin/adminBrandList";
 	}
-	
+
 	// 상품 관리
 	// 상품 리스트
 	@GetMapping("adminProductList")
@@ -307,7 +305,7 @@ public class AdminController {
 		String jsonResponse = "{\"message\": \"File uploaded successfully.\"}";
 		return ResponseEntity.status(HttpStatus.OK).body(jsonResponse);
 	}
-	
+
 	// 상품등록 시 브랜드 검색창
 	@GetMapping("brandPop")
 	public void brandPopGET(Criteria cri, Model model) throws Exception {
@@ -328,7 +326,7 @@ public class AdminController {
 		model.addAttribute("pageMaker", pageMaker);
 
 	}
-	
+
 	// 상품 등록
 	@PostMapping("adminProductWriteForm")
 	public String adminProductWriteFormPOST(ProductVO product, HttpSession session, RedirectAttributes rttr) {
@@ -352,7 +350,7 @@ public class AdminController {
 		return "redirect:/admin/adminProductList";
 	}
 
-    //상품 디테일 이미지 불러오기
+	// 상품 디테일 이미지 불러오기
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(@RequestParam("fileName") String fileName) {
 		logger.info("getImage 진입 ... ");
@@ -445,9 +443,6 @@ public class AdminController {
 
 	}
 
-
-
-
 	// 매출 & 주문 관리
 	@GetMapping("/sales_OrderManagement")
 	public String salesOrderPost(HttpServletRequest request) throws Exception {
@@ -465,6 +460,7 @@ public class AdminController {
 		ArrayList<OrderVO> salesOrderlist = adminService.getSalesOrder(); // 판매된 주문 확인
 		request.setAttribute("salesOrderlist", salesOrderlist);
 
+		
 		return "/admin/salesManagementPage";
 
 	}

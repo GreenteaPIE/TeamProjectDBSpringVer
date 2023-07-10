@@ -49,7 +49,7 @@
 	<delete id="deleteBrand">
 		delete from brand where bname = #{bname}
 	</delete>
-
+	
 	<!-- 신규 주문 가져오기 -->
 	<select id="getNewOrder" resultType="com.db.model.OrderVO">
 

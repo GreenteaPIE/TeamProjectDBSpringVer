@@ -151,5 +151,6 @@ public class AdminServiceImpl implements AdminService{
 		System.out.println("(service) productModify ..... ");
 		return mapper.productModify(product);
 	}
+
 	
 }

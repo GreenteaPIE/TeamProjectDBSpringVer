@@ -77,7 +77,7 @@ public interface ProductService {
 	// 주문완료 후 포인트 지급
 	public void increaseUserPoint(String userid, int totalprice) throws Exception;
 
-	// 상품 상세(제품 이름으로 검색
+	// 상품 상세(제품 이름으로 검색)
 	public ProductVO productDetailByPname(String pname) throws Exception;
 
 	// 제품 이름,사이즈로 제품 불러오기
