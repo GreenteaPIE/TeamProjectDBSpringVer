@@ -1,14 +1,4 @@
----
-layout: post
-title: Project(DiamondBlack) Spring Version 
-date: 2023-06-15
-excerpt: "프로젝트 DB Spring Version[23.05.11 ~ 23.06.01]"
-tags: [project, java, jsp, Oracle, css, HTML, BootStrap, API, JQuery, JavaScript, Spring, FrameWork]
-feature: /img/SpringDB/logo.png
-project: true
-comments: true
 
----
 
 > **사용한 플랫폼 : Spring, Oracle**
 
