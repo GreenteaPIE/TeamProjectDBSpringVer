@@ -761,26 +761,3 @@ Junit 을 통한 Test 과정은 아래와 같이 하나의 메소드를 추가 �
 
 ## [이전 DB 프로젝트 보기](https://greenteapie.github.io/Team-Project-mvc2-pattern(DiamondBlack)/) / [프로젝트 주소](https://github.com/GreenteaPIE/TeamProjectDBSpringVer) /  [호스팅 주소](http://dbgreenteapie.shop/)
 
-<style>
- @keyframes blink {
-  0%, 100% { color: transparent; }
-  50% { color: black; }
-}
-.summary-text {
-  animation: blink 2s linear infinite;
-}
-table {
-  border-collapse: collapse;
-}
-th, td {
-  border: 1px solid black;
-}
-th {
-  font-weight: bold;
-  font-size: 17px;
-}
-td {
-  font-size: 12px;
-}
-</style>
-
